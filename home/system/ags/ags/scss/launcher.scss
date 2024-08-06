@@ -1,0 +1,31 @@
+.launcher-entry {
+  margin: 5px;
+  padding: 3px 10px;
+  font-size: 16px;
+  background-color: $surface;
+  border: 1px solid rgb(59, 59, 59);
+  border-radius: 15px;
+  box-shadow: 0 0 2px 2px $shadow;
+
+  &:focus {
+    border-color: $primary;
+  }
+}
+
+.list {
+  margin: 5px;
+  padding: 5px;
+  min-width: 350px;
+  background-color: $surface;
+  border-radius: 15px;
+  font-size: 15px;
+  box-shadow: 0 0 2px 2px $shadow;
+
+  .item {
+    &:hover,
+    &:focus {
+      background-color: mix($surface, $onSurface, 70%);
+      outline: none;
+    }
+  }
+}

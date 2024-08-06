@@ -1,0 +1,19 @@
+<actions>
+  <action>
+    <icon>phone-symbolic</icon>
+    <name>Send To Device</name>
+    <submenu/>
+    <unique-id>1</unique-id>
+    <command>localsend_app %f</command>
+    <description></description>
+    <range/>
+    <patterns>*</patterns>
+    <startup-notify/>
+    <directories/>
+    <audio-files/>
+    <image-files/>
+    <other-files/>
+    <text-files/>
+    <video-files/>
+  </action>
+</actions>

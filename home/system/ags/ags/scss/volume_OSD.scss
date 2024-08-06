@@ -1,0 +1,26 @@
+.volume-box {
+  margin: 5px;
+  padding: 0 10px;
+  min-width: 340px;
+  min-height: 50px;
+  background-color: $surface;
+  border-radius: 15px;
+  font-size: 20px;
+  box-shadow: 0 0 2px 2px $shadow;
+}
+
+scale.volume-slider {
+  padding: 0;
+  trough {
+    min-height: 25px;
+    border-radius: 15px;
+    background-color: $surfaceVariant;
+  }
+  highlight {
+    border-radius: 15px;
+    background-color: $primary;
+  }
+  slider {
+    all: unset;
+  }
+}

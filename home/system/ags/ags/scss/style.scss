@@ -1,0 +1,19 @@
+* {
+  font-weight: bold;
+}
+
+button {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 15px;
+}
+
+//@import '../../material/colors/colors';
+@import '/home/xyzyx/.config/material/colors/colors';
+
+@import './bar';
+@import './launcher';
+@import './volume_OSD';
+@import './notifications';
