@@ -3,6 +3,7 @@
     fzf
     eza
     bat
+    ncdu
   ];
 
   programs.starship = {
@@ -52,7 +53,7 @@
       ls = "eza --icons";
       ll = "eza -alh --icons";
       tree = "eza -T --icons";
-      proton-mount = "mkdir -p ~/Proton/ && rclone mount Proton: ~/Proton/ --daemon";
+      du = "ncdu";
     };
 
     antidote = {
@@ -70,7 +71,7 @@
     initExtra = ''
       # auto notify
       export AUTO_NOTIFY_THRESHOLD=20
-      export AUTO_NOTIFY_IGNORE=( "ranger" "nvim" "man" "fzf" "btop" "cat" "bat" )
+      export AUTO_NOTIFY_IGNORE=( "ranger" "nvim" "man" "fzf" "btop" "bat" "ncdu" )
 
       # history substring search
       bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -84,7 +85,7 @@
       bindkey '^ ' fzf-completion
 
       # autosuggestions
-      ZSH_AUTOSUGGEST_STRATEGY=( completion history )
+      ZSH_AUTOSUGGEST_STRATEGY=(completion history)
       bindkey '^I' autosuggest-accept
     '';
   };

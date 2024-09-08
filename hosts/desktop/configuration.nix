@@ -61,6 +61,11 @@
       jack.enable = true;
       wireplumber.enable = true;
     };
+    # https://www.reddit.com/r/linux_gaming/comments/nypsi1/updated_guide_to_remapping_keys_on_linux_using/
+    udev.extraHwdb = ''
+      evdev:name:Logitech G815 RGB MECHANICAL GAMING KEYBOARD:*
+        KEYBOARD_KEY_70039=esc
+    '';
     gvfs.enable = true;
   };
 

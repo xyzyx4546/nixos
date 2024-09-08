@@ -8,6 +8,7 @@
     ../../home/programs/neofetch
     ../../home/programs/neovim
     ../../home/programs/protonup
+    ../../home/programs/spotify
     ../../home/programs/thunar
     ../../home/programs/zsh
 
@@ -28,9 +29,9 @@
       wl-clipboard
 
       lutris
+      ckan
       protontricks
       gthumb
-      psst
       gnome-calculator
       localsend
       webcord

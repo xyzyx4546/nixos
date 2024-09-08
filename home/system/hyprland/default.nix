@@ -19,11 +19,11 @@
       source = "~/.config/material/colors/colors-hyprland.conf";
 
       exec-once = [
+        "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
         "ags"
         "python ~/.config/hypr/workspaces.py close_empty"
-        "mkdir -p ~/Proton/ && rclone mount Proton: ~/Proton/ --daemon"
-        
+
         "sleep 1 && localsend_app --hidden"
         "sleep 1 && webcord -m"
         "sleep 1 && telegram-desktop -startintray"
@@ -96,19 +96,21 @@
         "size 35% 35%, class:(floating|zenity|file-roller|localsend_app)"
         "dimaround, class:(floating|zenity|polkit-gnome-authentication-agent-1|file-roller)"
         
-        "monitor 0, class:^(?!(firefox|WebCord|org.telegram.desktop|steam|lutris|org.prismlauncher.PrismLauncher|psst-gui)$).+$"
+        "monitor 0, class:^(?!(firefox|left|WebCord|org.telegram.desktop|steam|lutris|org.prismlauncher.PrismLauncher)$).+$"
         "workspace 98, class:^(firefox)$"
-        "workspace 99, class:^(WebCord|org.telegram.desktop|steam|lutris|org.prismlauncher.PrismLauncher|psst-gui)$"
+        "workspace 98, title:^(Spotify Premium)$"
+        "workspace 99, class:^(left|WebCord|org.telegram.desktop|steam||lutris|org.prismlauncher.PrismLauncher)$"
 
-        "workspace special:games, class:^(explorer.exe$|lor.exe$|Minecraft|steam_app)"
-        "tile, class:^(lor.exe$|Minecraft|steam_app)"
-        "fullscreen, class:^(lor.exe$Minecraft|steam_app)"
+        "workspace special:games, class:^(explorer.exe$|lor.exe$|Minecraft|KSP.x86_64|steam_app)"
+        "tile, class:^(lor.exe$|Minecraft|KSP.x86_64|steam_app)"
+        "fullscreen, class:^(lor.exe$|Minecraft|KSP.x86_64|steam_app)"
       ];
 
       layerrule = [
         "noanim, ^(hyprpicker|notification_popup)$"
         "blur, ^(bar)$"
         "ignorealpha 0.7, ^(bar)$"
+        "xray 0, ^(bar)$"
       ];
 
       workspace = [
@@ -122,7 +124,7 @@
         "8, monitor:DP-3"
         "9, monitor:DP-3"
         "10, monitor:DP-3"
-        "98, monitor:HDMI-A-1, gapsout:10, on-created-empty:firefox"
+        "98, monitor:HDMI-A-1, gapsout:10"
         "99, monitor:HDMI-A-1, gapsout:10, default:true, persistent:true"
       ];
 
@@ -155,6 +157,7 @@
         "SUPER, W, exec, python ~/.config/material/material.py random"
         "SUPER SHIFT, W, exec, python ~/.config/material/material.py select"
         "SUPER, E, exec, thunar"
+        "SUPER, S, exec, kitty --class left spotify_player"
         "SUPER, K, exec, ags -t calculator-launcher"
         "SUPER, V, exec, ags -t clipboard-launcher"
 

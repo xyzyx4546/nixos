@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ inputs, ... }: {
   programs.firefox = {
     enable = true;
 
@@ -33,6 +33,7 @@
 
       search = {
         default = "Startpage";
+        force = true;
         privateDefault = "Startpage";
         engines = {
           "Startpage" = {

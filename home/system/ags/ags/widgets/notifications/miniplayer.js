@@ -86,7 +86,7 @@ export default function MiniPlayer(player) {
     tooltip_text: player.identity || '',
     icon: player.bind('entry').transform((entry) => {
       const name = `${entry}-symbolic`
-      return Utils.lookUpIcon(name) ? name : player.identity === 'Psst' ? 'org.gnome.Lollypop-spotify-symbolic' : 'audio-x-generic-symbolic'
+      return Utils.lookUpIcon(name) ? name : player.identity === 'Spotify Player' ? 'org.gnome.Lollypop-spotify-symbolic' : 'audio-x-generic-symbolic'
     }),
   })
 

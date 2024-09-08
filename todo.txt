@@ -1,6 +1,5 @@
-fix: cursor, top bar transparency isnt getting updated, Psst cant be launcher from terminal
+rework workspaces
+spotify...
 
-programming environemnt, nvim: (nvim tree, lualine, bufferline, toggleterm, null-ls, project)
+programming environment, nvim: (nvim tree, lualine, bufferline, toggleterm, null-ls, project)
 switch to proton, backups: minecraft, documents
-
-on install: passwd, logins (spotify, protondrive, steam, browser), install steams, install proton-GE (protonup)
