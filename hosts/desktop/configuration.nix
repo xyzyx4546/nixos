@@ -67,6 +67,8 @@
         KEYBOARD_KEY_70039=esc
     '';
     gvfs.enable = true;
+    ratbagd.enable = true;
+    hardware.openrgb.enable = true;
   };
 
   systemd = {

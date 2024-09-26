@@ -157,7 +157,7 @@
         "SUPER, W, exec, python ~/.config/material/material.py random"
         "SUPER SHIFT, W, exec, python ~/.config/material/material.py select"
         "SUPER, E, exec, thunar"
-        "SUPER, S, exec, kitty --class left spotify_player"
+        "SUPER, S, exec, spotify"
         "SUPER, K, exec, ags -t calculator-launcher"
         "SUPER, V, exec, ags -t clipboard-launcher"
 
@@ -180,6 +180,8 @@
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
+      ];
+      bindel = [
         ", XF86AudioRaiseVolume, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/volume_OSD.js'); open();\" & wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
         ", XF86AudioLowerVolume, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/volume_OSD.js'); open();\" & wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
       ];

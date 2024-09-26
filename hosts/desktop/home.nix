@@ -36,6 +36,7 @@
       localsend
       webcord
       telegram-desktop
+      piper
     ];
 
     stateVersion = "24.05";

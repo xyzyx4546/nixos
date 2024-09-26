@@ -10,7 +10,7 @@
     enable = true;
 
     settings = {
-      add_newline = true;
+      add_newline = false;
       format = ''
         ╭─$directory$username@$hostname$git_branch$cmd_duration
         ╰─$character
@@ -38,6 +38,10 @@
       };
       cmd_duration = {
         format = "  [󰄉 $duration](bold #808080)";
+      };
+
+      line_break = {
+        disabled = true;
       };
 
       scan_timeout = 10;
@@ -87,6 +91,15 @@
       # autosuggestions
       ZSH_AUTOSUGGEST_STRATEGY=(completion history)
       bindkey '^I' autosuggest-accept
+
+      # fix empty line
+      precmd() {
+        precmd() {
+          if [[ "$(fc -nl -1)" != "clear" && "$(fc -nl -1)" != "c" ]]; then
+            echo
+          fi
+        }
+      }
     '';
   };
 }
