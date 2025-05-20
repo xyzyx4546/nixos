@@ -1,0 +1,65 @@
+{
+  pkgs,
+  lib,
+  hostName,
+  ...
+}: {
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-unwrapped"
+    ];
+
+  time.timeZone = "Europe/Berlin";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "de-latin1";
+
+  networking = {
+    inherit hostName;
+    firewall.enable = true;
+  };
+
+  # users.groups."users".gid = 100;
+  users.users.xyzyx = {
+    isNormalUser = true;
+    extraGroups = ["wheel"];
+    initialPassword = "xyzyx";
+    shell = pkgs.zsh;
+    uid = 1000;
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq2xd3Eri9HfFP49Gl4snnrxMY6zXyNpWQIs9dd2L4Q"];
+  };
+
+  environment.variables = {
+    VISUAL = "nvim";
+    EDITOR = "nvim";
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    EGL_PLATFORM = "wayland";
+    NIXOS_OZONE_WL = "1";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+
+  programs = {
+    zsh.enable = true;
+    nh = {
+      enable = true;
+      flake = "/home/xyzyx/Projects/nixos";
+      clean = {
+        enable = true;
+        dates = "daily";
+        extraArgs = "--keep=5 --keep-since=3d";
+      };
+    };
+  };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
+
+  systemd.tmpfiles.rules = ["d /mnt 0777 root root -"];
+}
