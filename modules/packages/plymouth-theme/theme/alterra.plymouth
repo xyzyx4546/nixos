@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=alterra
+Description=display spinning alterra logo
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/alterra
+ScriptFile=/usr/share/plymouth/themes/alterra/alterra.script

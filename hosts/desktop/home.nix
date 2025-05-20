@@ -1,22 +1,23 @@
 { pkgs, ... }: {
   imports = [
-    ../../home/programs/btop
-    ../../home/programs/firefox
-    ../../home/programs/git
-    ../../home/programs/kitty
-    ../../home/programs/mangohud
-    ../../home/programs/neofetch
-    ../../home/programs/neovim
-    ../../home/programs/protonup
-    ../../home/programs/spotify
-    ../../home/programs/thunar
-    ../../home/programs/zsh
+    ../../modules/programs/firefox
+    ../../modules/programs/games
+    ../../modules/programs/git
+    ../../modules/programs/kitty
+    ../../modules/programs/neofetch
+    ../../modules/programs/neovim
+    ../../modules/programs/spotify
+    ../../modules/programs/tmux
+    ../../modules/programs/yazi
+    ../../modules/programs/zsh
 
-    ../../home/system/ags
-    ../../home/system/gtk
-    ../../home/system/hyprland
-    ../../home/system/material
-    ../../home/system/xdg-userdirs
+    ../../modules/system/ags
+    ../../modules/system/fonts
+    ../../modules/system/gtk
+    ../../modules/system/hyprland/desktop.nix
+    ../../modules/system/material
+    ../../modules/system/scripts
+    ../../modules/system/xdg
   ];
 
   home = {
@@ -24,19 +25,12 @@
     homeDirectory = "/home/xyzyx";
 
     packages = with pkgs; [
-      prismlauncher
-      libnotify
-      wl-clipboard
-
-      lutris
-      ckan
-      protontricks
       gthumb
       gnome-calculator
-      localsend
       webcord
       telegram-desktop
       piper
+      onlyoffice-desktopeditors
     ];
 
     stateVersion = "24.05";

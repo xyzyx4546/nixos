@@ -1,5 +1,0 @@
-rework workspaces
-
-secureboot, bootloader, ...
-programming environment, nvim: (nvim tree, lualine, bufferline, toggleterm, null-ls, project)
-switch to proton, backups: minecraft, documents
