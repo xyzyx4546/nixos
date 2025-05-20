@@ -1,0 +1,149 @@
+box.notifications,
+box.miniplayers {
+  padding: 5px 20px;
+  min-width: 2px;
+  min-height: 2px;
+
+  .no-notifications {
+    margin: 5px;
+    padding: 10px;
+    min-width: 340px;
+    min-height: 50px;
+    background-color: $surface;
+    border-radius: 15px;
+    font-size: 15px;
+    box-shadow: 0 0 2px 2px $shadow;
+    font-size: 20px;
+  }
+
+  .clear-all {
+    margin: 5px;
+    padding: 3px 5px;
+    background-color: $surfaceVariant;
+    border-radius: 15px;
+    font-size: 15px;
+    box-shadow: 0 0 2px 2px $shadow;
+
+    &:hover {
+      background-color: mix($surfaceVariant, $onSurfaceVariant, 70%);
+    }
+  }
+}
+
+// ------------------------------
+
+.notification {
+  margin: 5px;
+  padding: 10px;
+  min-width: 340px;
+  min-height: 50px;
+  background-color: $surface;
+  border-radius: 15px;
+  font-size: 15px;
+  box-shadow: 0 0 2px 2px $shadow;
+
+  .icon {
+    min-width: 40px;
+    min-height: 40px;
+    image {
+      font-size: 58px;
+      margin: 5px;
+    }
+    box {
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 7px;
+    }
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .body {
+    font-size: 15px;
+  }
+
+  .close-button {
+    font-size: 20px;
+    border-radius: 15px;
+    &:hover {
+      background-color: mix($surface, $onSurface, 70%);
+    }
+  }
+
+  .actions {
+    padding-top: 15px;
+  }
+
+  .action-button {
+    min-height: 30px;
+    background-color: $surfaceVariant;
+    border-radius: 15px;
+    &:hover {
+      background-color: mix($surfaceVariant, $onSurfaceVariant, 70%);
+    }
+  }
+}
+
+// ------------------------------
+
+.player {
+  margin: 5px;
+  padding: 10px;
+  min-width: 340px;
+  min-height: 50px;
+  background-color: $surface;
+  border-radius: 15px;
+  font-size: 15px;
+  box-shadow: 0 0 2px 2px $shadow;
+
+  .img {
+    min-width: 60px;
+    min-height: 60px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .artist {
+    font-size: 15px;
+  }
+
+  scale.position {
+    padding: 0;
+    trough {
+      min-height: 6px;
+      border-radius: 15px;
+      background-color: $surfaceVariant;
+    }
+    highlight {
+      border-radius: 15px;
+      background-color: $primary;
+    }
+    slider {
+      all: unset;
+    }
+  }
+
+  .position,
+  .length {
+    font-size: 15px;
+  }
+
+  button {
+    margin-top: 5px;
+    min-height: 25px;
+    min-width: 25px;
+    font-size: 20px;
+    border-radius: 15px;
+
+    &:hover {
+      background-color: mix($surface, $onSurface, 70%);
+    }
+  }
+}
