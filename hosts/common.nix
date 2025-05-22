@@ -33,11 +33,6 @@
   environment.variables = {
     VISUAL = "nvim";
     EDITOR = "nvim";
-    MOZ_ENABLE_WAYLAND = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
-    EGL_PLATFORM = "wayland";
-    NIXOS_OZONE_WL = "1";
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   programs = {
