@@ -1,12 +1,18 @@
 # TODO: gamescope, dies das
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    prismlauncher
-    protontricks
-    lutris
-    ckan
-    protonup
-  ];
+{pkgs, ...}: {
+  home = {
+    packages = with pkgs; [
+      prismlauncher
+      protontricks
+      lutris
+      ckan
+      protonup
+    ];
+
+    sessionVariables = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    };
+  };
 
   programs.mangohud.enable = true;
 
