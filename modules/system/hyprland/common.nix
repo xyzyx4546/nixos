@@ -18,6 +18,19 @@
     xwayland.enable = true;
 
     settings = {
+      # Force wayland
+      env = [
+        "GDK_BACKEND,wayland"
+        "QT_QPA_PLATFORM,wayland"
+        "SDL_VIDEODRIVER,wayland"
+        "CLUTTER_BACKEND,wayland"
+        "ELECTRON_OZONE_PLATFORM,wayland"
+        "MOZ_ENABLE_WAYLAND,1"
+        "MOZ_DISABLE_RDD_SANDBOX,1"
+        "EGL_PLATFORM,wayland"
+        "NIXOS_OZONE_WL,1"
+      ];
+
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
