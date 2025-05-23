@@ -24,7 +24,7 @@
       };
 
       # General editor settings
-      useSystemClipboard = true;
+      clipboard.registers = ["unnamed" "unnamedplus"];
       lineNumberMode = "relNumber";
 
       globals = {
