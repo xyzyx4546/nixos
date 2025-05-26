@@ -207,6 +207,7 @@
         nix-develop-nvim
         dressing-nvim
         nvim-sops
+        presence-nvim
       ];
 
       extraLuaFiles = [

@@ -36,7 +36,7 @@
         "swww-daemon"
         "ags"
 
-        "sleep 1 && webcord -m"
+        "sleep 1 && vesktop --start-minimized"
         "sleep 1 && telegram-desktop -startintray"
       ];
 
@@ -160,6 +160,7 @@
         "SUPER, Y, exec, kitty yazi"
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
+        "SUPER, D, exec, vesktop"
 
         "SUPER, SUPER_L, exec, ags -t app-launcher"
         "SUPER, M, exec, ags -t calculator-launcher"
