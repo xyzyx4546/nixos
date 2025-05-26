@@ -8,6 +8,7 @@
     ../../modules/programs/neofetch
     ../../modules/programs/neovim
     ../../modules/programs/tmux
+    ../../modules/programs/vesktop
     ../../modules/programs/yazi
     ../../modules/programs/zsh
 
@@ -27,7 +28,6 @@
     packages = with pkgs; [
       gthumb
       gnome-calculator
-      webcord
       telegram-desktop
       onlyoffice-desktopeditors
     ];
