@@ -24,7 +24,11 @@
       };
 
       # General editor settings
-      clipboard.registers = ["unnamed" "unnamedplus"];
+      clipboard = {
+        enable = true;
+        providers.wl-copy.enable = true;
+        registers = "unnamedplus";
+      };
       lineNumberMode = "relNumber";
 
       globals = {
