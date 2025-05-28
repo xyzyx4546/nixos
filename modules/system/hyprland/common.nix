@@ -2,8 +2,6 @@
   imports = [
     ./hyprlock.nix
     ./hypridle.nix
-
-    # ./plugins/hyprgrass.nix
   ];
 
   home.packages = with pkgs; [
@@ -36,8 +34,9 @@
         "swww-daemon"
         "ags"
 
-        "sleep 1 && vesktop --start-minimized"
-        "sleep 1 && telegram-desktop -startintray"
+        "[workspace special:browser silent] uwsm app -- firefox"
+        "vesktop --start-minimized"
+        "telegram-desktop -startintray"
       ];
 
       input = {
@@ -48,17 +47,6 @@
         repeat_delay = 300;
         accel_profile = "flat";
         follow_mouse = 1;
-        touchpad = {
-          natural_scroll = "yes";
-          scroll_factor = 0.1;
-        };
-      };
-
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 4;
-        workspace_swipe_distance = 600;
-        workspace_swipe_min_speed_to_force = 5;
       };
 
       general = {
@@ -118,18 +106,17 @@
       ];
 
       workspace = [
-        "special:browser, on-created-empty:firefox"
-        "1, monitor:0, persistent:true"
-        "2, monitor:0, persistent:true"
-        "3, monitor:0, persistent:true"
-        "4, monitor:0, persistent:true"
-        "5, monitor:0, persistent:true"
-        "6, monitor:0, persistent:true"
-        "7, monitor:0, persistent:true"
-        "7, monitor:0, persistent:true"
-        "8, monitor:0, persistent:true"
-        "9, monitor:0, persistent:true"
-        "10, monitor:0, persistent:true"
+        "1, persistent:true, default:true"
+        "2, persistent:true"
+        "3, persistent:true"
+        "4, persistent:true"
+        # "5, persistent:true"
+        # "6, persistent:true"
+        # "7, persistent:true"
+        # "7, persistent:true"
+        # "8, persistent:true"
+        # "9, persistent:true"
+        # "10, persistent:true"
       ];
 
       layerrule = [

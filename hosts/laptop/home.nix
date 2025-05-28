@@ -1,4 +1,3 @@
-# FIX: stupid touchpad...
 { pkgs, ... }: {
   imports = [
     ../../modules/programs/firefox
