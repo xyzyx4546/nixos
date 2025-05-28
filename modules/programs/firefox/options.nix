@@ -166,7 +166,9 @@
 
       "apz.overscroll.enabled" = true;
       "general.smoothScroll" = true;
+      "mousewheel.default.delta_multiplier_x" = 275;
       "mousewheel.default.delta_multiplier_y" = 275;
+      "widget.swipe.pixel-size" = 400;
       "general.smoothScroll.msdPhysics.enabled" = false;
 
       "fp.tweak.autohide-bookmarks" = false;

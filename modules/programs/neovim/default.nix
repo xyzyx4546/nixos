@@ -1,3 +1,4 @@
+# TODO: improve scroll behaviour
 {pkgs, ...}: {
   imports = [
     ./keymaps.nix

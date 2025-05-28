@@ -23,7 +23,7 @@
   # users.groups."users".gid = 100;
   users.users.xyzyx = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "input"];
     initialPassword = "xyzyx";
     shell = pkgs.zsh;
     uid = 1000;
