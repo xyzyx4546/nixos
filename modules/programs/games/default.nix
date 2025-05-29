@@ -1,10 +1,8 @@
-# TODO: gamescope, dies das
 {pkgs, ...}: {
   home = {
     packages = with pkgs; [
       prismlauncher
       protontricks
-      lutris
       ckan
       protonup
     ];
