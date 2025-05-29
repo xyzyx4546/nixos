@@ -150,8 +150,6 @@
 
       "browser.urlbar.trending.featureGate" = false;
 
-      "browser.startup.page" = 3;
-      "browser.newtabpage.enabled" = false;
       "browser.toolbars.bookmarks.visibility" = "always";
 
       "extensions.pocket.enabled" = false;
