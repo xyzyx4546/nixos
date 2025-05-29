@@ -12,15 +12,9 @@
   };
 
   # Graphics Configuration
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-    amdgpu.amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
-    };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # Boot Configuration
@@ -68,9 +62,20 @@
   };
 
   programs = {
-    hyprland.enable = true;
-    hyprland.withUWSM = true;
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
     adb.enable = true;
+    steam = {
+      enable = true;
+      package = pkgs.steam.override {
+        extraEnv = {
+          MANGOHUD = true;
+        };
+      };
+    };
+    gamescope.enable = true;
   };
 
   services = {

@@ -8,14 +8,13 @@
       "HDMI-A-1, addreserved, 10, 0, 0, 0"
     ];
 
+    # second monitor
     workspace = [
-      "1, monitor:DP-3, default:true"
       "99, monitor:HDMI-A-1, default:true, persistent:true"
     ];
-
     windowrule = [
-      "monitor 0, class:negative:(^(firefox|left|WebCord|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$)"
-      "workspace 99, class:^(left|WebCord|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher|Spotify Premium)$"
+      "monitor 0, class:negative:(^(left|vesktop|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$)"
+      "workspace 99, class:^(left|vesktop|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$"
     ];
 
     bindm = [
