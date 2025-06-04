@@ -79,9 +79,20 @@
   };
 
   services = {
-    # TODO: DiSpLaYmAnAgEr
-    xserver.displayManager.gdm.enable = true;
-    displayManager.defaultSession = "hyprland-uwsm";
+    greetd = {
+      enable = true;
+      settings = {
+        initial_session = {
+
+          command = "uwsm start default &> /dev/null";
+          user = "xyzyx";
+        };
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --remember --remember-user-session --time";
+          user = "greeter";
+        };
+      };
+    };
 
     pipewire = {
       enable = true;

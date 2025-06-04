@@ -11,6 +11,11 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
+
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
   };
 
   dconf = {
