@@ -35,9 +35,9 @@
         "ags"
 
         "[workspace special:browser silent] uwsm app -- firefox"
-        "vesktop --start-minimized"
-        "telegram-desktop -startintray"
-        "steam -silent"
+        "uwsm app -- vesktop --start-minimized"
+        "uwsm app -- telegram-desktop -startintray"
+        "uwsm app -- steam -silent"
       ];
 
       input = {
@@ -144,11 +144,11 @@
         "SUPER SHIFT, J, movewindow, d"
 
         # Programs
-        "SUPER, C, exec, kitty"
-        "SUPER, Y, exec, kitty yazi"
-        "SUPER, S, exec, kitty --class=left spotify_player"
-        "SUPER, N, exec, kitty nvim"
-        "SUPER, D, exec, vesktop"
+        "SUPER, C, exec, uwsm app -- kitty"
+        "SUPER, Y, exec, uwsm app -- kitty yazi"
+        "SUPER, S, exec, uwsm app -- kitty --class=left spotify_player"
+        "SUPER, N, exec, uwsm app -- kitty nvim"
+        "SUPER, D, exec, uwsm app -- vesktop"
 
         "SUPER, SUPER_L, exec, ags -t app-launcher"
         "SUPER, M, exec, ags -t calculator-launcher"

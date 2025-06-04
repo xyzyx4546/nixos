@@ -20,7 +20,6 @@
     firewall.enable = true;
   };
 
-  # users.groups."users".gid = 100;
   users.users.xyzyx = {
     isNormalUser = true;
     extraGroups = ["wheel" "input"];

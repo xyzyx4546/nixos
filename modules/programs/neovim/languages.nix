@@ -3,6 +3,7 @@
     extraPackages = with pkgs; [
       cargo
       rustc
+      rustfmt
       gcc
       gnumake
       nodejs
