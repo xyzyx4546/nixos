@@ -89,7 +89,7 @@ local function add_project()
       vim.notify('cloning repository...', vim.log.levels.INFO)
 
       local clone_job = Job:new({
-        command = 'glab',
+        command = 'gh',
         args = { 'repo', 'clone', input, path, '--', '-q' },
         on_stderr = function(_, line)
           table.insert(errors, line)
