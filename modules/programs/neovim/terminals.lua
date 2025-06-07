@@ -3,6 +3,9 @@ local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true })
 vim.keymap.set('n', '<leader>tg', function() lazygit:toggle() end, { desc = 'Open lazygit [toggleterm]' })
 
+local ghdash = Terminal:new({ cmd = 'gh-dash', hidden = true })
+vim.keymap.set('n', '<leader>th', function() ghdash:toggle() end, { desc = 'Open gh-dash [toggleterm]' })
+
 local yazi = Terminal:new({ cmd = 'yazi', hidden = true })
 vim.keymap.set('n', '<leader>ty', function() yazi:toggle() end, { desc = 'Open yazi [toggleterm]' })
 

@@ -8,13 +8,6 @@
       ];
     }
     {
-      name = "Coding";
-      bookmarks = [
-        { name = "GitHub"; url = "https://github.com"; }
-        { name = "GitLab"; url = "https://gitlab.com"; }
-      ];
-    }
-    {
       name = "Proton";
       bookmarks = [
         { name = "Mail"; url = "https://mail.proton.me"; }
@@ -29,6 +22,7 @@
         { name = "Moodle"; url = "https://elearning.dhbw-stuttgart.de/moodle/my/courses.php"; }
       ];
     }
+    { name = "GitHub"; url = "https://github.com"; }
     { name = "YouTube"; url = "https://www.youtube.com/feed/subscriptions"; }
     { name = "Server"; url = "https://ehrhardt.duckdns.org"; }
   ];}];
