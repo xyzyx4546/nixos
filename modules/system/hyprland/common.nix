@@ -101,9 +101,9 @@
         "dimaround, class:(floating|xdg-desktop-portal-gtk|zenity|polkit-gnome-authentication-agent-1)"
         "size 800 450, class:(floating|xdg-desktop-portal-gtk|zenity|polkit-gnome-authentication-agent-1)"
 
-        "workspace special:games, class:^(surviving mars$|minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
-        "tile, class:^(surviving mars$|minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
-        "fullscreen, class:^(surviving mars$|minecraft.*|ksp.x86_64.*|gamescope$)"
+        "workspace special:games, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
+        "tile, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
+        "fullscreen, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|gamescope$)"
       ];
 
       workspace = [
