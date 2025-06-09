@@ -1,29 +1,39 @@
-{
-  programs.firefox.profiles."xyzyx".bookmarks.force = true;
-  programs.firefox.profiles."xyzyx".bookmarks.settings = [{ toolbar = true; bookmarks = [
-    {
-      name = "Gaming";
-      bookmarks = [
-        { name = "Steam keys"; url = "https://www.keyforsteam.de"; }
-      ];
-    }
-    {
-      name = "Proton";
-      bookmarks = [
-        { name = "Mail"; url = "https://mail.proton.me"; }
-        { name = "Calendar"; url = "https://calendar.proton.me"; }
-        { name = "Drive"; url = "https://drive.proton.me"; }
-        { name = "Pass"; url = "https://pass.proton.me"; }
-      ];
-    }
-    {
-      name = "Studium";
-      bookmarks = [
-        { name = "Moodle"; url = "https://elearning.dhbw-stuttgart.de/moodle/my/courses.php"; }
-      ];
-    }
-    { name = "GitHub"; url = "https://github.com"; }
-    { name = "YouTube"; url = "https://www.youtube.com/feed/subscriptions"; }
-    { name = "Server"; url = "https://ehrhardt.duckdns.org"; }
-  ];}];
+let
+  profile = "xyzyx";
+
+  item = name: url: {
+    inherit name;
+    inherit url;
+  };
+
+  folder = name: bookmarks: {
+    inherit name;
+    inherit bookmarks;
+  };
+in {
+  programs.firefox.profiles.${profile}.bookmarks = {
+    force = true;
+    settings = [
+      {
+        toolbar = true;
+        bookmarks = [
+          (folder "Gaming" [
+            (item "Steam keys" "https://www.keyforsteam.de")
+          ])
+          (folder "Proton" [
+            (item "Mail" "https://mail.proton.me")
+            (item "Calendar" "https://calendar.proton.me")
+            (item "Drive" "https://drive.proton.me")
+            (item "Pass" "https://pass.proton.me")
+          ])
+          (folder "Studium" [
+            (item "Moodle" "https://elearning.dhbw-stuttgart.de/moodle/my/courses.php")
+          ])
+          (item "GitHub" "https://github.com")
+          (item "YouTube" "https://www.youtube.com/feed/subscriptions")
+          (item "Server" "https://ehrhardt.duckdns.org")
+        ];
+      }
+    ];
+  };
 }

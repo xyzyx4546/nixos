@@ -1,4 +1,3 @@
-# TODO: improve
 {pkgs, ...}: {
   programs.yazi = {
     enable = true;
@@ -11,20 +10,8 @@
       };
     };
 
-    plugins = {
-      # FIX: ouch plugin doesnt work properly with large .zip files
-      ouch = builtins.fetchGit {
-        url = "https://github.com/ndtoan96/ouch.yazi.git";
-        rev = "558188d2479d73cafb7ad8fb1bee12b2b59fb607";
-      };
-      chmod = "${builtins.fetchGit {
-        url = "https://github.com/yazi-rs/plugins.git";
-        rev = "273019910c1111a388dd20e057606016f4bd0d17";
-      }}/chmod.yazi";
-      full-border = "${builtins.fetchGit {
-        url = "https://github.com/yazi-rs/plugins.git";
-        rev = "273019910c1111a388dd20e057606016f4bd0d17";
-      }}/full-border.yazi";
+    plugins = with pkgs.yaziPlugins; {
+      inherit ouch chmod full-border;
       yaziline = builtins.fetchGit {
         url = "https://github.com/llanosrocas/yaziline.yazi.git";
         rev = "1342efed87fe7e408d44b6795ff3a62a478b381d";
@@ -32,9 +19,7 @@
     };
 
     initLua =
-      /*
-      lua
-      */
+      # lua
       ''
         require('full-border'):setup {}
         require('yaziline'):setup {
@@ -47,8 +32,19 @@
       '';
 
     settings = {
+      # HACK: find is broken for .zip files in version 5.46
+      open.prepend_rules = [
+        {
+          name = "*.zip";
+          use = "extract";
+        }
+      ];
       plugin = {
         prepend_previewers = [
+          {
+            name = "*.zip";
+            run = "ouch";
+          }
           {
             mime = "application/*zip";
             run = "ouch";
@@ -76,7 +72,11 @@
         ];
       };
       manager = {
-        ratio = [1 4 3];
+        ratio = [
+          1
+          4
+          3
+        ];
         sorty_by = "natural";
         linemode = "size";
       };
@@ -109,12 +109,18 @@
           run = "tab_switch 1 --relative";
         }
         {
-          on = ["g" "x"];
+          on = [
+            "g"
+            "x"
+          ];
           run = "cd ~/Projects/nixos";
           desc = "Goto NixOS configuration";
         }
         {
-          on = ["g" "n"];
+          on = [
+            "g"
+            "n"
+          ];
           run = "cd /nas";
           desc = "Goto NAS";
         }
@@ -129,7 +135,10 @@
           desc = "Compress with ouch";
         }
         {
-          on = ["c" "m"];
+          on = [
+            "c"
+            "m"
+          ];
           run = "plugin chmod";
           desc = "Chmod on selected files";
         }
@@ -148,7 +157,6 @@
         OnCalendar = "daily";
         Persistent = true;
       };
-
       Install.WantedBy = ["timers.target"];
     };
 

@@ -17,7 +17,6 @@
         brightness = 0.7;
       };
 
-
       label = [
         {
           monitor = "DP-3";

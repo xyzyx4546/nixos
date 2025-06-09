@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     ncdu
     wev
@@ -8,14 +8,16 @@
     tldr
     speedtest-go
     asciiquarium-transparent
-    thefuck
+    neofetch
     duf
   ];
+
+  xdg.configFile."neofetch/config.conf".source = ./neofetch.conf;
 
   programs = {
     fzf = {
       enable = true;
-      changeDirWidgetOptions = [ "--preview 'eza --tree --color=always --icons=always --level=5 {} | head -200'" ];
+      changeDirWidgetOptions = ["--preview 'eza --tree --color=always --icons=always --level=5 {} | head -200'"];
       defaultOptions = [
         "--min-height 500"
         "--border"
@@ -38,7 +40,8 @@
     bat = {
       enable = true;
       extraPackages = with pkgs.bat-extras; [
-        batdiff batman
+        batdiff
+        batman
       ];
       config = {
         theme = "Dracula";
@@ -62,18 +65,13 @@
       icons = "always";
     };
 
-    zoxide.enable = true;
-
     starship = {
       enable = true;
-
       settings = {
-        add_newline = false;
         format = ''
           [╭─](#808080)$directory$username@$hostname$git_branch$cmd_duration
           [╰─](#808080)$character
         '';
-
         directory = {
           format = "[ $path](bold blue)";
           truncation_symbol = "…/";
@@ -92,12 +90,7 @@
         cmd_duration = {
           format = "  [󰄉 $duration](bold #808080)";
         };
-
-        line_break = {
-          disabled = true;
-        };
-
-        scan_timeout = 10;
+        add_newline = false;
       };
     };
 
@@ -112,23 +105,24 @@
         tree = "eza -T";
         du = "ncdu";
         df = "duf --only local,network --hide-mp /nix/store --theme ansi";
-        cd = "z";
         y = "yazi";
       };
 
       autosuggestion.enable = true;
-      autosuggestion.strategy = [ "completion" "history" ];
+      autosuggestion.strategy = ["completion" "history"];
       historySubstringSearch.enable = true;
       syntaxHighlighting.enable = true;
-      plugins = [{
-        name = "fzf-tab";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "v1.1.2";
-          sha256 = "Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
-        };
-      }];
+      plugins = [
+        {
+          name = "fzf-tab";
+          src = pkgs.fetchFromGitHub {
+            owner = "Aloxaf";
+            repo = "fzf-tab";
+            rev = "v1.1.2";
+            sha256 = "Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
+          };
+        }
+      ];
 
       initContent = ''
         # history substring search
@@ -147,10 +141,6 @@
 
         # autosuggestions
         bindkey '^I' autosuggest-accept
-
-        # thefuck
-        eval $(thefuck --alias)
-        eval $(thefuck --alias fk)
 
         # fix empty line
         precmd() {

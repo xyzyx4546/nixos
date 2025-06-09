@@ -1,9 +1,8 @@
-{ pkgs, ... }: 
-
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   pname = "xenlism-grub-theme";
   version = "16-06-2023";
-  
+
   src = pkgs.fetchFromGitHub {
     owner = "xenlism";
     repo = "Grub-themes";

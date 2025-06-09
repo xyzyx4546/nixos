@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   xdg = {
     userDirs = {
       enable = true;
@@ -22,7 +22,7 @@
       enable = true;
 
       defaultApplications = {
-        "inode/directory" = [ "yazi.desktop" ];
+        "inode/directory" = ["yazi.desktop"];
       };
     };
   };

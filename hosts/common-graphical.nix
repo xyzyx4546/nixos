@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   # lib,
   ...
 }: {
@@ -71,7 +70,7 @@
       enable = true;
       package = pkgs.steam.override {
         extraEnv = {
-          MANGOHUD = true;
+          "MANGOHUD" = true;
         };
       };
     };
@@ -81,16 +80,9 @@
   services = {
     greetd = {
       enable = true;
-      settings = {
-        initial_session = {
-
-          command = "uwsm start default &> /dev/null";
-          user = "xyzyx";
-        };
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --remember --remember-user-session --time";
-          user = "greeter";
-        };
+      settings.default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time";
+        user = "greeter";
       };
     };
 
@@ -141,7 +133,7 @@
     "/nas/family" = {
       device = "//server/family";
       fsType = "cifs";
-      options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,guest,uid=${toString config.users.users."xyzyx".uid},gid=${toString config.users.groups."${config.users.users."xyzyx".group}".gid}"];
+      options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,guest,uid=1000,gid=100"];
     };
   };
 
