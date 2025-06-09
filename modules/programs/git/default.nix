@@ -20,6 +20,7 @@
         gh-s
       ];
     };
+
     gh-dash = {
       enable = true;
       settings = {

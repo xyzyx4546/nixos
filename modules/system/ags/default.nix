@@ -1,5 +1,9 @@
-{ inputs, pkgs, ... }: {
-  imports = [ inputs.ags.homeManagerModules.default ];
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.ags.homeManagerModules.default];
 
   home.packages = with pkgs; [
     sassc
@@ -7,7 +11,7 @@
     brightnessctl
     libnotify
     wl-clipboard
-  ]; 
+  ];
   services.cliphist = {
     enable = true;
     systemdTargets = "hyprland-session.target";

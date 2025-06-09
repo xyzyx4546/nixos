@@ -1,9 +1,8 @@
-{ pkgs, ... }: 
-
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   pname = "alterra-plymouth-theme";
   version = "20-10-2024";
-  
+
   src = ./theme;
 
   installPhase = ''

@@ -1,9 +1,4 @@
-# TODO: New Rice
-# - https://hyprland-community.github.io/pyprland/Plugins.html
-# - Fancier wallpaper selection
-# - Game selection
-# - timestamp for notifications
-# - Clipboard (fix + syncing)
+# TODO: disko/nixos-anywhere
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -32,14 +27,6 @@
     nvf,
     ...
   } @ inputs: {
-    devShells."x86_64-linux".default = (import nixpkgs {system = "x86_64-linux";}).mkShell {
-      buildInputs = with (import nixpkgs {system = "x86_64-linux";}); [
-        (python3.withPackages (p: [
-          p.material-color-utilities
-          p.jinja2
-        ]))
-      ];
-    };
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

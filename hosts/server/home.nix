@@ -2,7 +2,6 @@
   imports = [
     ../../modules/programs/git
     ../../modules/programs/kitty
-    ../../modules/programs/neofetch
     ../../modules/programs/neovim
     ../../modules/programs/tmux
     ../../modules/programs/yazi

@@ -10,7 +10,8 @@
       arRPC = true;
     };
     vencord.settings = {
-      autoUpdate = false;
+      autoUpdate = true;
+      autoUpdateNotification = false;
       notifyAboutUpdates = false;
       plugins = {
         BetterUploadButton.enabled = true;

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.spotify-player = {
     enable = true;
     package = pkgs.spotify-player.override {
@@ -29,17 +29,47 @@
       {
         name = "dracula";
         component_style = {
-          playback_status = { fg = "Green"; modifiers = ["Bold"]; };
-          playback_track = { fg = "Green"; modifiers = ["Bold"]; };
-          playback_artists = { fg = "Cyan"; };
-          playback_metadata = { fg = "BrightBlack"; };
-          playback_progress_bar = { bg = "BrightBlack"; fg = "Green"; };
-          current_playing = { fg = "Green"; modifiers = ["Bold"]; };
-          page_desc = { fg = "Cyan"; };
-          playlist_desc = { fg = "BrightBlack"; modifiers = ["Dim"]; };
-          table_header = { fg = "Blue"; modifiers = ["Bold" "Underlined"]; };
-          selection = { bg = "BrightBlack"; modifiers = ["Bold"]; };
-          like = { fg = "Red"; modifiers = ["Bold"]; };
+          playback_status = {
+            fg = "Green";
+            modifiers = ["Bold"];
+          };
+          playback_track = {
+            fg = "Green";
+            modifiers = ["Bold"];
+          };
+          playback_artists = {
+            fg = "Cyan";
+          };
+          playback_metadata = {
+            fg = "BrightBlack";
+          };
+          playback_progress_bar = {
+            bg = "BrightBlack";
+            fg = "Green";
+          };
+          current_playing = {
+            fg = "Green";
+            modifiers = ["Bold"];
+          };
+          page_desc = {
+            fg = "Cyan";
+          };
+          playlist_desc = {
+            fg = "BrightBlack";
+            modifiers = ["Dim"];
+          };
+          table_header = {
+            fg = "Blue";
+            modifiers = ["Bold" "Underlined"];
+          };
+          selection = {
+            bg = "BrightBlack";
+            modifiers = ["Bold"];
+          };
+          like = {
+            fg = "Red";
+            modifiers = ["Bold"];
+          };
         };
       }
     ];
