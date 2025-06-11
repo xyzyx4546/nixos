@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./keymaps.nix
     ./languages.nix
@@ -129,18 +133,15 @@
         setupOpts.defaults = {
           prompt_prefix = " ";
           selection_caret = " ";
-          # FIX:
-          # mappings = {
-          #   i = {
-          #     ['<esc>'] = require('telescope.actions').close,
-          #     ['<C-j>'] = require('telescope.actions').move_selection_next,
-          #     ['<C-k>'] = require('telescope.actions').move_selection_previous,
-          #     ['<M-h>'] = require('telescope.actions').preview_scrolling_left,
-          #     ['<M-j>'] = require('telescope.actions').preview_scrolling_down,
-          #     ['<M-k>'] = require('telescope.actions').preview_scrolling_up,
-          #     ['<M-l>'] = require('telescope.actions').preview_scrolling_right,
-          #   }
-          # },
+          mappings.i = {
+            "<esc>" = lib.generators.mkLuaInline "require('telescope.actions').close";
+            "<C-j>" = lib.generators.mkLuaInline "require('telescope.actions').move_selection_next";
+            "<C-k>" = lib.generators.mkLuaInline "require('telescope.actions').move_selection_previous";
+            "<M-h>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_left";
+            "<M-j>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_down";
+            "<M-k>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_up";
+            "<M-l>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_right";
+          };
         };
       };
 
