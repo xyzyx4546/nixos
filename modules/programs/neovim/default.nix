@@ -156,6 +156,33 @@
         };
       };
 
+      # Git integration
+      git = {
+        gitsigns.enable = true;
+        vim-fugitive.enable = true;
+      };
+
+      # Autocompletion
+      autocomplete.blink-cmp = {
+        enable = true;
+        friendly-snippets.enable = true;
+        mappings = {
+          close = "Esc";
+          confirm = "<Tab>";
+          next = "<C-j>";
+          previous = "<C-k>";
+          scrollDocsDown = "<M-j>";
+          scrollDocsUp = "<M-k>";
+        };
+        setupOpts = {
+          completion = {
+            menu.border = "rounded";
+            documentation.window.border = "rounded";
+            ghost_text.enabled = true;
+          };
+        };
+      };
+
       # Utility plugins
       binds.whichKey.enable = true;
 
@@ -178,30 +205,6 @@
         ccc.enable = true;
       };
 
-      # Git integration
-      git = {
-        gitsigns.enable = true;
-        vim-fugitive.enable = true;
-      };
-
-      # Snippets and autocompletion
-      snippets.luasnip.enable = true;
-
-      # TODO: Formatting of cmp window
-      # TODO: Remove Treesitter suggestions
-      autocomplete.nvim-cmp = {
-        enable = true;
-        mappings = {
-          close = "Esc";
-          confirm = "<Tab>";
-          next = "<Down>";
-          previous = "<Up>";
-          scrollDocsDown = "<M-j>";
-          scrollDocsUp = "<M-k>";
-        };
-        setupOpts.experimental.ghost_text = true;
-      };
-
       startPlugins = with pkgs.vimPlugins; [
         heirline-nvim
         nvim-tree-lua
@@ -215,9 +218,25 @@
         ./heirline.lua
         ./tree.lua
         ./projects.lua
-        ./snippets.lua
         ./terminals.lua
       ];
     };
   };
 }
+/*
+vim.autocomplete.blink-cmp.setupOpts.keymap = {
+  preset = "none";
+
+  "<Up>" = ["select_prev" "fallback"];
+  "<C-n>" = [
+    (lib.generators.mkLuaInline '''
+      function(cmp)
+        if some_condition then return end -- runs the next command
+          return true -- doesn't run the next command
+        end,
+    ''')
+    "select_next"
+  ];
+};
+*/
+
