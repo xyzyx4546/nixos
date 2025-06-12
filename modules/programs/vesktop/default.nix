@@ -12,7 +12,6 @@
     vencord.settings = {
       autoUpdate = true;
       autoUpdateNotification = false;
-      notifyAboutUpdates = false;
       plugins = {
         BetterUploadButton.enabled = true;
         FakeNitro.enabled = true;
