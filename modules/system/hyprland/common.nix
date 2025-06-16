@@ -103,7 +103,7 @@
 
         "workspace special:games, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
         "tile, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
-        "fullscreen, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|gamescope$)"
+        "fullscreen, class:^(surviving mars$|Minecraft.*|ksp.x86_64.*|steam_app.*|gamescope$)"
       ];
 
       workspace = [

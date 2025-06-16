@@ -17,11 +17,11 @@
   };
 
   boot = {
-    initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhdi"];
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
     kernelModules = ["kvm-amd"];
   };
 
-  hardware.amd.intel.updateMicrocode = true;
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
   services = {
