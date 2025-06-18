@@ -223,20 +223,3 @@
     };
   };
 }
-/*
-vim.autocomplete.blink-cmp.setupOpts.keymap = {
-  preset = "none";
-
-  "<Up>" = ["select_prev" "fallback"];
-  "<C-n>" = [
-    (lib.generators.mkLuaInline '''
-      function(cmp)
-        if some_condition then return end -- runs the next command
-          return true -- doesn't run the next command
-        end,
-    ''')
-    "select_next"
-  ];
-};
-*/
-
