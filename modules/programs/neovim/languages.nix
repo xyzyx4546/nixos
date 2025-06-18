@@ -21,12 +21,16 @@
     };
 
     luaConfigPost =
-      /*
-      lua
-      */
+      # lua
       ''
         -- HACK: the option diagnostics.config.virtual_lines doesnt work properly
-        vim.diagnostic.config({virtual_lines = true})
+        vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+        vim.keymap.set('n', '<leader>lv', function()
+          vim.diagnostic.config({
+            virtual_lines = not vim.diagnostic.config().virtual_lines,
+            virtual_text = not vim.diagnostic.config().virtual_text,
+          })
+        end, { desc = 'Toggle diagnostic virtual lines and virtual text' })
 
         -- HACK: nvf doesnt provide a keybind option
         vim.keymap.set('n', '<leader><leader>', require('conform').format, { desc = 'Format file' })
