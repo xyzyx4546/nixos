@@ -25,6 +25,7 @@
         Pmenu = {bg = null;};
         TabLineFill = {bg = null;};
         StatusLine = {bg = null;};
+        StatusLineTerm = {bg = null;};
       };
 
       # General editor settings
@@ -119,6 +120,7 @@
       };
 
       ui = {
+        # FIX: ui-select looks broken
         noice.enable = true;
         borders = {
           enable = true;
@@ -145,20 +147,28 @@
         };
       };
 
-      # Terminal settings
+      # ToggleTerm
       terminal.toggleterm = {
         enable = true;
+        lazygit = {
+          enable = true;
+          mappings.open = "<C-g>";
+        };
         setupOpts = {
           direction = "float";
           open_mapping = "<C-t>";
           persist_mode = false;
           close_on_exit = true;
+          float_opts.border = "curved";
         };
       };
 
-      # Git integration
+      # Git
       git = {
-        gitsigns.enable = true;
+        gitsigns = {
+          enable = true;
+          mappings.toggleDeleted = null;
+        };
         vim-fugitive.enable = true;
       };
 
@@ -174,8 +184,30 @@
           scrollDocsDown = "<M-j>";
           scrollDocsUp = "<M-k>";
         };
+        sourcePlugins = with pkgs.vimPlugins; {
+          "copilot" = {
+            enable = true;
+            package = blink-cmp-copilot;
+            module = "blink-cmp-copilot";
+          };
+        };
         setupOpts = {
+          # HACK: Disables conflicting autocompletion for Copilot Chat
+          enabled =
+            lib.generators.mkLuaInline
+            # lua
+            ''
+              function()
+                return vim.bo.filetype ~= "copilot-chat"
+              end
+            '';
+          # HACK: can't set this with `blink-cmp.sourcePlugins`
+          sources.providers.copilot = {
+            async = true;
+            score_offset = 100;
+          };
           completion = {
+            # HACK: shouldn't be needed due to `ui.borders.globalStyle = "rounded"`
             menu.border = "rounded";
             documentation.window.border = "rounded";
             ghost_text.enabled = true;
@@ -203,22 +235,50 @@
       utility = {
         surround.enable = true;
         ccc.enable = true;
+        oil-nvim = {
+          enable = true;
+          setupOpts = {
+            delete_to_trash = true;
+            skip_confirm_for_simple_edits = true;
+            keymaps = {
+              "<C-q>" = "actions.close";
+              "<C-o>" = "actions.close";
+              "?" = "actions.show_help";
+            };
+            float = {
+              max_width = 0.8;
+              max_height = 0.8;
+            };
+          };
+        };
+        yazi-nvim = {
+          enable = true;
+          mappings = {
+            openYazi = "<C-y>";
+            openYaziDir = null;
+          };
+          setupOpts.keymaps.change_working_directory = "<C-c>";
+        };
       };
 
-      startPlugins = with pkgs.vimPlugins; [
-        heirline-nvim
-        nvim-tree-lua
-        nix-develop-nvim
-        dressing-nvim
-        nvim-sops
-        presence-nvim
-      ];
+      extraPlugins = with pkgs.vimPlugins; {
+        nix-develop-nvim.package = nix-develop-nvim;
+
+        presence-nvim.package = presence-nvim;
+
+        "CopilotChat" = {
+          package = CopilotChat-nvim;
+          setup = builtins.readFile ./lua/copilot.lua;
+        };
+
+        "heirline" = {
+          package = heirline-nvim;
+          setup = builtins.readFile ./lua/heirline.lua;
+        };
+      };
 
       extraLuaFiles = [
-        ./heirline.lua
-        ./tree.lua
-        ./projects.lua
-        ./terminals.lua
+        ./lua/projects.lua
       ];
     };
   };
