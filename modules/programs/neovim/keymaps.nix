@@ -1,5 +1,5 @@
 {
-  programs.  nvf.settings.vim.keymaps = [
+  programs.nvf.settings.vim.keymaps = [
     {
       mode = ["n" "v"];
       key = "j";
@@ -13,21 +13,39 @@
       silent = true;
     }
     {
-      mode = ["n" "v" "i"];
+      mode = "";
       key = "<C-h>";
       action = "<CMD>bp<CR>";
       silent = true;
     }
     {
-      mode = ["n" "v" "i"];
+      mode = "";
       key = "<C-l>";
       action = "<CMD>bn<CR>";
       silent = true;
     }
     {
-      mode = ["n" "v" "i"];
+      mode = "";
       key = "<C-q>";
       action = "<CMD>bn<bar>silent!bd#<CR>";
+      silent = true;
+    }
+    {
+      mode = "";
+      key = "<C-c>";
+      action = "<CMD>CopilotChatToggle<CR>";
+      silent = true;
+    }
+    {
+      mode = "";
+      key = "<C-o>";
+      action = "<CMD>Oil --float<CR>";
+      silent = true;
+    }
+    {
+      mode = "n";
+      key = "-";
+      action = "<CMD>Oil<CR>";
       silent = true;
     }
     {

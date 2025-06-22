@@ -25,7 +25,7 @@
       ''
         -- HACK: the option diagnostics.config.virtual_lines doesnt work properly
         vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
-        vim.keymap.set('n', '<leader>lv', function()
+        vim.keymap.set('n', '<leader>tv', function()
           vim.diagnostic.config({
             virtual_lines = not vim.diagnostic.config().virtual_lines,
             virtual_text = not vim.diagnostic.config().virtual_text,
