@@ -159,6 +159,7 @@
           open_mapping = "<C-t>";
           persist_mode = false;
           close_on_exit = true;
+          # HACK: shouldn't be needed due to `ui.borders.globalStyle = "rounded"`
           float_opts.border = "curved";
         };
       };
@@ -241,6 +242,8 @@
             delete_to_trash = true;
             skip_confirm_for_simple_edits = true;
             keymaps = {
+              "<C-c>" = false;
+              "<C-t>" = false;
               "<C-q>" = "actions.close";
               "<C-o>" = "actions.close";
               "?" = "actions.show_help";
