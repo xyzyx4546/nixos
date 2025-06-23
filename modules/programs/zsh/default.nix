@@ -115,12 +115,7 @@
       plugins = [
         {
           name = "fzf-tab";
-          src = pkgs.fetchFromGitHub {
-            owner = "Aloxaf";
-            repo = "fzf-tab";
-            rev = "v1.1.2";
-            sha256 = "Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
-          };
+          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
         }
       ];
 
