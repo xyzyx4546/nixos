@@ -1,3 +1,14 @@
+$primary: #bd93f9;
+$onPrimary: #282a36;
+$secondary: #44475a;
+$onSecondary: #282a36;
+$onBackground: #f8f8f2;
+$surface: #282a36;
+$onSurface: #f8f8f2;
+$surfaceVariant: #44475a;
+$onSurfaceVariant: #f8f8f2;
+$shadow: #000000;
+
 * {
   font-weight: bold;
 }
@@ -9,9 +20,6 @@ button {
   background-color: transparent;
   border-radius: 15px;
 }
-
-@import '../../material/colors/colors';
-/* @import '/home/xyzyx/.config/material/colors/colors'; */
 
 @import './bar';
 @import './launcher';
