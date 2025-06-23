@@ -136,13 +136,13 @@
           prompt_prefix = " ";
           selection_caret = " ";
           mappings.i = {
-            "<esc>" = lib.generators.mkLuaInline "require('telescope.actions').close";
-            "<C-j>" = lib.generators.mkLuaInline "require('telescope.actions').move_selection_next";
-            "<C-k>" = lib.generators.mkLuaInline "require('telescope.actions').move_selection_previous";
-            "<M-h>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_left";
-            "<M-j>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_down";
-            "<M-k>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_up";
-            "<M-l>" = lib.generators.mkLuaInline "require('telescope.actions').preview_scrolling_right";
+            "<esc>" = lib.mkLuaInline "require('telescope.actions').close";
+            "<C-j>" = lib.mkLuaInline "require('telescope.actions').move_selection_next";
+            "<C-k>" = lib.mkLuaInline "require('telescope.actions').move_selection_previous";
+            "<M-h>" = lib.mkLuaInline "require('telescope.actions').preview_scrolling_left";
+            "<M-j>" = lib.mkLuaInline "require('telescope.actions').preview_scrolling_down";
+            "<M-k>" = lib.mkLuaInline "require('telescope.actions').preview_scrolling_up";
+            "<M-l>" = lib.mkLuaInline "require('telescope.actions').preview_scrolling_right";
           };
         };
       };
@@ -195,13 +195,7 @@
         setupOpts = {
           # HACK: Disables conflicting autocompletion for Copilot Chat
           enabled =
-            lib.generators.mkLuaInline
-            # lua
-            ''
-              function()
-                return vim.bo.filetype ~= "copilot-chat"
-              end
-            '';
+            lib.mkLuaInline "function() return vim.bo.filetype ~= 'copilot-chat' end";
           # HACK: can't set this with `blink-cmp.sourcePlugins`
           sources.providers.copilot = {
             async = true;
