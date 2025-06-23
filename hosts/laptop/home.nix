@@ -15,8 +15,7 @@
     ../../modules/system/fonts
     ../../modules/system/gtk
     ../../modules/system/hyprland/laptop.nix
-    ../../modules/system/material
-    ../../modules/system/scripts
+    ../../modules/system/wallpapers
     ../../modules/system/xdg
   ];
 

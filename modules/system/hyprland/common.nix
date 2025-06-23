@@ -155,8 +155,8 @@
         "SUPER, V, exec, ags -t clipboard-launcher"
         "SUPER SHIFT, Q, exec, ags -t powermenu-launcher"
 
-        "SUPER, W, exec, material.py random"
-        "SUPER SHIFT, W, exec, material.py select"
+        "SUPER, W, exec, wallpaper random"
+        "SUPER SHIFT, W, exec, wallpaper select"
         "SUPER, X, exec, hyprlock"
         ", PRINT, exec, grimblast --notify --freeze copysave area"
 
