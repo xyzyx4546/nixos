@@ -2,16 +2,23 @@
   programs.yazi = {
     enable = true;
 
+    flavors = {
+      dracula = builtins.fetchGit {
+        url = "https://github.com/dracula/yazi.git";
+        rev = "99b60fd76df4cce2778c7e6c611bfd733cf73866";
+      };
+    };
+
     theme = {
       flavor.dark = "dracula";
-      manager.hovered = {
+      mgr.hovered = {
         bg = "#44475a";
         bold = true;
       };
     };
 
     plugins = with pkgs.yaziPlugins; {
-      inherit ouch chmod full-border;
+      inherit ouch chmod full-border git mount;
       yaziline = builtins.fetchGit {
         url = "https://github.com/llanosrocas/yaziline.yazi.git";
         rev = "1342efed87fe7e408d44b6795ff3a62a478b381d";
@@ -21,14 +28,15 @@
     initLua =
       # lua
       ''
-        require('full-border'):setup {}
-        require('yaziline'):setup {
-          separator_style = 'curvy',
+        require("full-border"):setup()
+        require("git"):setup()
+        require("yaziline"):setup({
+          separator_style = "curvy",
           separator_open_thin = "",
           separator_close_thin = "",
-          select_symbol = '',
-          yank_symbol = '󰆐',
-        }
+          select_symbol = "",
+          yank_symbol = "󰆐",
+        })
       '';
 
     settings = {
@@ -70,13 +78,21 @@
             run = "ouch";
           }
         ];
-      };
-      manager = {
-        ratio = [
-          1
-          4
-          3
+        prepend_fetchers = [
+          {
+            id = "git";
+            name = "*";
+            run = "git";
+          }
+          {
+            id = "git";
+            name = "*/";
+            run = "git";
+          }
         ];
+      };
+      mgr = {
+        ratio = [1 4 3];
         sorty_by = "natural";
         linemode = "size";
       };
@@ -87,7 +103,7 @@
     };
 
     keymap = {
-      manager.prepend_keymap = [
+      mgr.prepend_keymap = [
         {
           on = "i";
           run = "spot";
@@ -109,18 +125,12 @@
           run = "tab_switch 1 --relative";
         }
         {
-          on = [
-            "g"
-            "x"
-          ];
+          on = ["g" "x"];
           run = "cd ~/Projects/nixos";
           desc = "Goto NixOS configuration";
         }
         {
-          on = [
-            "g"
-            "n"
-          ];
+          on = ["g" "n"];
           run = "cd /nas";
           desc = "Goto NAS";
         }
@@ -135,12 +145,13 @@
           desc = "Compress with ouch";
         }
         {
-          on = [
-            "c"
-            "m"
-          ];
+          on = ["c" "m"];
           run = "plugin chmod";
           desc = "Chmod on selected files";
+        }
+        {
+          on = "M";
+          run = "plugin mount";
         }
       ];
     };
@@ -161,10 +172,5 @@
     };
 
     services."gtrash-prune".Service.ExecStart = "${pkgs.gtrash}/bin/gtrash prune --day=30";
-  };
-
-  xdg.configFile."yazi/flavors/dracula.yazi/".source = builtins.fetchGit {
-    url = "https://github.com/dracula/yazi.git";
-    rev = "99b60fd76df4cce2778c7e6c611bfd733cf73866";
   };
 }
