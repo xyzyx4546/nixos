@@ -24,8 +24,8 @@
       };
       script = ''
         ${pkgs.coreutils}/bin/mkdir -p /nas/data/brigitte /nas/data/david /nas/data/frank /nas/data/simon /nas/data/family
-        ${pkgs.coreutils}/bin/chown xyzyx:users /nas/* /nas/data/*
-        ${pkgs.coreutils}/bin/chmod 755 /nas/* /nas/data/*
+        ${pkgs.coreutils}/bin/chown xyzyx:users /nas /nas/* /nas/data/*
+        ${pkgs.coreutils}/bin/chmod 755 /nas /nas/* /nas/data/*
       '';
     };
     "filebrowser" = {
@@ -39,7 +39,7 @@
             --address 127.0.0.1 \
             --port 8080 \
             --root /nas/data \
-            --database /nas/data/filebrowser.db
+            --database /nas/filebrowser.db
         '';
         Restart = "always";
         User = "xyzyx";
