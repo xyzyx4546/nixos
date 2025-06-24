@@ -12,10 +12,16 @@ local action_state = require("telescope.actions.state")
 local PROJECTS_DIR = os.getenv("HOME") .. "/Projects/"
 
 local close_all_buffers = function(cmd)
+	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].filetype == "TelescopePrompt" then
+			vim.api.nvim_buf_delete(bufnr, { force = true })
+		end
+	end
+
 	local buffers = vim.api.nvim_list_bufs()
 
 	for _, bufnr in ipairs(buffers) do
-		if vim.api.nvim_buf_get_option(bufnr, "modified") and vim.bo[bufnr].filetype ~= "TelescopePrompt" then
+		if vim.api.nvim_buf_get_option(bufnr, "modified") then
 			local choice = vim.fn.confirm(
 				"Buffer " .. vim.api.nvim_buf_get_name(bufnr) .. " has unsaved changes. Save?",
 				"&Yes\n&No\n&Cancel"
@@ -36,7 +42,7 @@ local close_all_buffers = function(cmd)
 
 	for _, bufnr in ipairs(buffers) do
 		if vim.api.nvim_buf_is_loaded(bufnr) and bufnr ~= current_buf then
-			vim.cmd("bd! " .. bufnr)
+			vim.cmd("silent! bd! " .. bufnr)
 		end
 	end
 end
@@ -75,8 +81,8 @@ local function delete_project(project, prompt_bufnr)
 end
 
 local function enter_project(project)
-	close_all_buffers("Oil " .. project.path)
 	vim.cmd("cd " .. project.path)
+	close_all_buffers("Oil " .. project.path)
 	if io.open(project.path .. "/flake.nix", "r") then
 		vim.notify("entering development environment...")
 		vim.cmd("NixDevelop")
