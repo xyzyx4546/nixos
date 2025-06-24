@@ -36,7 +36,7 @@
 
         "[workspace special:browser silent] uwsm app -- firefox"
         "uwsm app -- vesktop --start-minimized"
-        "uwsm app -- telegram-desktop -startintray"
+        "uwsm app -- Telegram -startintray"
         "uwsm app -- steam -silent"
       ];
 
