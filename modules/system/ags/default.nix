@@ -14,7 +14,6 @@
   ];
   services.cliphist = {
     enable = true;
-    systemdTargets = "hyprland-session.target";
     extraOptions = [
       "-max-dedupe-search"
       "100"
