@@ -74,7 +74,6 @@
         };
       };
     };
-    gamescope.enable = true;
   };
 
   services = {
