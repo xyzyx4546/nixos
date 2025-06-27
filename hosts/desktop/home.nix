@@ -24,11 +24,9 @@
     homeDirectory = "/home/xyzyx";
 
     packages = with pkgs; [
-      gthumb
-      gnome-calculator
       telegram-desktop
-      piper
       onlyoffice-desktopeditors
+      piper
     ];
 
     stateVersion = "24.05";

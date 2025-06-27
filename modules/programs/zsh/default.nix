@@ -10,6 +10,7 @@
     asciiquarium-transparent
     neofetch
     duf
+    libqalculate
   ];
 
   xdg.configFile."neofetch/config.conf".source = ./neofetch.conf;
