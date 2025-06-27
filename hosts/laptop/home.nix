@@ -24,8 +24,6 @@
     homeDirectory = "/home/xyzyx";
 
     packages = with pkgs; [
-      gthumb
-      gnome-calculator
       telegram-desktop
       onlyoffice-desktopeditors
     ];
