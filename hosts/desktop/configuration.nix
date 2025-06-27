@@ -28,7 +28,7 @@
     ratbagd.enable = true;
     hardware.openrgb.enable = true;
     greetd.settings.initial_session = {
-      command = "uwsm start /run/current-system/sw/bin/Hyprland &> /dev/null";
+      command = "Hyprland &> /dev/null";
       user = "xyzyx";
     };
   };

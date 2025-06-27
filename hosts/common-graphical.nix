@@ -61,10 +61,7 @@
   };
 
   programs = {
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-    };
+    hyprland.enable = true;
     adb.enable = true;
     steam = {
       enable = true;

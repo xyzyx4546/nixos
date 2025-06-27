@@ -34,10 +34,10 @@
         "swww-daemon"
         "ags"
 
-        "[workspace special:browser silent] uwsm app -- firefox"
-        "uwsm app -- vesktop --start-minimized"
-        "uwsm app -- Telegram -startintray"
-        "uwsm app -- steam -silent"
+        "[workspace special:browser silent] firefox"
+        "vesktop --start-minimized"
+        "Telegram -startintray"
+        "steam -silent"
       ];
 
       input = {
@@ -144,11 +144,11 @@
         "SUPER SHIFT, J, movewindow, d"
 
         # Programs
-        "SUPER, C, exec, uwsm app -- kitty"
-        "SUPER, Y, exec, uwsm app -- kitty yazi"
-        "SUPER, S, exec, uwsm app -- kitty --class=left spotify_player"
-        "SUPER, N, exec, uwsm app -- kitty nvim"
-        "SUPER, D, exec, uwsm app -- vesktop"
+        "SUPER, C, exec, kitty"
+        "SUPER, Y, exec, kitty yazi"
+        "SUPER, S, exec, kitty --class=left spotify_player"
+        "SUPER, N, exec, kitty nvim"
+        "SUPER, D, exec, vesktop"
 
         "SUPER, SUPER_L, exec, ags -t app-launcher"
         "SUPER, M, exec, ags -t calculator-launcher"
