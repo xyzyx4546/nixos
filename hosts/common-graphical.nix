@@ -9,6 +9,7 @@
     firewall.checkReversePath = false;
     firewall.allowedUDPPorts = [51820];
   };
+  systemd.services."NetworkManager-wait-online".enable = false;
 
   # Graphics Configuration
   hardware.graphics = {
@@ -130,28 +131,6 @@
       device = "//server/family";
       fsType = "cifs";
       options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,guest,uid=1000,gid=100"];
-    };
-  };
-
-  systemd = {
-    user.services = {
-      "polkit-gnome-authentication-agent-1" = {
-        description = "Polkit GNOME Authentication Agent";
-        wantedBy = ["graphical-session.target"];
-        wants = ["graphical-session.target"];
-        after = ["graphical-session.target"];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-      };
-    };
-
-    services = {
-      "NetworkManager-wait-online".enable = false;
     };
   };
 }
