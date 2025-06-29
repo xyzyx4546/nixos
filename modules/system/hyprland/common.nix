@@ -8,11 +8,16 @@
     hyprland-qtutils
     xdg-desktop-portal-hyprland
     grimblast
+    swww
   ];
+
+  xdg.configFile."wallpapers" = {
+    recursive = true;
+    source = ./wallpapers;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = false;
     xwayland.enable = true;
 
     settings = {
@@ -97,9 +102,9 @@
       windowrule = [
         "suppressevent maximize, class:.*"
 
-        "float, class:(floating|xdg-desktop-portal-gtk|zenity|polkit-gnome-authentication-agent-1)"
-        "dimaround, class:(floating|xdg-desktop-portal-gtk|zenity|polkit-gnome-authentication-agent-1)"
-        "size 800 450, class:(floating|xdg-desktop-portal-gtk|zenity|polkit-gnome-authentication-agent-1)"
+        "float, class:(floating|xdg-desktop-portal-gtk|waypaper)"
+        "dimaround, class:(floating|xdg-desktop-portal-gtk|waypaper)"
+        "size 800 450, class:(floating|xdg-desktop-portal-gtk|waypaper)"
 
         "workspace special:games, class:^(surviving mars|Minecraft.|ksp.x86_64.|steam_app.)*"
         "tile, class:^(surviving mars|Minecraft.|ksp.x86_64.|steam_app.)*"
@@ -155,8 +160,8 @@
         "SUPER, V, exec, ags -t clipboard-launcher"
         "SUPER SHIFT, Q, exec, ags -t powermenu-launcher"
 
-        "SUPER, W, exec, wallpaper random"
-        "SUPER SHIFT, W, exec, wallpaper select"
+        "SUPER, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers --random"
+        "SUPER SHIFT, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers"
         "SUPER, X, exec, hyprlock"
         ", PRINT, exec, grimblast --notify --freeze copysave area"
 
