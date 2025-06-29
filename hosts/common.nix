@@ -25,7 +25,6 @@
     extraGroups = ["wheel" "input"];
     initialPassword = "xyzyx";
     shell = pkgs.zsh;
-    uid = 1000;
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq2xd3Eri9HfFP49Gl4snnrxMY6zXyNpWQIs9dd2L4Q"];
   };
 

@@ -117,6 +117,4 @@
     };
   };
   environment.variables."BORG_REPO" = "/nas/backup";
-
-  environment.systemPackages = [pkgs.filebrowser];
 }

@@ -95,39 +95,7 @@
             proxyPass = "http://127.0.0.1:2812/";
             proxyWebsockets = true;
           };
-          "/dashboard/" = {
-            proxyPass = "http://127.0.0.1:8081/";
-            proxyWebsockets = true;
-          };
         };
-      };
-    };
-    homepage-dashboard = {
-      enable = true;
-      listenPort = 8081;
-      openFirewall = true;
-      services = [
-        {
-          name = "Local Web Server";
-          url = "http://localhost:80";
-          icon = "fas fa-server";
-        }
-        {
-          name = "Google";
-          url = "https://www.google.com";
-          icon = "fas fa-search";
-        }
-      ];
-      widgets = [
-        {
-          type = "clock";
-          options = {
-            format = "HH:mm:ss";
-          };
-        }
-      ];
-      settings = {
-        title = "My Homepage Dashboard";
       };
     };
   };
@@ -140,17 +108,6 @@
       group = "nginx";
     };
   };
-
-  # networking = {
-  #   interfaces."end0".ipv4.addresses = [
-  #     {
-  #       address = "192.168.2.10";
-  #       prefixLength = 24;
-  #     }
-  #   ];
-  #   defaultGateway = "192.168.2.1";
-  #   nameservers = ["192.168.2.1"];
-  # };
 
   system.stateVersion = "24.05";
 }

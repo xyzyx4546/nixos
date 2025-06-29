@@ -1,14 +1,8 @@
 {
   pkgs,
-  # lib,
   ...
 }: {
-  networking = {
-    networkmanager.enable = true;
-    # firewall.enable = lib.mkForce false;
-    firewall.checkReversePath = false;
-    firewall.allowedUDPPorts = [51820];
-  };
+  networking.networkmanager.enable = true;
   systemd.services."NetworkManager-wait-online".enable = false;
 
   # Graphics Configuration
@@ -94,7 +88,6 @@
 
     upower.enable = true;
 
-    # HACK: find a better way to do this
     evdevremapkeys = {
       enable = true;
       settings = {
