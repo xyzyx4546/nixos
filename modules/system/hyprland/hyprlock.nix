@@ -2,8 +2,6 @@
   programs.hyprlock = {
     enable = true;
     settings = {
-      source = "~/.config/material/colors/colors-hyprland.conf";
-
       general = {
         disable_loading_bar = true;
         ignore_empty_input = true;
