@@ -22,7 +22,7 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
-        theme = pkgs.callPackage ../modules/packages/grub-theme/grub-theme.nix {inherit pkgs;};
+        theme = pkgs.callPackage ../modules/packages/grub-theme {inherit pkgs;};
         splashImage = null;
         useOSProber = true;
       };
@@ -50,7 +50,7 @@
       enable = true;
       theme = "alterra";
       themePackages = [
-        (pkgs.callPackage ../modules/packages/plymouth-theme/plymouth-theme.nix {inherit pkgs;})
+        (pkgs.callPackage ../modules/packages/plymouth-theme {inherit pkgs;})
       ];
     };
   };
