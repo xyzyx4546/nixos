@@ -3,6 +3,6 @@
 
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-    (pkgs.callPackage ../../packages/nunito/nunito.nix {})
+    (pkgs.callPackage ../../packages/nunito {})
   ];
 }
