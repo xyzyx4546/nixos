@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  hostName,
   ...
 }: {
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -15,10 +14,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "de-latin1";
 
-  networking = {
-    inherit hostName;
-    firewall.enable = true;
-  };
+  networking.firewall.enable = true;
 
   users.users.xyzyx = {
     isNormalUser = true;
