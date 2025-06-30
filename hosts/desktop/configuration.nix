@@ -33,5 +33,6 @@
     };
   };
 
+  networking.hostName = "desktop";
   system.stateVersion = "24.05";
 }

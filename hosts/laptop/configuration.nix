@@ -24,5 +24,6 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
+  networking.hostName = "laptop";
   system.stateVersion = "24.05";
 }

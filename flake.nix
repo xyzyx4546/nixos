@@ -30,7 +30,6 @@
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {hostName = "desktop";};
         modules = [
           nixos-hardware.nixosModules.common-cpu-amd
           nixos-hardware.nixosModules.common-gpu-amd
@@ -55,7 +54,6 @@
 
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {hostName = "laptop";};
         modules = [
           nixos-hardware.nixosModules.dell-latitude-3480
           ./hosts/laptop/configuration.nix
@@ -77,10 +75,7 @@
       };
 
       server = nixos-raspberrypi.lib.nixosSystemFull {
-        specialArgs = {
-          inherit nixos-raspberrypi;
-          hostName = "server";
-        };
+        specialArgs = {inherit nixos-raspberrypi;};
         modules = [
           nixos-raspberrypi.nixosModules.raspberry-pi-5.base
           nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
