@@ -2,7 +2,6 @@
   imports = [
     ../common.nix
     ./nas.nix
-    ./vpn.nix
   ];
 
   nix.settings = {
@@ -79,6 +78,7 @@
           if status == 0 then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'DDclient failed'"
       '';
     };
+
     nginx = {
       enable = true;
       recommendedProxySettings = true;
@@ -97,6 +97,13 @@
           };
         };
       };
+    };
+
+    ddclient = {
+      enable = true;
+      protocol = "duckdns";
+      domains = ["ehrhardt.duckdns.org"];
+      passwordFile = "/etc/duckdns-token";
     };
   };
 
