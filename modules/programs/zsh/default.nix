@@ -70,7 +70,7 @@
       enable = true;
       settings = {
         format = ''
-          [╭─](#808080)$directory$username@$hostname$git_branch$cmd_duration
+          [╭─](#808080)$directory$username@$hostname$cmd_duration
           [╰─](#808080)$character
         '';
         directory = {
@@ -84,9 +84,6 @@
         hostname = {
           format = "[$hostname](bold yellow)";
           ssh_only = false;
-        };
-        git_branch = {
-          format = "  [ $branch](bold #F1502F)";
         };
         cmd_duration = {
           format = "  [󰄉 $duration](bold #808080)";
