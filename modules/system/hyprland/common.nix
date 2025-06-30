@@ -106,9 +106,9 @@
         "dimaround, class:(floating|xdg-desktop-portal-gtk|waypaper)"
         "size 800 450, class:(floating|xdg-desktop-portal-gtk|waypaper)"
 
-        "workspace special:games, class:^(surviving mars|Minecraft.|ksp.x86_64.|steam_app.)*"
-        "tile, class:^(surviving mars|Minecraft.|ksp.x86_64.|steam_app.)*"
-        "fullscreen, class:^(surviving mars|Minecraft.|ksp.x86_64.|steam_app.)*"
+        "workspace special:games, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
+        "tile, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
+        "fullscreen, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
       ];
 
       workspace = [
