@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
--- luacheck: globals vim
+-- luacheck: globals vim PROJECTS
 
 local Job = require("plenary.job")
 local scan = require("plenary.scandir")
@@ -80,13 +80,9 @@ local function delete_project(project, prompt_bufnr)
 	end)
 end
 
-local function enter_project(project)
-	vim.cmd("cd " .. project.path)
-	close_all_buffers("Oil " .. project.path)
-	if io.open(project.path .. "/flake.nix", "r") then
-		vim.notify("entering development environment...")
-		vim.cmd("NixDevelop")
-	end
+local function enter_project(path)
+	vim.cmd("cd " .. path)
+	close_all_buffers("Oil " .. path)
 end
 
 local function add_project()
@@ -106,7 +102,7 @@ local function add_project()
 				on_exit = function(_, return_code)
 					vim.schedule(function()
 						if return_code == 0 then
-							enter_project({ path = path })
+							enter_project(path)
 						else
 							vim.notify(
 								"failed to clone repository:\n" .. table.concat(errors, "\n"),
@@ -128,7 +124,7 @@ local function create_project()
 			local path = PROJECTS_DIR .. input
 			vim.fn.jobstart("mkdir " .. path)
 			vim.fn.jobstart("nohup fetch_projects.py")
-			enter_project({ path = path })
+			enter_project(path)
 		end
 	end)
 end
@@ -160,7 +156,7 @@ local function project_picker()
 					project = action_state.get_selected_entry().value
 					actions.close(prompt_bufnr)
 					if project then
-						enter_project(project)
+						enter_project(project.path)
 					end
 				end)
 				map("i", "<C-n>", function()
@@ -178,11 +174,11 @@ local function project_picker()
 		:find()
 end
 
-function _PROJECTS(name)
+function PROJECTS(name)
 	if name then
 		local path = PROJECTS_DIR .. name
 		if vim.fn.isdirectory(path) then
-			enter_project({ path = path })
+			enter_project(path)
 		else
 			vim.notify("project '" .. name .. "' does not exist.", vim.log.levels.ERROR)
 		end
@@ -191,4 +187,4 @@ function _PROJECTS(name)
 	end
 end
 
-vim.keymap.set("n", "<leader>fp", _PROJECTS, { desc = "Find projects [Telescope]" })
+vim.keymap.set("n", "<leader>fp", PROJECTS, { desc = "Find projects [Telescope]" })

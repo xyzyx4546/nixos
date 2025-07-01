@@ -89,13 +89,13 @@
                 icon = "  ";
                 desc = "Find project";
                 key = "p";
-                action = "lua _PROJECTS()";
+                action = "lua PROJECTS()";
               }
               {
                 icon = "  ";
                 desc = "Configuration";
                 key = "x";
-                action = "lua _PROJECTS('nixos')";
+                action = "lua PROJECTS('nixos')";
               }
               {
                 icon = "  ";
