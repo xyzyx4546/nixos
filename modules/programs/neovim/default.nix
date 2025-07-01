@@ -150,10 +150,6 @@
       # ToggleTerm
       terminal.toggleterm = {
         enable = true;
-        lazygit = {
-          enable = true;
-          mappings.open = "<C-g>";
-        };
         setupOpts = {
           direction = "float";
           open_mapping = "<C-t>";
@@ -276,6 +272,7 @@
 
       extraLuaFiles = [
         ./lua/projects.lua
+        ./lua/terminals.lua
       ];
     };
   };
