@@ -104,6 +104,7 @@
         du = "ncdu";
         df = "duf --only local,network --hide-mp /nix/store --theme ansi";
         y = "yazi";
+        t = "tmux new-session -A -s main";
       };
 
       autosuggestion.enable = true;
