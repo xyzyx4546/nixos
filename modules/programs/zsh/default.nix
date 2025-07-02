@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    (pkgs.callPackage ../../packages/lazytimer {inherit pkgs;})
     ncdu
     wev
     nix-prefetch-git
