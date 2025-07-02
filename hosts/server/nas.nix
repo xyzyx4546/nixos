@@ -58,6 +58,8 @@
           "security" = "user";
           "map to guest" = "bad user";
           "guest account" = "nobody";
+          "veto files" = "/._*/.DS_Store/";
+          "delete veto files" = "yes";
         };
         "brigitte" = {
           "path" = "/nas/data/brigitte";
