@@ -1,14 +1,5 @@
 {pkgs, ...}: {
   programs.nvf.settings.vim = {
-    extraPackages = with pkgs; [
-      cargo
-      rustc
-      rustfmt
-      gcc
-      gnumake
-      nodejs
-    ];
-
     lsp = {
       enable = true;
       formatOnSave = false;
@@ -49,12 +40,12 @@
       enableExtraDiagnostics = true;
       enableFormat = true;
       enableTreesitter = true;
+      enableDAP = true;
 
       bash.enable = true;
       clang.enable = true;
       css.enable = true;
       html.enable = true;
-      java.enable = true;
       lua.enable = true;
       markdown = {
         enable = true;
@@ -74,5 +65,16 @@
         format.type = "prettierd";
       };
     };
+
+    # HACK: shouldn't be necessary, but it is
+    extraPackages = with pkgs; [
+      rustfmt
+    ];
   };
+
+  home.packages = with pkgs; [
+    cargo
+    gcc
+    nodejs
+  ];
 }
