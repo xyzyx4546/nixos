@@ -6,7 +6,6 @@
 require("copilot").setup()
 
 require("CopilotChat").setup({
-	model = "claude-sonnet-4",
 	show_help = false,
 	window = {
 		layout = "float",
