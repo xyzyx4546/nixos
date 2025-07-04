@@ -66,9 +66,9 @@
       };
     };
 
-    # HACK: shouldn't be necessary, but it is
     extraPackages = with pkgs; [
       rustfmt
+      rustc
     ];
   };
 
