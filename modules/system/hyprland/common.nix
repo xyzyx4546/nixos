@@ -67,30 +67,28 @@
 
       decoration = {
         rounding = 15;
+        dim_around = 0.5;
         blur = {
           enabled = true;
           xray = true;
           size = 4;
           passes = 4;
-          new_optimizations = true;
-          brightness = "0.5";
+          brightness = 0.5;
         };
-        dim_around = "0.5";
       };
 
       animations = {
         enabled = "yes";
 
-        bezier = "bezier, 0.25, 1, 0.5, 1";
+        bezier = "bezier, 0.2, 0.8, 0.1, 1";
 
         animation = [
-          "windows, 1, 6, bezier, popin"
-          "border, 1, 6, bezier"
-          "borderangle, 1, 6, bezier"
-          "fade, 1, 6, bezier"
-          "workspaces, 1, 6, bezier"
-          "specialWorkspace, 1, 6, bezier, slidevert"
-          "layers, 1, 3, bezier, popin"
+          "windows, 1, 4, bezier, popin 80%"
+          "border, 1, 7, bezier"
+          "fade, 1, 4, bezier"
+          "workspaces, 1, 4, bezier"
+          "specialWorkspace, 1, 4, bezier, slidevert"
+          "layers, 1, 4, bezier, popin 80%"
         ];
       };
 
