@@ -75,6 +75,7 @@
   home.packages = with pkgs; [
     cargo
     gcc
+    gnumake
     nodejs
   ];
 }
