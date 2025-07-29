@@ -40,7 +40,8 @@
       '';
 
     settings = {
-      # HACK: find is broken for .zip files in version 5.46
+      # HACK: file is broken for .zip files in version 5.46
+      # https://bugs.astron.com/view.php?id=571
       open.prepend_rules = [
         {
           name = "*.zip";
@@ -140,7 +141,7 @@
           desc = "Restore files from trash with gtrash";
         }
         {
-          on = "C";
+          on = ["c" "a"];
           run = "plugin ouch zip";
           desc = "Compress with ouch";
         }
