@@ -10,6 +10,7 @@
     ../../modules/programs/spotify
     ../../modules/programs/vesktop
     ../../modules/programs/yazi
+    ../../modules/programs/zathura
     ../../modules/programs/zsh
 
     ../../modules/system/ags
