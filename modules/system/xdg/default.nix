@@ -23,6 +23,7 @@
 
       defaultApplications = {
         "inode/directory" = ["yazi.desktop"];
+        "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
       };
     };
   };
