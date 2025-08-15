@@ -64,9 +64,19 @@
       };
     };
 
+    # LaTeX support
+    extraPlugins = with pkgs.vimPlugins; {
+      "vimtex" = {
+        package = vimtex;
+        setup = "require('lspconfig').texlab.setup {}";
+      };
+    };
+    formatter.conform-nvim.setupOpts.formatters_by_ft.tex = ["latexindent"];
+
     extraPackages = with pkgs; [
       rustfmt
       rustc
+      texlab
     ];
   };
 
@@ -75,5 +85,6 @@
     gcc
     gnumake
     nodejs
+    texliveFull
   ];
 }
