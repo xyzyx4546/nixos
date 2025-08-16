@@ -12,7 +12,6 @@
     ../../modules/programs/zathura
     ../../modules/programs/zsh
 
-    ../../modules/system/ags
     ../../modules/system/fonts
     ../../modules/system/gtk
     ../../modules/system/hyprland/desktop.nix
