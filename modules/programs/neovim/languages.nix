@@ -42,7 +42,10 @@
 
       bash.enable = true;
       clang.enable = true;
-      css.enable = true;
+      css = {
+        enable = true;
+        format.type = "prettierd";
+      };
       html.enable = true;
       lua.enable = true;
       markdown = {
