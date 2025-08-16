@@ -129,11 +129,7 @@
         # "10, persistent:true"
       ];
 
-      layerrule = [
-        "noanim, ^(hyprpicker|notification_popup)$"
-        "blur, ^(bar)$"
-        "xray 0, ^(bar)$"
-      ];
+      layerrule = ["noanim, ^(hyprpicker|notification_popup)$"];
 
       bind = [
         # Window management
