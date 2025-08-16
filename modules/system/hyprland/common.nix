@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hyprlock.nix
     ./hypridle.nix
@@ -9,6 +13,8 @@
     xdg-desktop-portal-hyprland
     grimblast
     swww
+    ags
+    brightnessctl
   ];
 
   xdg.configFile."wallpapers" = {
@@ -37,7 +43,7 @@
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
-        "ags"
+        "${inputs.ags-shell.packages.${pkgs.system}.default}/bin/ags-shell"
 
         "[workspace special:browser silent] firefox"
         "vesktop --start-minimized"
@@ -132,7 +138,6 @@
       bind = [
         # Window management
         "SUPER, Q, killactive,"
-        "SUPER SHIFT, escape, exit,"
         "SUPER, F, togglefloating,"
         ",F11, fullscreen, 0"
 
@@ -152,21 +157,20 @@
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
         "SUPER, D, exec, vesktop"
-
-        "SUPER, SUPER_L, exec, ags -t app-launcher"
-        "SUPER, M, exec, ags -t calculator-launcher"
-        "SUPER, V, exec, ags -t clipboard-launcher"
-        "SUPER SHIFT, Q, exec, ags -t powermenu-launcher"
+        "SUPER, A, exec, ags toggle Applauncher"
 
         "SUPER, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers --random"
         "SUPER SHIFT, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers"
-        "SUPER, X, exec, hyprlock"
         ", PRINT, exec, grimblast --notify --freeze copysave area"
+
+        "SUPER, X, exec, hyprlock"
+        "SUPER SHIFT, escape, exit,"
+        "SUPER SHIFT, Q, exec, systemctl poweroff"
 
         # Workspaces
         "SUPER, G, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace games"
-        "SUPER, B, exec, hyprctl dispatch focusmonitor 1 && hyprctl dispatch togglespecialworkspace browser"
-        "SUPER SHIFT, B, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace browser"
+        "SUPER, SUPER_L, exec, hyprctl dispatch focusmonitor 1 && hyprctl dispatch togglespecialworkspace browser"
+        "SUPER, B, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace browser"
 
         "SUPER CONTROL_L, H, workspace, m-1"
         "SUPER CONTROL_L, L, workspace, m+1"
@@ -178,16 +182,16 @@
         "SUPER SHIFT, Tab, focusmonitor, -1"
       ];
       bindl = [
-        ", XF86AudioMute, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/osd.js'); open('volume');\" & wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
       ];
       bindel = [
-        ", XF86AudioRaiseVolume, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/osd.js'); open('volume');\" & wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
-        ", XF86AudioLowerVolume, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/osd.js'); open('volume');\" & wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
-        ", XF86MonBrightnessUp, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/osd.js'); open('brightness');\" & brightnessctl s +10%"
-        ", XF86MonBrightnessDown, exec, ags -r \"const { open } = await import('file://$HOME/.config/ags/widgets/osd.js'); open('brightness');\" & brightnessctl s 10%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
+        ", XF86MonBrightnessUp, exec, brightnessctl s +10%"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
 
       misc = {
