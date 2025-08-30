@@ -26,6 +26,9 @@
         TabLineFill = {bg = null;};
         StatusLine = {bg = null;};
         StatusLineTerm = {bg = null;};
+        LspReferenceText = {bg = "#44475a";};
+        LspReferenceRead = {bg = "#44475a";};
+        LspReferenceWrite = {bg = "#44475a";};
       };
 
       # General editor settings
@@ -120,7 +123,6 @@
       };
 
       ui = {
-        # FIX: ui-select looks broken
         noice.enable = true;
         borders = {
           enable = true;
@@ -224,6 +226,15 @@
       comments.comment-nvim.enable = true;
 
       utility = {
+        snacks-nvim = {
+          enable = true;
+          setupOpts = {
+            indent.enabled = true;
+            input.enabled = true;
+            picker.enabled = true;
+            words.enabled = true;
+          };
+        };
         surround.enable = true;
         ccc.enable = true;
         oil-nvim = {

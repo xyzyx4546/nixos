@@ -153,7 +153,7 @@
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
         "SUPER, D, exec, vesktop"
-        "SUPER, A, exec, ags toggle Applauncher"
+        "SUPER, SPACE, exec, ags toggle Applauncher"
 
         "SUPER, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers --random"
         "SUPER SHIFT, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers"
