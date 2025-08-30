@@ -75,6 +75,7 @@
       };
     };
     formatter.conform-nvim.setupOpts.formatters_by_ft.tex = ["latexindent"];
+    globals.vimtex_quickfix_mode = 0;
 
     extraPackages = with pkgs; [
       rustfmt
@@ -92,3 +93,4 @@
     texliveFull
   ];
 }
+
