@@ -40,23 +40,15 @@
       enableTreesitter = true;
       enableDAP = true;
 
-      bash.enable = true;
-      clang.enable = true;
       css = {
         enable = true;
         format.type = "prettierd";
       };
-      html.enable = true;
       lua.enable = true;
-      markdown = {
-        enable = true;
-        extensions.render-markdown-nvim.enable = true;
-      };
       nix = {
         enable = true;
         lsp.server = "nixd";
       };
-      python.enable = true;
       rust = {
         enable = true;
         crates.enable = true;
