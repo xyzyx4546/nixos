@@ -86,29 +86,5 @@
     upower.enable = true;
     gvfs.enable = true;
     gnome.gnome-keyring.enable = true;
-
-    evdevremapkeys = {
-      enable = true;
-      settings = {
-        devices = [
-          {
-            input_name = "AT Translated Set 2 keyboard";
-            output_name = "AT Translated Set 2 keyboard remapped";
-            remappings = {
-              KEY_CAPSLOCK = ["KEY_ESC"];
-              KEY_ESC = ["KEY_CAPSLOCK"];
-            };
-          }
-          {
-            input_name = "Logitech G815 RGB MECHANICAL GAMING KEYBOARD";
-            output_name = "Logitech G815 RGB MECHANICAL GAMING KEYBOARD remapped";
-            remappings = {
-              KEY_CAPSLOCK = ["KEY_ESC"];
-              KEY_ESC = ["KEY_CAPSLOCK"];
-            };
-          }
-        ];
-      };
-    };
   };
 }
