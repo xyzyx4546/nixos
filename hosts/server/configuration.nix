@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../common.nix
-    ./nas.nix
+    ./nextcloud.nix
   ];
 
   nix.settings = {
@@ -41,42 +41,38 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking = {
+    firewall = {
+      allowedUDPPorts = [53];
+      allowedTCPPorts = [53 80 443];
+    };
+    interfaces."end0".ipv4.addresses = [
+      {
+        address = "192.168.2.10";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.2.1";
+    nameservers = ["192.168.2.1"];
+  };
+
   services = {
-    monit = {
+    dnsmasq = {
       enable = true;
-      config = ''
-        set daemon 60
-        set httpd port 2812
-          allow 127.0.0.1
+      resolveLocalQueries = true;
+      settings = {
+        address = ["/ehrhardt.duckdns.org/192.168.2.10"];
+        server = ["192.168.2.1"];
+        no-resolv = true;
+        cache-size = 1000;
+      };
+    };
 
-        check filesystem root with path /
-          if space usage > 90% then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'Root filesystem is over 90% full'"
-
-        check filesystem nas_data with path /nas/data
-          if space usage > 90% then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'NAS data is over 90% full'"
-
-        check filesystem nas_backup with path /nas/backup
-          if space usage > 90% then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'NAS backup is over 90% full'"
-
-        check process sshd with pidfile /run/sshd.pid
-          if does not exist then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'SSH is not running'"
-
-        check process samba with pidfile /run/samba/smbd.pid
-          if does not exist then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'Samba is not running'"
-
-        check process filebrowser matching "/bin/filebrowser"
-          if does not exist then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'Filebrowser is not running'"
-
-        check process nginx with pidfile /run/nginx/nginx.pid
-          if does not exist then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'Nginx is not running'"
-
-        check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nas.service"
-          if status == 0 then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'Backup failed'"
-
-        check program ddclient with path "${pkgs.systemd}/bin/systemctl is-failed ddclient.service"
-          if status == 0 then exec "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures 'DDclient failed'"
-      '';
+    ddclient = {
+      enable = true;
+      protocol = "duckdns";
+      domains = ["ehrhardt.duckdns.org"];
+      passwordFile = "/etc/duckdns-token";
     };
 
     nginx = {
@@ -86,24 +82,46 @@
       virtualHosts."ehrhardt.duckdns.org" = {
         forceSSL = true;
         enableACME = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:8080";
-            proxyWebsockets = true;
-          };
-          "/status/" = {
-            proxyPass = "http://127.0.0.1:2812/";
-            proxyWebsockets = true;
-          };
+        locations."/status/" = {
+          proxyPass = "http://127.0.0.1:2812/";
+          proxyWebsockets = true;
         };
       };
     };
 
-    ddclient = {
+    monit = let
+      ntfy = {message}: "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures '${message}'";
+    in {
       enable = true;
-      protocol = "duckdns";
-      domains = ["ehrhardt.duckdns.org"];
-      passwordFile = "/etc/duckdns-token";
+      config = ''
+        set daemon 60
+        set httpd port 2812
+          allow 127.0.0.1
+
+        check filesystem root with path /
+          if space usage > 90% then exec "${ntfy {message = "Root drive is over 90% full";}}"
+
+        check filesystem nextcloud with path /mnt/nextcloud
+          if space usage > 90% then exec "${ntfy {message = "Nextcloud drive is over 90% full";}}"
+
+        check filesystem backup with path /mnt/backup
+          if space usage > 90% then exec "${ntfy {message = "Backup drive is over 90% full";}}"
+
+        check process sshd with pidfile /run/sshd.pid
+          if does not exist then exec "${ntfy {message = "SSHD is not running";}}"
+
+        check process nginx with pidfile /run/nginx/nginx.pid
+          if does not exist then exec "${ntfy {message = "Nginx is not running";}}"
+
+        check process dnsmasq with pidfile /run/dnsmasq.pid
+          if does not exist then exec "${ntfy {message = "Dnsmasq is not running";}}"
+
+        check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nnextcloud.service"
+          if status == 0 then exec "${ntfy {message = "Borgbackup job nextcloud failed";}}"
+
+        check program ddclient with path "${pkgs.systemd}/bin/systemctl is-failed ddclient.service"
+          if status == 0 then exec "${ntfy {message = "DDClient failed";}}"
+      '';
     };
   };
 

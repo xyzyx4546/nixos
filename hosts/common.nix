@@ -49,6 +49,4 @@
       KbdInteractiveAuthentication = false;
     };
   };
-
-  systemd.tmpfiles.rules = ["d /mnt 0777 root root -"];
 }
