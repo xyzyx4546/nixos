@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   networking.networkmanager.enable = true;
   systemd.services."NetworkManager-wait-online".enable = false;
 
@@ -87,6 +84,8 @@
     };
 
     upower.enable = true;
+    gvfs.enable = true;
+    gnome.gnome-keyring.enable = true;
 
     evdevremapkeys = {
       enable = true;
@@ -110,20 +109,6 @@
           }
         ];
       };
-    };
-  };
-
-  environment.systemPackages = [pkgs.cifs-utils];
-  fileSystems = {
-    "/nas/david" = {
-      device = "//server/david";
-      fsType = "cifs";
-      options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,guest,uid=1000,gid=100"];
-    };
-    "/nas/family" = {
-      device = "//server/family";
-      fsType = "cifs";
-      options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,guest,uid=1000,gid=100"];
     };
   };
 }
