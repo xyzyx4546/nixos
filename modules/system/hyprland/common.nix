@@ -54,6 +54,7 @@
       input = {
         kb_layout = "de";
         kb_variant = "nodeadkeys";
+        kb_options = "caps:swapescape";
         numlock_by_default = true;
         repeat_rate = 50;
         repeat_delay = 300;
