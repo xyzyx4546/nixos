@@ -17,6 +17,8 @@
     brightnessctl
   ];
 
+  services.polkit-gnome.enable = true;
+
   xdg.configFile."wallpapers" = {
     recursive = true;
     source = ./wallpapers;
@@ -194,6 +196,11 @@
       misc = {
         disable_hyprland_logo = true;
         force_default_wallpaper = 0;
+      };
+
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
       };
 
       debug.disable_logs = false;
