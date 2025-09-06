@@ -192,9 +192,14 @@
           desc = "Jump to device";
         }
         {
-          on = [ "g" "M"];
+          on = ["g" "M"];
           run = "plugin gvfs -- jump-back-prev-cwd";
           desc = "Jump back from device";
+        }
+        {
+          on = ["g" "s"];
+          run = "cd ~/.local/share/Steam/steamapps/common";
+          desc = "Go to Steam apps";
         }
       ];
     };
