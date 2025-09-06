@@ -5,6 +5,7 @@
       protontricks
       ckan
       protonup
+      (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
     ];
 
     sessionVariables = {
