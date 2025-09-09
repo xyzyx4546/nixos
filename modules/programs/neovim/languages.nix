@@ -44,6 +44,7 @@
         enable = true;
         format.type = "prettierd";
       };
+      html.enable = true;
       lua.enable = true;
       nix = {
         enable = true;
