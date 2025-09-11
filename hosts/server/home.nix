@@ -4,7 +4,6 @@
     ../../modules/programs/kitty
     ../../modules/programs/neovim
     ../../modules/programs/tmux
-    ../../modules/programs/yazi
     ../../modules/programs/zsh
   ];
 
