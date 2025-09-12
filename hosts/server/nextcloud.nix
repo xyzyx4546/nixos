@@ -16,11 +16,6 @@
     };
   };
 
-  systemd.services."systemd-tmpfiles-resetup" = {
-    after = ["mnt-nextcloud.mount"];
-    wants = ["mnt-nextcloud.mount"];
-  };
-
   services = {
     nextcloud = {
       enable = true;
@@ -36,17 +31,20 @@
       };
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit groupfolders;
+        inherit groupfolders news calendar;
       };
     };
 
     borgbackup.jobs."nextcloud" = {
       user = "nextcloud";
-      paths = "/mnt/nextcloud";
+      paths = "/mnt/nextcloud/data";
+      exclude = ["/mnt/nextcloud/data/appdata_*" "/mnt/nextcloud/data/index.html"];
       repo = "/mnt/backup";
       doInit = false;
       encryption.mode = "none";
       startAt = "daily";
+      preHook = "${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on";
+      postHook = "${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off";
       prune.keep = {
         daily = 7;
         monthly = 6;
@@ -55,4 +53,14 @@
     };
   };
   environment.variables."BORG_REPO" = "/mnt/backup";
+
+  systemd.services = {
+    # HACK: Ensure tmpfiles are created after the nextcloud mount is available
+    "systemd-tmpfiles-resetup" = {
+      after = ["mnt-nextcloud.mount"];
+      wants = ["mnt-nextcloud.mount"];
+    };
+    # HACK: Ensure borgbackup can toggle maintenance mode
+    "borgbackup-job-nextcloud".serviceConfig.ReadWritePaths = ["/mnt/nextcloud"];
+  };
 }
