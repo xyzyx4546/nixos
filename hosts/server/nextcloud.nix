@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: {
@@ -17,9 +18,61 @@
   };
 
   services = {
-    nextcloud = {
+    nextcloud = let
+      customNextcloud = pkgs.nextcloud31.overrideAttrs {
+        postInstall =
+          lib.concatMapStrings (app: ''
+            if [ ! -d "$out/apps/${lib.escapeShellArg app}" ]; then
+              echo "Error: App directory '$out/apps/${lib.escapeShellArg app}' does not exist!" >&2
+              exit 1
+            fi
+            rm -rf "$out/apps/${lib.escapeShellArg app}"
+          '')
+          [
+            "activity"
+            "admin_audit"
+            "app_api"
+            "bruteforcesettings"
+            "circles"
+            "cloud_federation_api"
+            "comments"
+            "contactsinteraction"
+            "dashboard"
+            "encryption"
+            "federation"
+            "files_downloadlimit"
+            "files_external"
+            "files_reminders"
+            "files_versions"
+            "firstrunwizard"
+            "logreader"
+            "nextcloud_announcements"
+            "notifications"
+            "password_policy"
+            "photos"
+            "privacy"
+            "profile"
+            "recommendations"
+            "related_resources"
+            "sharebymail"
+            "support"
+            "survey_client"
+            "suspicious_login"
+            "systemtags"
+            "twofactor_backupcodes"
+            "twofactor_nextcloud_notification"
+            "twofactor_totp"
+            "updatenotification"
+            "user_ldap"
+            "user_status"
+            "weather_status"
+            "webhook_listeners"
+            "workflowengine"
+          ];
+      };
+    in {
       enable = true;
-      package = pkgs.nextcloud31;
+      package = customNextcloud;
       https = true;
       hostName = "ehrhardt.duckdns.org";
       datadir = "/mnt/nextcloud";
