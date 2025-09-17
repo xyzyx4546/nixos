@@ -12,6 +12,7 @@
     neofetch
     duf
     libqalculate
+    jq
   ];
 
   xdg.configFile."neofetch/config.conf".source = ./neofetch.conf;
