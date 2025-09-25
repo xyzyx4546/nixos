@@ -24,7 +24,6 @@
     nixos-hardware,
     nixos-raspberrypi,
     home-manager,
-    nvf,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -40,12 +39,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."xyzyx" = {
-                imports = [
-                  nvf.homeManagerModules.default
-                  ./hosts/desktop/home.nix
-                ];
-              };
+              users."xyzyx".imports = [./hosts/desktop/home.nix];
               extraSpecialArgs = {inherit inputs;};
             };
           }
@@ -62,12 +56,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."xyzyx" = {
-                imports = [
-                  nvf.homeManagerModules.default
-                  ./hosts/laptop/home.nix
-                ];
-              };
+              users."xyzyx".imports = [./hosts/laptop/home.nix];
               extraSpecialArgs = {inherit inputs;};
             };
           }
@@ -85,12 +74,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."xyzyx" = {
-                imports = [
-                  nvf.homeManagerModules.default
-                  ./hosts/server/home.nix
-                ];
-              };
+              users."xyzyx".imports = [./hosts/server/home.nix];
               extraSpecialArgs = {inherit inputs;};
             };
           }
