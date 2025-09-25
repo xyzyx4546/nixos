@@ -16,6 +16,8 @@
 
   networking.firewall.enable = true;
 
+  boot.tmp.cleanOnBoot = true;
+
   users.users.xyzyx = {
     isNormalUser = true;
     extraGroups = ["wheel" "input"];
