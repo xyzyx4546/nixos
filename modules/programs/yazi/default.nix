@@ -19,10 +19,6 @@
 
     plugins = with pkgs.yaziPlugins; {
       inherit ouch chmod full-border git;
-      gvfs = builtins.fetchGit {
-        url = "https://github.com/boydaihungst/gvfs.yazi.git";
-        rev = "b58c30588215093cb6f8b0dc4eed562894c091bc";
-      };
       yaziline = builtins.fetchGit {
         url = "https://github.com/llanosrocas/yaziline.yazi.git";
         rev = "1342efed87fe7e408d44b6795ff3a62a478b381d";
@@ -34,10 +30,6 @@
       ''
         require("full-border"):setup()
         require("git"):setup()
-        require("gvfs"):setup({
-          password_vault = "keyring",
-          save_password_autoconfirm = true,
-        })
         require("yaziline"):setup({
           separator_style = "curvy",
           separator_open_thin = "",
@@ -49,7 +41,17 @@
 
     settings = {
       plugin = {
+        prepend_preloaders = [
+          {
+            name = "/mnt/nextcloud/**";
+            run = "noop";
+          }
+        ];
         prepend_previewers = [
+          {
+            name = "/mnt/nextcloud/**";
+            run = "noop";
+          }
           {
             mime = "application/*zip";
             run = "ouch";
@@ -157,46 +159,6 @@
           desc = "Chmod on selected files";
         }
         {
-          on = ["M" "m"];
-          run = "plugin gvfs -- select-then-mount --jump";
-          desc = "Mount device";
-        }
-        {
-          on = ["M" "u"];
-          run = "plugin gvfs -- select-then-unmount --eject";
-          desc = "Eject device";
-        }
-        {
-          on = ["M" "U"];
-          run = "plugin gvfs -- select-then-unmount --eject --force";
-          desc = "Force eject device";
-        }
-        {
-          on = ["M" "a"];
-          run = "plugin gvfs -- add-mount";
-          desc = "Add mount URI";
-        }
-        {
-          on = ["M" "e"];
-          run = "plugin gvfs -- edit-mount";
-          desc = "Edit mount URI";
-        }
-        {
-          on = ["M" "r"];
-          run = "plugin gvfs -- remove-mount";
-          desc = "Remove mount URI";
-        }
-        {
-          on = ["g" "m"];
-          run = "plugin gvfs -- jump-to-device";
-          desc = "Jump to device";
-        }
-        {
-          on = ["g" "M"];
-          run = "plugin gvfs -- jump-back-prev-cwd";
-          desc = "Jump back from device";
-        }
-        {
           on = ["g" "s"];
           run = "cd ~/.local/share/Steam/steamapps/common";
           desc = "Go to Steam apps";
@@ -208,8 +170,6 @@
   home.packages = with pkgs; [
     ouch
     gtrash
-    glib
-    libsecret
   ];
 
   systemd.user = {
