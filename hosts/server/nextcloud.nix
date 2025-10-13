@@ -18,8 +18,9 @@
   };
 
   services = {
-    nextcloud = let
-      customNextcloud = pkgs.nextcloud31.overrideAttrs {
+    nextcloud = {
+      enable = true;
+      package = pkgs.nextcloud31.overrideAttrs {
         postInstall =
           lib.concatMapStrings (app: ''
             if [ ! -d "$out/apps/${lib.escapeShellArg app}" ]; then
@@ -34,7 +35,6 @@
             "app_api"
             "bruteforcesettings"
             "circles"
-            "cloud_federation_api"
             "comments"
             "contactsinteraction"
             "dashboard"
@@ -70,21 +70,30 @@
             "workflowengine"
           ];
       };
-    in {
-      enable = true;
-      package = customNextcloud;
       https = true;
       hostName = "ehrhardt.duckdns.org";
       datadir = "/mnt/nextcloud";
       configureRedis = true;
+      database.createLocally = true;
+      maxUploadSize = "16G";
       config = {
         adminpassFile = "${pkgs.writeText "nextcloud-pass" "nextcloud1"}";
         adminuser = "david";
-        dbtype = "sqlite";
+        dbtype = "mysql";
+      };
+      phpOptions = {
+        "opcache.memory_consumption" = "512";
+        "opcache.interned_strings_buffer" = "32";
+        "opcache.max_accelerated_files" = "20000";
+      };
+      settings = {
+        default_phone_region = "DE";
+        maintenance_window_start = 23;
+        trashbin_retention_obligation = "auto, 30";
       };
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit groupfolders news calendar;
+        inherit impersonate groupfolders calendar contacts news;
       };
     };
 
@@ -96,8 +105,14 @@
       doInit = false;
       encryption.mode = "none";
       startAt = "daily";
-      preHook = "${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on";
-      postHook = "${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off";
+      preHook = ''
+        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on
+        ${config.services.mysql.package}/bin/mariadb-dump ${config.services.nextcloud.config.dbname} > /mnt/nextcloud/data/db.sql
+      '';
+      postHook = ''
+        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off
+        rm /mnt/nextcloud/data/db.sql
+      '';
       prune.keep = {
         daily = 7;
         monthly = 6;
@@ -110,6 +125,10 @@
   systemd.services = {
     # HACK: Ensure tmpfiles are created after the nextcloud mount is available
     "systemd-tmpfiles-resetup" = {
+      after = ["mnt-nextcloud.mount"];
+      wants = ["mnt-nextcloud.mount"];
+    };
+    "systemd-tmpfiles-setup" = {
       after = ["mnt-nextcloud.mount"];
       wants = ["mnt-nextcloud.mount"];
     };
