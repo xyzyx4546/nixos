@@ -71,7 +71,7 @@
           ];
       };
       https = true;
-      hostName = "ehrhardt.duckdns.org";
+      hostName = "fam-ehrhardt.de";
       datadir = "/mnt/nextcloud";
       configureRedis = true;
       database.createLocally = true;

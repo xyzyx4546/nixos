@@ -23,7 +23,7 @@ in {
           ])
           (item "GitHub" "https://github.com")
           (item "YouTube" "https://www.youtube.com/feed/subscriptions")
-          (item "Server" "https://ehrhardt.duckdns.org")
+          (item "Nextcloud" "https://fam-ehrhardt.de")
         ];
       }
     ];

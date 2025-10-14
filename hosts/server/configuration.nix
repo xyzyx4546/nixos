@@ -1,18 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../common.nix
     ./nextcloud.nix
   ];
 
   nix.settings = {
-    substituters = [
-      "https://cache.nixos.org"
-      "https://nixos-raspberrypi.cachix.org"
-    ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-    ];
+    substituters = lib.mkAfter ["https://nixos-raspberrypi.cachix.org"];
+    trusted-public-keys = lib.mkAfter ["nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="];
     trusted-users = ["xyzyx"];
   };
 
@@ -33,7 +31,6 @@
         enable = true;
         value = "on";
       };
-
       pciex1_gen = {
         enable = true;
         value = "3";
@@ -61,28 +58,43 @@
       enable = true;
       resolveLocalQueries = true;
       settings = {
-        address = ["/ehrhardt.duckdns.org/192.168.2.10"];
-        server = ["192.168.2.1"];
+        address = ["/fam-ehrhardt.de/192.168.2.10"];
+        server = ["9.9.9.9"];
         no-resolv = true;
         cache-size = 1000;
       };
     };
 
-    ddclient = {
+    oink = {
       enable = true;
-      protocol = "duckdns";
-      domains = ["ehrhardt.duckdns.org"];
-      passwordFile = "/etc/duckdns-token";
+      settings = {
+        apiKey = "";
+        secretApiKey = "";
+      };
+      domains = [
+        {
+          domain = "fam-ehrhardt.de";
+          subdomain = "";
+        }
+        {
+          domain = "fam-ehrhardt.de";
+          subdomain = "status";
+        }
+      ];
     };
 
     nginx = {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts."ehrhardt.duckdns.org" = {
+      virtualHosts."fam-ehrhardt.de" = {
         forceSSL = true;
         enableACME = true;
-        locations."/status/" = {
+      };
+      virtualHosts."status.fam-ehrhardt.de" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
           proxyPass = "http://127.0.0.1:2812/";
           proxyWebsockets = true;
         };
@@ -119,19 +131,17 @@
         check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nnextcloud.service"
           if status == 0 then exec "${ntfy {message = "Borgbackup job nextcloud failed";}}"
 
-        check program ddclient with path "${pkgs.systemd}/bin/systemctl is-failed ddclient.service"
-          if status == 0 then exec "${ntfy {message = "DDClient failed";}}"
+        check program oink with path "${pkgs.systemd}/bin/systemctl is-failed oink.service"
+          if status == 0 then exec "${ntfy {message = "Oink failed";}}"
       '';
     };
   };
 
+  systemd.services.oink.serviceConfig.EnvironmentFile = "/etc/oink.env";
+
   security.acme = {
     acceptTerms = true;
-    defaults.email = "nobody@ehrhardt.duckdns.org";
-    certs."ehrhardt.duckdns.org" = {
-      domain = "ehrhardt.duckdns.org";
-      group = "nginx";
-    };
+    defaults.email = "nobody@fam-ehrhardt.de";
   };
 
   networking.hostName = "server";
