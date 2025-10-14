@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ../../modules/programs/git
     ../../modules/programs/kitty
@@ -11,6 +11,10 @@
   home = {
     username = "xyzyx";
     homeDirectory = "/home/xyzyx";
+
+    packages = with pkgs; [
+      mycli
+    ];
 
     stateVersion = "24.05";
   };
