@@ -1,17 +1,10 @@
 {pkgs, ...}: {
-  home = {
-    packages = with pkgs; [
-      prismlauncher
-      protontricks
-      ckan
-      protonup
-      (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
-    ];
-
-    sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    };
-  };
+  home.packages = with pkgs; [
+    lutris-free
+    prismlauncher
+    protontricks
+    (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
+  ];
 
   programs.mangohud = {
     enable = true;
