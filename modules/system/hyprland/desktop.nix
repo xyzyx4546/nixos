@@ -5,7 +5,6 @@
     monitor = [
       "DP-3, 2560x1440@144, 1920x-200, 1"
       "HDMI-A-1, 1920x1080@60, 0x0, 1"
-      "HDMI-A-1, addreserved, 10, 0, 0, 0"
     ];
 
     # second monitor
