@@ -120,17 +120,17 @@
       ];
 
       workspace = [
-        "1, persistent:true, default:true"
-        "2, persistent:true"
-        "3, persistent:true"
-        "4, persistent:true"
-        # "5, persistent:true"
-        # "6, persistent:true"
-        # "7, persistent:true"
-        # "7, persistent:true"
-        # "8, persistent:true"
-        # "9, persistent:true"
-        # "10, persistent:true"
+        "1, persistent:true, monitor:0, default:true"
+        "2, persistent:true, monitor:0"
+        "3, persistent:true, monitor:0"
+        "4, persistent:true, monitor:0"
+        # "5, persistent:true, monitor:0"
+        # "6, persistent:true, monitor:0"
+        # "7, persistent:true, monitor:0"
+        # "7, persistent:true, monitor:0"
+        # "8, persistent:true, monitor:0"
+        # "9, persistent:true, monitor:0"
+        # "10, persistent:true, monitor:0"
       ];
 
       layerrule = ["noanim, ^(hyprpicker|notification_popup)$"];
