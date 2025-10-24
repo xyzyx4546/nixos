@@ -119,20 +119,23 @@
         check filesystem backup with path /mnt/backup
           if space usage > 90% then exec "${ntfy {message = "Backup drive is over 90% full";}}"
 
-        check process sshd with pidfile /run/sshd.pid
+        check process sshd matching "sshd"
           if does not exist then exec "${ntfy {message = "SSHD is not running";}}"
 
-        check process nginx with pidfile /run/nginx/nginx.pid
+        check process nginx matching "nginx"
           if does not exist then exec "${ntfy {message = "Nginx is not running";}}"
 
-        check process dnsmasq with pidfile /run/dnsmasq.pid
+        check process dnsmasq matching "dnsmasq"
           if does not exist then exec "${ntfy {message = "Dnsmasq is not running";}}"
+
+        check process oink matching "oink"
+          if does not exist then exec "${ntfy {message = "Oink is not running";}}"
+
+        check process mysql matching "mysqld"
+          if does not exist then exec "${ntfy {message = "MySQL is not running";}}"
 
         check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nnextcloud.service"
           if status == 0 then exec "${ntfy {message = "Borgbackup job nextcloud failed";}}"
-
-        check program oink with path "${pkgs.systemd}/bin/systemctl is-failed oink.service"
-          if status == 0 then exec "${ntfy {message = "Oink failed";}}"
       '';
     };
   };
