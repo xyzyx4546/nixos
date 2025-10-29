@@ -23,7 +23,6 @@
     homeDirectory = "/home/xyzyx";
 
     packages = with pkgs; [
-      telegram-desktop
       onlyoffice-desktopeditors
       piper
     ];
