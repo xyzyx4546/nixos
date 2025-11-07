@@ -120,10 +120,10 @@
       ];
 
       workspace = [
-        "1, persistent:true, monitor:0, default:true"
-        "2, persistent:true, monitor:0"
-        "3, persistent:true, monitor:0"
-        "4, persistent:true, monitor:0"
+        "1, persistent:true, default:true"
+        "2, persistent:true"
+        "3, persistent:true"
+        "4, persistent:true"
         # "5, persistent:true, monitor:0"
         # "6, persistent:true, monitor:0"
         # "7, persistent:true, monitor:0"
