@@ -63,7 +63,7 @@
         ];
       };
 
-      server = nixos-raspberrypi.lib.nixosSystemFull {
+      server = nixos-raspberrypi.lib.nixosSystem {
         specialArgs = {inherit nixos-raspberrypi;};
         modules = [
           nixos-raspberrypi.nixosModules.raspberry-pi-5.base
