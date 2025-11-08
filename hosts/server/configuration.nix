@@ -2,17 +2,21 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  domain = "fam-ehrhardt.de";
+  subdomains = [
+    {
+      name = "status";
+      port = 2812;
+    }
+  ];
+in {
+  _module.args = { inherit domain; };
+
   imports = [
     ../common.nix
     ./nextcloud.nix
   ];
-
-  nix.settings = {
-    substituters = lib.mkAfter ["https://nixos-raspberrypi.cachix.org"];
-    trusted-public-keys = lib.mkAfter ["nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="];
-    trusted-users = ["xyzyx"];
-  };
 
   fileSystems = {
     "/boot/firmware" = {
@@ -50,16 +54,14 @@
       }
     ];
     defaultGateway = "192.168.2.1";
-    nameservers = ["192.168.2.1"];
   };
 
   services = {
     dnsmasq = {
       enable = true;
-      resolveLocalQueries = true;
       settings = {
-        address = ["/fam-ehrhardt.de/192.168.2.10"];
-        server = ["9.9.9.9"];
+        address = ["/${domain}/192.168.2.10"];
+        server = ["192.168.2.1"];
         no-resolv = true;
         cache-size = 1000;
       };
@@ -71,39 +73,46 @@
         apiKey = "";
         secretApiKey = "";
       };
-      domains = [
-        {
-          domain = "fam-ehrhardt.de";
-          subdomain = "";
-        }
-        {
-          domain = "fam-ehrhardt.de";
-          subdomain = "status";
-        }
-      ];
+      domains =
+        [
+          {
+            inherit domain;
+            subdomain = "";
+          }
+        ]
+        ++ (map (s: {
+            inherit domain;
+            subdomain = s.name;
+          })
+          subdomains);
     };
 
     nginx = {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts."fam-ehrhardt.de" = {
-        forceSSL = true;
-        enableACME = true;
-      };
-      virtualHosts."status.fam-ehrhardt.de" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:2812/";
-          proxyWebsockets = true;
+      virtualHosts =
+        (lib.listToAttrs (map (s: {
+            name = "${s.name}.${domain}";
+            value = {
+              forceSSL = true;
+              useACMEHost = domain;
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${toString s.port}/";
+                proxyWebsockets = true;
+              };
+            };
+          })
+          subdomains))
+        // {
+          "${domain}" = {
+            forceSSL = true;
+            enableACME = true;
+          };
         };
-      };
     };
 
-    monit = let
-      ntfy = {message}: "${pkgs.ntfy-sh}/bin/ntfy send --title=Server server-failures '${message}'";
-    in {
+    monit = {
       enable = true;
       config = ''
         set daemon 60
@@ -111,31 +120,31 @@
           allow 127.0.0.1
 
         check filesystem root with path /
-          if space usage > 90% then exec "${ntfy {message = "Root drive is over 90% full";}}"
+          if space usage > 90% then alert
 
         check filesystem nextcloud with path /mnt/nextcloud
-          if space usage > 90% then exec "${ntfy {message = "Nextcloud drive is over 90% full";}}"
+          if space usage > 90% then alert
 
         check filesystem backup with path /mnt/backup
-          if space usage > 90% then exec "${ntfy {message = "Backup drive is over 90% full";}}"
+          if space usage > 90% then alert
 
         check process sshd matching "sshd"
-          if does not exist then exec "${ntfy {message = "SSHD is not running";}}"
+          if does not exist then alert
 
         check process nginx matching "nginx"
-          if does not exist then exec "${ntfy {message = "Nginx is not running";}}"
+          if does not exist then alert
 
         check process dnsmasq matching "dnsmasq"
-          if does not exist then exec "${ntfy {message = "Dnsmasq is not running";}}"
+          if does not exist then alert
 
         check process oink matching "oink"
-          if does not exist then exec "${ntfy {message = "Oink is not running";}}"
+          if does not exist then alert
 
         check process mysql matching "mysqld"
-          if does not exist then exec "${ntfy {message = "MySQL is not running";}}"
+          if does not exist then alert
 
         check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nnextcloud.service"
-          if status == 0 then exec "${ntfy {message = "Borgbackup job nextcloud failed";}}"
+          if status == 0 then alert
       '';
     };
   };
@@ -144,7 +153,10 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "nobody@fam-ehrhardt.de";
+    certs."${domain}" = {
+      email = "nobody@${domain}";
+      extraDomainNames = map (s: "${s.name}.${domain}") subdomains;
+    };
   };
 
   networking.hostName = "server";

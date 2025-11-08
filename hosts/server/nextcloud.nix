@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  domain,
   ...
 }: {
   fileSystems = {
@@ -71,7 +72,7 @@
           ];
       };
       https = true;
-      hostName = "fam-ehrhardt.de";
+      hostName = domain;
       datadir = "/mnt/nextcloud";
       configureRedis = true;
       database.createLocally = true;
