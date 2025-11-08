@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   domain = "fam-ehrhardt.de";
@@ -9,12 +10,17 @@
       name = "status";
       port = 2812;
     }
+    {
+      name = "home";
+      port = config.services.home-assistant.config.http.server_port;
+    }
   ];
 in {
   _module.args = { inherit domain; };
 
   imports = [
     ../common.nix
+    ./home-assistant.nix
     ./nextcloud.nix
   ];
 
