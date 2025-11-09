@@ -91,8 +91,10 @@
       };
     };
 
+    mysql.dataDir = "/mnt/nextcloud/mysql";
+
     borgbackup.jobs.main = let
-      dbPath = "/tmp/db.sql";
+      dbPath = "/mnt/nextcloud/db.sql";
     in {
       paths = [
         "/mnt/nextcloud/data/__groupfolders"
@@ -102,20 +104,25 @@
         "/mnt/nextcloud/data/simon"
         dbPath
       ];
+      readWritePaths = ["/mnt/nextcloud"];
       preHook = "${config.services.mysql.package}/bin/mariadb-dump ${config.services.nextcloud.config.dbname} > ${dbPath}";
       postHook = "rm -f ${dbPath}";
     };
   };
 
-  systemd.services = {
-    # HACK: Ensure tmpfiles are created after the nextcloud mount is available
-    "systemd-tmpfiles-resetup" = {
-      after = ["mnt-nextcloud.mount"];
-      wants = ["mnt-nextcloud.mount"];
-    };
-    "systemd-tmpfiles-setup" = {
-      after = ["mnt-nextcloud.mount"];
-      wants = ["mnt-nextcloud.mount"];
+  systemd = {
+    tmpfiles.rules = ["d /mnt/nextcloud/mysql 0750 ${config.services.mysql.user} ${config.services.mysql.group}"];
+
+    services = {
+      # HACK: Ensure tmpfiles are created after the nextcloud mount is available
+      "systemd-tmpfiles-resetup" = {
+        after = ["mnt-nextcloud.mount"];
+        wants = ["mnt-nextcloud.mount"];
+      };
+      "systemd-tmpfiles-setup" = {
+        after = ["mnt-nextcloud.mount"];
+        wants = ["mnt-nextcloud.mount"];
+      };
     };
   };
 }
