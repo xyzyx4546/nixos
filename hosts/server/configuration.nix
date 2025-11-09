@@ -16,7 +16,7 @@
     }
   ];
 in {
-  _module.args = { inherit domain; };
+  _module.args = {inherit domain;};
 
   imports = [
     ../common.nix
@@ -32,6 +32,11 @@ in {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
+    };
+    "/mnt/backup" = {
+      device = "/dev/disk/by-label/BACKUP";
+      fsType = "ext4";
+      options = ["defaults" "noatime" "nofail"];
     };
   };
 
@@ -149,11 +154,25 @@ in {
         check process mysql matching "mysqld"
           if does not exist then alert
 
-        check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-nnextcloud.service"
+        check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-main.service"
           if status == 0 then alert
       '';
     };
+
+    borgbackup.jobs.main = {
+      repo = "/mnt/backup";
+      doInit = false;
+      encryption.mode = "none";
+      startAt = "daily";
+      prune.keep = {
+        daily = 7;
+        monthly = 6;
+        yearly = -1;
+      };
+    };
   };
+
+  environment.variables."BORG_REPO" = "/mnt/backup";
 
   systemd.services.oink.serviceConfig.EnvironmentFile = "/etc/oink.env";
 
