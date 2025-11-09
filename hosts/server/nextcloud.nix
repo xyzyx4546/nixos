@@ -5,17 +5,10 @@
   domain,
   ...
 }: {
-  fileSystems = {
-    "/mnt/nextcloud" = {
-      device = "/dev/disk/by-label/NEXTCLOUD";
-      fsType = "ext4";
-      options = ["defaults" "noatime" "nofail"];
-    };
-    "/mnt/backup" = {
-      device = "/dev/disk/by-label/BACKUP";
-      fsType = "ext4";
-      options = ["defaults" "noatime" "nofail"];
-    };
+  fileSystems."/mnt/nextcloud" = {
+    device = "/dev/disk/by-label/NEXTCLOUD";
+    fsType = "ext4";
+    options = ["defaults" "noatime" "nofail"];
   };
 
   services = {
@@ -98,30 +91,21 @@
       };
     };
 
-    borgbackup.jobs."nextcloud" = {
-      user = "nextcloud";
-      paths = "/mnt/nextcloud/data";
-      exclude = ["/mnt/nextcloud/data/appdata_*" "/mnt/nextcloud/data/index.html"];
-      repo = "/mnt/backup";
-      doInit = false;
-      encryption.mode = "none";
-      startAt = "daily";
-      preHook = ''
-        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on
-        ${config.services.mysql.package}/bin/mariadb-dump ${config.services.nextcloud.config.dbname} > /mnt/nextcloud/data/db.sql
-      '';
-      postHook = ''
-        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off
-        rm /mnt/nextcloud/data/db.sql
-      '';
-      prune.keep = {
-        daily = 7;
-        monthly = 6;
-        yearly = -1;
-      };
+    borgbackup.jobs.main = let
+      dbPath = "/tmp/db.sql";
+    in {
+      paths = [
+        "/mnt/nextcloud/data/__groupfolders"
+        "/mnt/nextcloud/data/brigitte"
+        "/mnt/nextcloud/data/david"
+        "/mnt/nextcloud/data/frank"
+        "/mnt/nextcloud/data/simon"
+        dbPath
+      ];
+      preHook = "${config.services.mysql.package}/bin/mariadb-dump ${config.services.nextcloud.config.dbname} > ${dbPath}";
+      postHook = "rm -f ${dbPath}";
     };
   };
-  environment.variables."BORG_REPO" = "/mnt/backup";
 
   systemd.services = {
     # HACK: Ensure tmpfiles are created after the nextcloud mount is available
@@ -133,7 +117,5 @@
       after = ["mnt-nextcloud.mount"];
       wants = ["mnt-nextcloud.mount"];
     };
-    # HACK: Ensure borgbackup can toggle maintenance mode
-    "borgbackup-job-nextcloud".serviceConfig.ReadWritePaths = ["/mnt/nextcloud"];
   };
 }
