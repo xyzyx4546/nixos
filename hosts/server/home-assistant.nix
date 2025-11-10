@@ -27,7 +27,6 @@
       "${config.services.home-assistant.configDir}/automations.yaml"
       "${config.services.home-assistant.configDir}/scenes.yaml"
       "${config.services.home-assistant.configDir}/scripts.yaml"
-      "${config.services.home-assistant.configDir}/scripts.yaml"
       "${config.services.home-assistant.configDir}/home-assistant_v2.db"
     ];
   };
