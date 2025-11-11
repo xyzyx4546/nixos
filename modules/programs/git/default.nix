@@ -2,9 +2,11 @@
   programs = {
     git = {
       enable = true;
-      userName = "David Ehrhardt";
-      userEmail = "d.ehrhardt@proton.me";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "David Ehrhardt";
+          email = "d.ehrhardt@proton.me";
+        };
         credential.helper = "store";
         pull.rebase = true;
         init.defaultBranch = "main";

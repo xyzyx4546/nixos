@@ -24,7 +24,7 @@
   home.file.".mozilla/firefox/xyzyx/chrome" = {
     source = "${builtins.fetchGit {
       url = "https://github.com/amnweb/firefox-plus.git";
-      rev = "9954a13541a1d8ca7e84bbb58fce68d60c517490";
+      rev = "11e57be307035f185f6039e3511ed34549a263fc";
     }}/chrome";
   };
 }

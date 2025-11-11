@@ -6,7 +6,7 @@ local Terminal = require("toggleterm.terminal").Terminal
 local terminals = {
 	{ cmd = "lazygit", key = "l" },
 	{ cmd = "gh-dash", key = "g" },
-	{ cmd = "btop", key = "d" },
+	{ cmd = "btop", key = "t" },
 }
 
 for _, term in ipairs(terminals) do

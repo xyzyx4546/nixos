@@ -19,16 +19,19 @@
       "${pkgs.libinput-gestures}/bin/libinput-gestures -c ${pkgs.writeText "libinput-gestures.conf" ''
         gesture swipe up 4      hyprctl dispatch togglespecialworkspace games
         gesture swipe down 4    hyprctl dispatch togglespecialworkspace browser
-        gesture swipe left 4    hyprctl dispatch workspace m+1
-        gesture swipe right 4   hyprctl dispatch workspace m-1
-        gesture pinch out 4     hyprctl dispatch exec kitty
         gesture pinch in 4      hyprctl dispatch killactive
       ''}"
     ];
 
-    bindm = [
-      "SUPER, ALT_L, movewindow"
-      "SUPER, CONTROL_L, resizewindow"
+    gestures = {
+      workspace_swipe_min_speed_to_force = 3;
+      workspace_swipe_create_new = false;
+    };
+
+    gesture = [
+      "3, swipe, move"
+      "3, swipe, mod: alt, resize"
+      "4, horizontal, scale: 0.5, workspace"
     ];
   };
 }

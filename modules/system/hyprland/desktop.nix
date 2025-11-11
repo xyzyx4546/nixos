@@ -18,7 +18,7 @@
 
     bindm = [
       ", mouse:277, movewindow"
-      "SUPER, mouse:272, resizewindow"
+      "ALT, mouse:272, resizewindow"
     ];
   };
 }

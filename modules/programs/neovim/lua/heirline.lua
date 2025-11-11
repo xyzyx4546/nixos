@@ -40,7 +40,7 @@ local function create_section(opts)
 		{
 			provider = opts.icon,
 			hl = function()
-				return { fg = colors.background, bg = opts.color(), bold = true }
+				return { fg = colors.background, bg = opts.color() }
 			end,
 		},
 		{
@@ -333,9 +333,9 @@ local BufferLine = utils.make_buflist({
 		end,
 		hl = function(self)
 			if self.is_active then
-				return { fg = colors.background, bg = colors.purple, bold = true }
+				return { fg = colors.background, bg = colors.purple }
 			else
-				return { fg = colors.purple, bg = colors.background, bold = true }
+				return { fg = colors.purple, bg = colors.background }
 			end
 		end,
 	},
