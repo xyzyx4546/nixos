@@ -26,5 +26,7 @@
         "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
       };
     };
+
+    configFile."mimeapps.list".force = true;
   };
 }
