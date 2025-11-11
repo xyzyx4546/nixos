@@ -174,7 +174,10 @@ in {
 
   environment.variables."BORG_REPO" = "/mnt/backup";
 
-  systemd.services.oink.serviceConfig.EnvironmentFile = "/etc/oink.env";
+  systemd.services.oink.serviceConfig = {
+    EnvironmentFile = "/etc/oink.env";
+    Restart = "on-failure";
+  };
 
   security.acme = {
     acceptTerms = true;
