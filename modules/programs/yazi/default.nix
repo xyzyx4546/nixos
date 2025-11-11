@@ -11,10 +11,7 @@
 
     theme = {
       flavor.dark = "dracula";
-      mgr.hovered = {
-        bg = "#44475a";
-        bold = true;
-      };
+      mgr.hovered.bg = "#44475a";
     };
 
     plugins = with pkgs.yaziPlugins; {

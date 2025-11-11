@@ -4,9 +4,12 @@
   programs.kitty = {
     enable = true;
     themeFile = "Dracula";
+    font = {
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "family='JetBrainsMono Nerd Font' style=SemiBold";
+      size = 12;
+    };
     settings = {
-      font_size = 12;
-      font_family = "JetBrainsMono Nerd Font";
       window_margin_width = 11;
       remember_window_size = "no";
       background_opacity = 0;

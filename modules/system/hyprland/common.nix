@@ -46,7 +46,7 @@
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
-        "${inputs.ags-shell.packages.${pkgs.system}.default}/bin/ags-shell"
+        "${inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ags-shell"
 
         "[workspace special:browser silent] firefox"
         "vesktop --start-minimized"
