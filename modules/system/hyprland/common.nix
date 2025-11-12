@@ -49,8 +49,7 @@
         "${inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ags-shell"
 
         "[workspace special:browser silent] firefox"
-        "vesktop --start-minimized"
-        "Telegram -startintray"
+        "sleep 1 && vesktop --start-minimized"
         "steam -silent"
       ];
 
