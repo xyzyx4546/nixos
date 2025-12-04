@@ -26,6 +26,11 @@
     home-manager,
     ...
   } @ inputs: {
+    homeConfigurations.david = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      extraSpecialArgs = {inherit inputs;};
+      modules = [./hosts/dobby/home.nix];
+    };
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

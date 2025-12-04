@@ -40,6 +40,7 @@
       enableTreesitter = true;
       enableDAP = true;
 
+      bash.enable = true;
       css = {
         enable = true;
         format.type = "prettierd";
