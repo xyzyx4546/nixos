@@ -19,6 +19,7 @@
       enable = true;
       homeFlake = "/home/david/Projects/nixos";
     };
+    direnv.enable = true;
     home-manager.enable = true;
   };
 }
