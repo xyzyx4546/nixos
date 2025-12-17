@@ -2,12 +2,11 @@
   programs.nvf.settings.vim = {
     lsp = {
       enable = true;
-      formatOnSave = false;
       inlayHints.enable = true;
       mappings = {
-        renameSymbol = "<leader>lr";
+        renameSymbol = "lr";
         toggleFormatOnSave = null;
-        format = null;
+        format = "<leader><leader>";
       };
     };
 
@@ -21,17 +20,7 @@
             virtual_text = not vim.diagnostic.config().virtual_text,
           })
         end, { desc = 'Toggle diagnostic virtual lines and virtual text' })
-
-        vim.keymap.set('n', '<leader><leader>', require('conform').format, { desc = 'Format file' })
       '';
-
-    formatter.conform-nvim = {
-      enable = true;
-      setupOpts = {
-        format_after_save = null;
-        format_on_save = null;
-      };
-    };
 
     # Languages
     languages = {
@@ -41,34 +30,20 @@
       enableDAP = true;
 
       bash.enable = true;
-      css = {
-        enable = true;
-        format.type = "prettierd";
-      };
+      css.enable = true;
       html.enable = true;
       lua.enable = true;
-      nix = {
-        enable = true;
-        lsp.server = "nixd";
-      };
+      nix.enable = true;
       rust = {
         enable = true;
-        crates.enable = true;
+        extensions.crates-nvim.enable = true;
       };
-      ts = {
-        enable = true;
-        format.type = "prettierd";
-      };
+      ts.enable = true;
     };
 
+    # TODO:
     # LaTeX support
-    extraPlugins = with pkgs.vimPlugins; {
-      "vimtex" = {
-        package = vimtex;
-        setup = "require('lspconfig').texlab.setup {}";
-      };
-    };
-    formatter.conform-nvim.setupOpts.formatters_by_ft.tex = ["latexindent"];
+    extraPlugins."vimtex".package = pkgs.vimPlugins.vimtex;
     globals.vimtex_quickfix_mode = 0;
 
     extraPackages = with pkgs; [
@@ -87,4 +62,3 @@
     texliveFull
   ];
 }
-

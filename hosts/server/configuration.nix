@@ -40,6 +40,9 @@ in {
     };
   };
 
+  # HACK: temporary
+  boot.loader.raspberryPi.bootloader = "kernel";
+
   hardware.raspberry-pi.config = {
     all.base-dt-params = {
       pciex1 = {
@@ -80,10 +83,8 @@ in {
 
     oink = {
       enable = true;
-      settings = {
-        apiKey = "";
-        secretApiKey = "";
-      };
+      apiKeyFile = "/etc/oink/apiKey";
+      secretApiKeyFile = "/etc/oink/secretApiKey";
       domains =
         [
           {
@@ -173,11 +174,6 @@ in {
   };
 
   environment.variables."BORG_REPO" = "/mnt/backup";
-
-  systemd.services.oink.serviceConfig = {
-    EnvironmentFile = "/etc/oink.env";
-    Restart = "on-failure";
-  };
 
   security.acme = {
     acceptTerms = true;
