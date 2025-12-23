@@ -47,6 +47,7 @@
         "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
         "${inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ags-shell"
+        "spotify_player -d"
 
         "[workspace special:browser silent] firefox"
         "sleep 1 && vesktop --start-minimized"
@@ -181,16 +182,16 @@
         "SUPER SHIFT, Tab, focusmonitor, -1"
       ];
       bindl = [
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioNext, exec, playerctl next"
-        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
       ];
       bindel = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
-        ", XF86MonBrightnessUp, exec, brightnessctl s +10%"
-        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
+        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
+        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +10%"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%-"
       ];
 
       misc = {
