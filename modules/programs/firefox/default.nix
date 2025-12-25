@@ -17,14 +17,8 @@
         # nix flake show "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"
         proton-pass
         ublock-origin
+        darkreader
       ];
     };
-  };
-
-  home.file.".mozilla/firefox/xyzyx/chrome" = {
-    source = "${builtins.fetchGit {
-      url = "https://github.com/amnweb/firefox-plus.git";
-      rev = "11e57be307035f185f6039e3511ed34549a263fc";
-    }}/chrome";
   };
 }
