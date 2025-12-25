@@ -21,7 +21,7 @@
       database.createLocally = true;
       maxUploadSize = "16G";
       config = {
-        adminpassFile = "${pkgs.writeText "nextcloud-pass" "nextcloud1"}";
+        adminpassFile = config.sops.secrets."nextcloud/password".path;
         adminuser = "david";
         dbtype = "mysql";
       };

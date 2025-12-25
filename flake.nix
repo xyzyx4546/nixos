@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +27,7 @@
     nixpkgs,
     nixos-hardware,
     nixos-raspberrypi,
+    sops-nix,
     home-manager,
     ...
   } @ inputs: {
@@ -39,6 +44,7 @@
           nixos-hardware.nixosModules.common-gpu-amd
           nixos-hardware.nixosModules.common-pc-ssd
           ./hosts/desktop/configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -56,6 +62,7 @@
         modules = [
           nixos-hardware.nixosModules.dell-latitude-3480
           ./hosts/laptop/configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -74,6 +81,7 @@
           nixos-raspberrypi.nixosModules.raspberry-pi-5.base
           nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
           ./hosts/server/configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager = {

@@ -1,6 +1,7 @@
 {
   pkgs,
-  lib,
+  lib, 
+  config,
   ...
 }: {
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -9,6 +10,23 @@
       "steam"
       "steam-unwrapped"
     ];
+
+  sops = {
+    defaultSopsFile = ../secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/xyzyx/.config/sops/age/keys.txt";
+
+    secrets = {
+      "xyzyx/password".neededForUsers = true;
+      "xyzyx/ssh-key" = {
+        path = "/home/xyzyx/.ssh/id_ed25519";
+        owner = "xyzyx";
+      };
+      "oink/api-key" = {};
+      "oink/secret-api-key" = {};
+      "nextcloud/password" = {};
+    };
+  };
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -21,7 +39,7 @@
   users.users.xyzyx = {
     isNormalUser = true;
     extraGroups = ["wheel" "input"];
-    initialPassword = "xyzyx";
+    hashedPasswordFile = config.sops.secrets."xyzyx/password".path;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq2xd3Eri9HfFP49Gl4snnrxMY6zXyNpWQIs9dd2L4Q"];
   };

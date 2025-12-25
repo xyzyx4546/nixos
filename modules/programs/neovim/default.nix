@@ -272,6 +272,17 @@
 
         presence-nvim.package = presence-nvim;
 
+        "sops.nvim".package = pkgs.vimUtils.buildVimPlugin {
+          pname = "sops.nvim"; 
+          version = "latest"; 
+          src = pkgs.fetchFromGitHub {
+            owner = "trixnz";
+            repo = "sops.nvim";
+            rev = "5946285744ffef26b792839d9130135365bfa8ea";
+            hash = "sha256-6BFgZSQwrh218genHjnldv1xnCjx4PIoXZcFYKVBlGo=";
+          };
+        };
+
         "CopilotChat" = {
           package = CopilotChat-nvim;
           setup = builtins.readFile ./lua/copilot.lua;
@@ -282,6 +293,10 @@
           setup = builtins.readFile ./lua/heirline.lua;
         };
       };
+
+      extraPackages = with pkgs; [
+        sops
+      ];
 
       extraLuaFiles = [
         ./lua/projects.lua

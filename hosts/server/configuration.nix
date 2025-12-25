@@ -83,8 +83,8 @@ in {
 
     oink = {
       enable = true;
-      apiKeyFile = "/etc/oink/apiKey";
-      secretApiKeyFile = "/etc/oink/secretApiKey";
+      apiKeyFile = config.sops.secrets."oink/api-key".path;
+      secretApiKeyFile = config.sops.secrets."oink/secret-api-key".path;
       domains =
         [
           {
