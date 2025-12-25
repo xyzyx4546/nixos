@@ -44,6 +44,15 @@
     mysql.dataDir = "/mnt/nextcloud/mysql";
   };
 
+  environment.systemPackages = [
+    (pkgs.writeScriptBin
+      "nextcloud-logs"
+      #bash
+      ''
+        journalctl -t Nextcloud -n "''${1:-100}" -o json | jq -C -r '.MESSAGE | fromjson' | less +G
+      '')
+  ];
+
   systemd = {
     tmpfiles.rules = ["d /mnt/nextcloud/mysql 0750 ${config.services.mysql.user} ${config.services.mysql.group}"];
 
