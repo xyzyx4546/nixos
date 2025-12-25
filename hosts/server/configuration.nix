@@ -168,7 +168,7 @@ in {
       enable = true;
       config = ''
         set daemon 60
-        set httpd port 2812
+        set httpd port 2812 read-only
           allow 127.0.0.1
 
         check filesystem root with path /
