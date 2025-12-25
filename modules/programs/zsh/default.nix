@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [inputs.nix-index-database.homeModules.default];
+
   home.packages = with pkgs; [
     (pkgs.callPackage ../../packages/lazytimer {inherit pkgs;})
     ncdu
@@ -19,6 +25,8 @@
   xdg.configFile."neofetch/config.conf".source = ./neofetch.conf;
 
   programs = {
+    nix-index-database.comma.enable = true;
+
     fzf = {
       enable = true;
       changeDirWidgetOptions = ["--preview 'eza --tree --color=always --icons=always --level=5 {} | head -200'"];
