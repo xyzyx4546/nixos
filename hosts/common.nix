@@ -24,6 +24,8 @@
       };
       "oink/api-key" = {};
       "oink/secret-api-key" = {};
+      "restic/password" = {};
+      "restic/b2" = {};
       "nextcloud/password" = {};
     };
   };

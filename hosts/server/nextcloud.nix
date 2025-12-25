@@ -42,22 +42,6 @@
     };
 
     mysql.dataDir = "/mnt/nextcloud/mysql";
-
-    borgbackup.jobs.main = let
-      dbPath = "/mnt/nextcloud/db.sql";
-    in {
-      paths = [
-        "/mnt/nextcloud/data/__groupfolders"
-        "/mnt/nextcloud/data/brigitte"
-        "/mnt/nextcloud/data/david"
-        "/mnt/nextcloud/data/frank"
-        "/mnt/nextcloud/data/simon"
-        dbPath
-      ];
-      readWritePaths = ["/mnt/nextcloud"];
-      preHook = "${config.services.mysql.package}/bin/mariadb-dump ${config.services.nextcloud.config.dbname} > ${dbPath}";
-      postHook = "rm -f ${dbPath}";
-    };
   };
 
   systemd = {
@@ -74,5 +58,16 @@
         wants = ["mnt-nextcloud.mount"];
       };
     };
+  };
+
+  backup = {
+    localOnlyPaths = [
+      "${config.services.nextcloud.datadir}/data/__groupfolders"
+      "${config.services.nextcloud.datadir}/data/brigitte"
+      "${config.services.nextcloud.datadir}/data/david"
+      "${config.services.nextcloud.datadir}/data/frank"
+      "${config.services.nextcloud.datadir}/data/simon"
+    ];
+    databases = [config.services.nextcloud.config.dbname];
   };
 }

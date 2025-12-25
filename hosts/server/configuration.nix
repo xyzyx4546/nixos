@@ -20,6 +20,7 @@ in {
 
   imports = [
     ../common.nix
+    ./backup.nix
     ./home-assistant.nix
     ./nextcloud.nix
   ];
@@ -32,11 +33,6 @@ in {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-    };
-    "/mnt/backup" = {
-      device = "/dev/disk/by-label/BACKUP";
-      fsType = "ext4";
-      options = ["defaults" "noatime" "nofail"];
     };
   };
 
@@ -124,7 +120,51 @@ in {
         };
     };
 
-    monit = {
+    monit = let
+      checkOneshotService = pkgs.writeShellScript "check-oneshot-service" ''
+        set -euo pipefail
+
+        SERVICE="$1"
+
+        LOAD_STATE=$(systemctl show -p LoadState "$SERVICE" --value)
+
+        if [ "$LOAD_STATE" != "loaded" ]; then
+          echo "ERROR: Service has LoadState=$LOAD_STATE."
+          exit 2
+        fi
+
+        EXEC_STATUS=$(systemctl show -p ExecMainStatus "$SERVICE" --value)
+
+        if [ "$EXEC_STATUS" != "0" ]; then
+            echo "ERROR: Last run failed with exit status $EXEC_STATUS."
+            exit 1
+        fi
+
+        LAST_EXIT=$(systemctl show -p ExecMainExitTimestamp "$SERVICE" --value)
+
+        if [ -z "$LAST_EXIT" ] || [ "$LAST_EXIT" = "n/a" ]; then
+          echo "ERROR: Service has never run."
+          exit 1
+        fi
+
+        LAST_SEC=$(date -d "$LAST_EXIT" +%s) || {
+          echo "ERROR: Could not parse exit timestamp."
+          exit 1
+        }
+        CHECK_SINCE=$(date -d "30 hours ago" +%s) || {
+          echo "ERROR: Could not calculate time threshold."
+          exit 1
+        }
+
+        if [ "$LAST_SEC" -lt "$CHECK_SINCE" ]; then
+          echo "ERROR: Service has not run since 30 hours (last run: $LAST_EXIT)."
+          exit 1
+        fi
+
+        echo "OK: Service is healthy. (last run: $LAST_EXIT)"
+        exit 0
+      '';
+    in {
       enable = true;
       config = ''
         set daemon 60
@@ -155,25 +195,26 @@ in {
         check process mysql matching "mysqld"
           if does not exist then alert
 
-        check program borgbackup with path "${pkgs.systemd}/bin/systemctl is-failed borgbackup-job-main.service"
-          if status == 0 then alert
+        check process nextcloud-php matching "phpfpm-nextcloud"
+          if does not exist then alert
+
+        check process matter matching "matter-server"
+          if does not exist then alert
+
+        check process home-assistant matching "homeassistant"
+          if does not exist then alert
+
+        check program restic-local with path "${checkOneshotService} restic-backups-local"
+          if status != 0 then alert
+
+        check program restic-b2 with path "${checkOneshotService} restic-backups-b2"
+          if status != 0 then alert
+
+        check program mysql-backup with path "${checkOneshotService} mysql-backup"
+          if status != 0 then alert
       '';
     };
-
-    borgbackup.jobs.main = {
-      repo = "/mnt/backup";
-      doInit = false;
-      encryption.mode = "none";
-      startAt = "daily";
-      prune.keep = {
-        daily = 7;
-        monthly = 6;
-        yearly = -1;
-      };
-    };
   };
-
-  environment.variables."BORG_REPO" = "/mnt/backup";
 
   security.acme = {
     acceptTerms = true;
