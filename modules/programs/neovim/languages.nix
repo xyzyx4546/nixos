@@ -6,7 +6,7 @@
       mappings = {
         renameSymbol = "lr";
         toggleFormatOnSave = null;
-        format = "<leader><leader>";
+        format = null;
       };
     };
 
@@ -20,6 +20,8 @@
             virtual_text = not vim.diagnostic.config().virtual_text,
           })
         end, { desc = 'Toggle diagnostic virtual lines and virtual text' })
+        -- HACK: lsp.mappings.format currently doesnt always use conform
+        vim.keymap.set('n', '<leader><leader>', require('conform').format, { desc = 'Format' })
       '';
 
     # Languages
