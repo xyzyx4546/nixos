@@ -1,4 +1,8 @@
-{pkgs, lib, ...}:
+{
+  pkgs,
+  lib,
+  ...
+}:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "lazytimer";
   version = "0.1.0";
@@ -17,6 +21,6 @@ pkgs.rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/xyzyx4546/lazytimer";
     mainProgram = "lazytimer";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ xyzyx4546 ];
+    maintainers = with lib.maintainers; [xyzyx4546];
   };
 }

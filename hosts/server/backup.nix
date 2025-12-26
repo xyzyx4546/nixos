@@ -1,18 +1,22 @@
-{lib, config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   options.backup = {
     paths = lib.mkOption {
       type = with lib.types; listOf str;
-      default = [ ];
+      default = [];
       description = "List of paths to include in backups.";
     };
     localOnlyPaths = lib.mkOption {
       type = with lib.types; listOf str;
-      default = [ ];
+      default = [];
       description = "List of paths to include in local-only backups.";
     };
     databases = lib.mkOption {
       type = with lib.types; listOf str;
-      default = [ ];
+      default = [];
       description = "List of MySQL database names to include in backups.";
     };
   };
@@ -40,10 +44,10 @@
           Persistent = true;
         };
         pruneOpts = [
-          "--keep-daily" "7"
-          "--keep-weekly" "4"
-          "--keep-monthly" "6"
-          "--keep-yearly" "100"
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 6"
+          "--keep-yearly 100"
         ];
       in {
         "local" = {

@@ -273,8 +273,8 @@
         presence-nvim.package = presence-nvim;
 
         "sops.nvim".package = pkgs.vimUtils.buildVimPlugin {
-          pname = "sops.nvim"; 
-          version = "latest"; 
+          pname = "sops.nvim";
+          version = "latest";
           src = pkgs.fetchFromGitHub {
             owner = "trixnz";
             repo = "sops.nvim";
