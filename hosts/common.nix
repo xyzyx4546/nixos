@@ -27,6 +27,7 @@
       "restic/password" = {};
       "restic/b2" = {};
       "nextcloud/password" = {};
+      "vaultwarden/password" = {};
     };
   };
 

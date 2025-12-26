@@ -11,6 +11,10 @@
       port = 2812;
     }
     {
+      name = "vault";
+      port = config.services.vaultwarden.config.ROCKET_PORT;
+    }
+    {
       name = "home";
       port = config.services.home-assistant.config.http.server_port;
     }
@@ -23,6 +27,7 @@ in {
     ./backup.nix
     ./home-assistant.nix
     ./nextcloud.nix
+    ./vaultwarden.nix
   ];
 
   fileSystems = {
@@ -133,6 +138,13 @@ in {
           exit 2
         fi
 
+        ACTIVE_STATE=$(systemctl show -p ActiveState "$SERVICE" --value)
+
+        if [ "$ACTIVE_STATE" == "active" ] || [ "$ACTIVE_STATE" == "activating" ]; then
+            echo "OK: Service is currently running."
+            exit 0
+        fi
+
         EXEC_STATUS=$(systemctl show -p ExecMainStatus "$SERVICE" --value)
 
         if [ "$EXEC_STATUS" != "0" ]; then
@@ -204,6 +216,9 @@ in {
         check process home-assistant matching "homeassistant"
           if does not exist then alert
 
+        check process vaultwarden matching "vaultwarden"
+          if does not exist then alert
+
         check program restic-local with path "${checkOneshotService} restic-backups-local"
           if status != 0 then alert
 
@@ -211,6 +226,9 @@ in {
           if status != 0 then alert
 
         check program mysql-backup with path "${checkOneshotService} mysql-backup"
+          if status != 0 then alert
+
+        check program vaultwarden-backup with path "${checkOneshotService} backup-vaultwarden"
           if status != 0 then alert
       '';
     };
