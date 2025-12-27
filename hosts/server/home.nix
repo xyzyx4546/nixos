@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   imports = [
     ../../modules/programs/git
     ../../modules/programs/kitty
@@ -11,10 +11,6 @@
   home = {
     username = "xyzyx";
     homeDirectory = "/home/xyzyx";
-
-    packages = with pkgs; [
-      mycli
-    ];
 
     # HACK: suppress warning until i can use unpatched nixpkgs
     enableNixpkgsReleaseCheck = false;
