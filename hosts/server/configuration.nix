@@ -183,53 +183,31 @@ in {
         set httpd port 2812 read-only
           allow 127.0.0.1
 
-        check filesystem root with path /
-          if space usage > 90% then alert
-
-        check filesystem nextcloud with path /mnt/nextcloud
-          if space usage > 90% then alert
-
-        check filesystem backup with path /mnt/backup
-          if space usage > 90% then alert
-
         check process sshd matching "sshd"
-          if does not exist then alert
-
         check process nginx matching "nginx"
-          if does not exist then alert
-
         check process dnsmasq matching "dnsmasq"
-          if does not exist then alert
-
         check process oink matching "oink"
-          if does not exist then alert
-
         check process mysql matching "mysqld"
-          if does not exist then alert
-
         check process nextcloud-php matching "phpfpm-nextcloud"
-          if does not exist then alert
-
         check process matter matching "matter-server"
-          if does not exist then alert
-
         check process home-assistant matching "homeassistant"
-          if does not exist then alert
-
         check process vaultwarden matching "vaultwarden"
-          if does not exist then alert
 
         check program restic-local with path "${checkOneshotService} restic-backups-local"
           if status != 0 then alert
-
         check program restic-b2 with path "${checkOneshotService} restic-backups-b2"
           if status != 0 then alert
-
         check program mysql-backup with path "${checkOneshotService} mysql-backup"
           if status != 0 then alert
-
         check program vaultwarden-backup with path "${checkOneshotService} backup-vaultwarden"
           if status != 0 then alert
+
+        check filesystem root with path /
+          if space usage > 80% then alert
+        check filesystem nextcloud with path /mnt/nextcloud
+          if space usage > 80% then alert
+        check filesystem backup with path /mnt/backup
+          if space usage > 80% then alert
       '';
     };
   };
