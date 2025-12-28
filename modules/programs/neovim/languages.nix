@@ -4,7 +4,7 @@
       enable = true;
       inlayHints.enable = true;
       mappings = {
-        renameSymbol = "lr";
+        renameSymbol = "<leader>lr";
         toggleFormatOnSave = null;
         format = null;
       };
