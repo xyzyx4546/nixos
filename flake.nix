@@ -40,6 +40,7 @@
       extraSpecialArgs = {inherit inputs;};
       modules = [./hosts/dobby/home.nix];
     };
+
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -97,6 +98,22 @@
           }
         ];
       };
+    };
+
+    checks.x86_64-linux = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      mkCheck = name: cmd:
+        pkgs.stdenv.mkDerivation {
+          name = "${name}-check";
+          buildCommand = ''
+            ${cmd}
+            touch $out
+          '';
+        };
+    in {
+      alejandra = mkCheck "alejandra" "${pkgs.alejandra}/bin/alejandra --check ${./.}";
+      statix = mkCheck "statix" "${pkgs.statix}/bin/statix check ${./.}";
+      deadnix = mkCheck "deadnix" "${pkgs.deadnix}/bin/deadnix --fail ${./.}";
     };
   };
 }
