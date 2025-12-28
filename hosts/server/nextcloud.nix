@@ -37,7 +37,7 @@
       };
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit impersonate groupfolders calendar contacts news;
+        inherit impersonate groupfolders notes calendar contacts news;
       };
     };
 
