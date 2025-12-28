@@ -51,6 +51,7 @@
 
         "[workspace special:browser silent] firefox"
         "sleep 1 && vesktop --start-minimized"
+        "kdeconnectd"
         "steam -silent"
       ];
 

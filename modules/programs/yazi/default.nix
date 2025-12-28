@@ -20,6 +20,10 @@
         url = "https://github.com/llanosrocas/yaziline.yazi.git";
         rev = "1342efed87fe7e408d44b6795ff3a62a478b381d";
       };
+      kdeconnect-send = builtins.fetchGit {
+        url = "https://github.com/Deepak22903/kdeconnect-send.yazi.git";
+        rev = "7d9098d25c2bcfa46611a593fb6cef3f431fdfdc";
+      };
     };
 
     initLua =
@@ -154,6 +158,11 @@
           on = ["c" "m"];
           run = "plugin chmod";
           desc = "Chmod on selected files";
+        }
+        {
+          on = ["K"];
+          run = "plugin kdeconnect-send";
+          desc = "Send selected files via KDE Connect";
         }
         {
           on = ["g" "s"];
