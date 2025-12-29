@@ -185,22 +185,10 @@
           scrollDocsDown = "<M-j>";
           scrollDocsUp = "<M-k>";
         };
-        sourcePlugins = with pkgs.vimPlugins; {
-          "copilot" = {
-            enable = true;
-            package = blink-cmp-copilot;
-            module = "blink-cmp-copilot";
-          };
-        };
         setupOpts = {
           # HACK: Disables conflicting autocompletion for Copilot Chat
           enabled =
             lib.mkLuaInline "function() return vim.bo.filetype ~= 'copilot-chat' end";
-          # HACK: can't set this with `blink-cmp.sourcePlugins`
-          sources.providers.copilot = {
-            async = true;
-            score_offset = 100;
-          };
           completion = {
             # HACK: shouldn't be needed due to `ui.borders.globalStyle = "rounded"`
             menu.border = "rounded";
