@@ -12,6 +12,7 @@
     hyprland-qtutils
     xdg-desktop-portal-hyprland
     swww
+    wl-clipboard
     inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
@@ -110,7 +111,7 @@
 
         "float, class:(floating|xdg-desktop-portal-gtk|waypaper)"
         "dimaround, class:(floating|xdg-desktop-portal-gtk|waypaper)"
-        "size 800 450, class:(floating|xdg-desktop-portal-gtk|waypaper)"
+        "size 960 540, class:(floating|xdg-desktop-portal-gtk|waypaper)"
 
         "workspace special:games, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
         "tile, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
@@ -151,6 +152,7 @@
 
         # Programs
         "SUPER, C, exec, kitty"
+        "SUPER, V, exec, kitty --class=floating clipse"
         "SUPER, Y, exec, kitty yazi"
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
@@ -162,6 +164,7 @@
         ", PRINT, exec, ${pkgs.grimblast}/bin/grimblast --notify --freeze copysave area"
 
         "SUPER, X, exec, hyprlock"
+        "SUPER SHIFT, R, exec, hyprctl reload"
         "SUPER SHIFT, escape, exit,"
         "SUPER SHIFT, Q, exec, systemctl poweroff"
 

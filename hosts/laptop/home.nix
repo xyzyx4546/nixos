@@ -13,6 +13,7 @@
     ../../modules/programs/zathura
     ../../modules/programs/zsh
 
+    ../../modules/system/clipse
     ../../modules/system/fonts
     ../../modules/system/gtk
     ../../modules/system/hyprland/laptop.nix
