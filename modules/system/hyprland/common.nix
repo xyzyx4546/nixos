@@ -39,7 +39,6 @@
         "MOZ_DISABLE_RDD_SANDBOX,1"
         "EGL_PLATFORM,wayland"
         "NIXOS_OZONE_WL,1"
-        "EDITOR,nvim"
       ];
 
       exec-once = [

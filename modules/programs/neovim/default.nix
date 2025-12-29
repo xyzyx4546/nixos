@@ -10,6 +10,8 @@
     ./languages.nix
   ];
 
+  home.sessionVariables."EDITOR" = "nvim";
+
   programs.nvf = {
     enable = true;
     settings.vim = {
