@@ -28,8 +28,8 @@
     xwayland.enable = true;
 
     settings = {
-      # Force wayland
       env = [
+        # Force wayland
         "GDK_BACKEND,wayland"
         "QT_QPA_PLATFORM,wayland"
         "SDL_VIDEODRIVER,wayland"
@@ -39,6 +39,8 @@
         "MOZ_DISABLE_RDD_SANDBOX,1"
         "EGL_PLATFORM,wayland"
         "NIXOS_OZONE_WL,1"
+        # gtk darkmode is not working otherwise
+        "ADW_DISABLE_PORTAL,1"
       ];
 
       exec-once = [
