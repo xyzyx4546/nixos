@@ -11,10 +11,8 @@
   home.packages = with pkgs; [
     hyprland-qtutils
     xdg-desktop-portal-hyprland
-    grimblast
     swww
-    ags
-    brightnessctl
+    inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.polkit-gnome.enable = true;
@@ -46,8 +44,7 @@
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
         "swww-daemon"
-        "${inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ags-shell"
-        "spotify_player -d"
+        "ags-shell"
 
         "[workspace special:browser silent] firefox"
         "sleep 1 && vesktop --start-minimized"
@@ -158,11 +155,11 @@
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
         "SUPER, D, exec, vesktop"
-        "SUPER, SPACE, exec, ags toggle Applauncher"
+        "SUPER, SPACE, exec, ags-shell toggle Applauncher"
 
         "SUPER, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers --random"
         "SUPER SHIFT, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers"
-        ", PRINT, exec, grimblast --notify --freeze copysave area"
+        ", PRINT, exec, ${pkgs.grimblast}/bin/grimblast --notify --freeze copysave area"
 
         "SUPER, X, exec, hyprlock"
         "SUPER SHIFT, escape, exit,"
@@ -172,6 +169,9 @@
         "SUPER, G, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace games"
         "SUPER, SUPER_L, exec, hyprctl dispatch focusmonitor 1 && hyprctl dispatch togglespecialworkspace browser"
         "SUPER, B, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace browser"
+
+        "SUPER CONTROL_L, H, focusmonitor, 0"
+        "SUPER CONTROL_L, L, focusmonitor, 0"
 
         "SUPER CONTROL_L, H, workspace, m-1"
         "SUPER CONTROL_L, L, workspace, m+1"
