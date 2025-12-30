@@ -54,7 +54,6 @@
 
   programs = {
     hyprland.enable = true;
-    adb.enable = true;
     kdeconnect = {
       enable = true;
       # Disable graphical components
