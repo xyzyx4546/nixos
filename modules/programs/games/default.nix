@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    lutris-free
     prismlauncher
     protontricks
     (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
@@ -34,19 +33,22 @@
     '')
   ];
 
-  programs.mangohud = {
-    enable = true;
-    settings = {
-      legacy_layout = false;
-      round_corners = 10;
-      gpu_text = "GPU";
-      gpu_stats = true;
-      gpu_temp = true;
-      cpu_text = "CPU";
-      cpu_stats = true;
-      cpu_temp = true;
-      ram = true;
-      fps = true;
-    };
-  };
+  programs.mangohud.enable = true;
+  xdg.configFile."MangoHud/MangoHud.conf".text = ''
+    legacy_layout=false
+    round_corners=10
+
+    gpu_list=0
+    gpu_stats
+    gpu_temp
+
+    cpu_stats
+    cpu_temp
+
+    ram
+
+    fps
+    fps_text=FPS
+    frametime=false;
+  '';
 }
