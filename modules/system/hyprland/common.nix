@@ -128,7 +128,10 @@
         "4, persistent:true"
       ];
 
-      layerrule = ["noanim, ^(hyprpicker|notification_popup)$"];
+      layerrule = [
+        "noanim, ^(hyprpicker|notification_popup)$"
+        "animation slide, ^notifications$"
+      ];
 
       bind = [
         # Window management
