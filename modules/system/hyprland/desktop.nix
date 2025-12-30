@@ -10,6 +10,10 @@
     # second monitor
     workspace = [
       "99, monitor:HDMI-A-1, default:true, persistent:true"
+      "1, monitor:DP-3"
+      "2, monitor:DP-3"
+      "3, monitor:DP-3"
+      "4, monitor:DP-3"
     ];
     windowrule = [
       "monitor 0, class:negative:(^(left|vesktop|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$)"

@@ -124,13 +124,6 @@
         "2, persistent:true"
         "3, persistent:true"
         "4, persistent:true"
-        # "5, persistent:true, monitor:0"
-        # "6, persistent:true, monitor:0"
-        # "7, persistent:true, monitor:0"
-        # "7, persistent:true, monitor:0"
-        # "8, persistent:true, monitor:0"
-        # "9, persistent:true, monitor:0"
-        # "10, persistent:true, monitor:0"
       ];
 
       layerrule = ["noanim, ^(hyprpicker|notification_popup)$"];
