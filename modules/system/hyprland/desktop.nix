@@ -16,8 +16,8 @@
       "4, monitor:DP-3"
     ];
     windowrule = [
-      "monitor 0, class:negative:(^(left|vesktop|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$)"
-      "workspace 99, class:^(left|vesktop|org.telegram.desktop|steam|net.lutris.Lutris|org.prismlauncher.PrismLauncher)$"
+      "monitor 0, class:negative:(^(firefox|left|vesktop|steam|org.prismlauncher.PrismLauncher)$)"
+      "workspace 99, class:^(left|vesktop|steam|org.prismlauncher.PrismLauncher)$"
     ];
 
     bindm = [

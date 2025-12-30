@@ -48,7 +48,6 @@
         "swww-daemon"
         "ags-shell"
 
-        "[workspace special:browser silent] firefox"
         "sleep 1 && vesktop --start-minimized"
         "kdeconnectd"
         "steam -silent"
@@ -114,12 +113,15 @@
         "dimaround, class:(floating|xdg-desktop-portal-gtk|waypaper)"
         "size 960 540, class:(floating|xdg-desktop-portal-gtk|waypaper)"
 
+        "workspace special:browser, class:^firefox$"
+
         "workspace special:games, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
         "tile, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
         "fullscreen, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
       ];
 
       workspace = [
+        "special:browser, on-created-empty:firefox"
         "1, persistent:true, default:true"
         "2, persistent:true"
         "3, persistent:true"
