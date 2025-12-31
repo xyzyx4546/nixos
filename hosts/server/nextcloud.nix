@@ -71,11 +71,8 @@
 
   backup = {
     localOnlyPaths = [
-      "${config.services.nextcloud.datadir}/data/__groupfolders"
-      "${config.services.nextcloud.datadir}/data/brigitte"
-      "${config.services.nextcloud.datadir}/data/david"
-      "${config.services.nextcloud.datadir}/data/frank"
-      "${config.services.nextcloud.datadir}/data/simon"
+      "${config.services.nextcloud.datadir}/data"
+      "${config.services.nextcloud.datadir}/config/config.php"
     ];
     databases = [config.services.nextcloud.config.dbname];
   };
