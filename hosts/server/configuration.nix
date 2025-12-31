@@ -199,8 +199,6 @@ in {
           if status != 0 then alert
         check program mysql-backup with path "${checkOneshotService} mysql-backup"
           if status != 0 then alert
-        check program vaultwarden-backup with path "${checkOneshotService} backup-vaultwarden"
-          if status != 0 then alert
 
         check filesystem root with path /
           if space usage > 80% then alert
