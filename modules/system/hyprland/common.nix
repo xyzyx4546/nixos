@@ -29,6 +29,7 @@
 
     settings = {
       env = [
+        "EDITOR,nvim"
         # Force wayland
         "GDK_BACKEND,wayland"
         "QT_QPA_PLATFORM,wayland"
