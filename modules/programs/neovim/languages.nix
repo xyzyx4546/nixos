@@ -43,9 +43,9 @@
       ts.enable = true;
     };
 
-    # TODO:
     # LaTeX support
     extraPlugins."vimtex".package = pkgs.vimPlugins.vimtex;
+    formatter.conform-nvim.setupOpts.formatters_by_ft.tex = ["latexindent"];
     globals.vimtex_quickfix_mode = 0;
 
     extraPackages = with pkgs; [
