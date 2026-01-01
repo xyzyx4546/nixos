@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     prismlauncher
     protontricks
+    lsfg-vk
     (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
     (pkgs.writeShellScriptBin "nms-editor" ''
       set -euo pipefail
@@ -32,6 +33,22 @@
       (cd "$DIR" && ${pkgs.openjdk}/bin/java -jar "$JAR" > /dev/null)
     '')
   ];
+
+  xdg.configFile."lsfg-vk/conf.toml".source = (pkgs.formats.toml {}).generate "conf.toml" {
+    version = 1;
+    game = [
+      {
+        exe = "2";
+        multiplier = 2;
+        performance_mode = true;
+      }
+      {
+        exe = "3";
+        multiplier = 3;
+        performance_mode = true;
+      }
+    ];
+  };
 
   programs.mangohud.enable = true;
   xdg.configFile."MangoHud/MangoHud.conf".text = ''
