@@ -39,6 +39,8 @@
 
   boot.tmp.cleanOnBoot = true;
 
+  zramSwap.enable = true;
+
   users.users.xyzyx = {
     isNormalUser = true;
     extraGroups = ["wheel" "input"];
