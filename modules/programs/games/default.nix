@@ -4,6 +4,7 @@
     protontricks
     lsfg-vk
     (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
+    (pkgs.callPackage ../../packages/littlenavmap {inherit pkgs;})
     (pkgs.writeShellScriptBin "nms-editor" ''
       set -euo pipefail
       trap 'rm -f "$DIR"/*.tmp' EXIT
