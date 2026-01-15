@@ -91,6 +91,7 @@ in {
           {
             inherit domain;
             subdomain = "";
+            skipIPv6 = true;
           }
         ]
         ++ (map (s: {
