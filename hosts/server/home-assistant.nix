@@ -29,8 +29,6 @@
     "f ${config.services.home-assistant.configDir}/scripts.yaml 0600 hass hass -"
   ];
 
-  networking.firewall.allowedUDPPorts = [5353];
-
   backup.paths = [
     "${config.services.home-assistant.configDir}/.storage"
     "${config.services.home-assistant.configDir}/automations.yaml"

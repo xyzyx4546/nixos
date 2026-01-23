@@ -35,7 +35,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "de-latin1";
 
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [5353]; # mDNS
+  };
 
   boot.tmp.cleanOnBoot = true;
 
