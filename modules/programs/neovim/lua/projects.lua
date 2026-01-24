@@ -122,8 +122,7 @@ local function create_project()
 	vim.ui.input({ prompt = "Name" }, function(input)
 		if input then
 			local path = PROJECTS_DIR .. input
-			vim.fn.jobstart("mkdir " .. path)
-			vim.fn.jobstart("nohup fetch_projects.py")
+			vim.fn.mkdir(path, "p")
 			enter_project(path)
 		end
 	end)
