@@ -155,6 +155,10 @@
       # ToggleTerm
       terminal.toggleterm = {
         enable = true;
+        lazygit = {
+          enable = true;
+          mappings.open = "<leader>tl";
+        };
         setupOpts = {
           direction = "float";
           open_mapping = "<C-t>";
@@ -257,8 +261,6 @@
       };
 
       extraPlugins = with pkgs.vimPlugins; {
-        nix-develop-nvim.package = nix-develop-nvim;
-
         presence-nvim.package = presence-nvim;
 
         "sops.nvim".package = pkgs.vimUtils.buildVimPlugin {
@@ -289,7 +291,6 @@
 
       extraLuaFiles = [
         ./lua/projects.lua
-        ./lua/terminals.lua
       ];
     };
   };
