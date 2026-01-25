@@ -51,6 +51,7 @@
 
         "sleep 1 && vesktop --start-minimized"
         "kdeconnectd"
+        "spotify_player -d"
         "steam -silent"
       ];
 
@@ -108,17 +109,9 @@
       };
 
       windowrule = [
-        "suppressevent maximize, class:.*"
-
-        "float, class:(floating|xdg-desktop-portal-gtk|waypaper)"
-        "dimaround, class:(floating|xdg-desktop-portal-gtk|waypaper)"
-        "size 960 540, class:(floating|xdg-desktop-portal-gtk|waypaper)"
-
-        "workspace special:browser, class:^firefox$"
-
-        "workspace special:games, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
-        "tile, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
-        "fullscreen, class:^(surviving mars|Minecraft|ksp\\.x86_64|steam_app).*"
+        "match:class ^firefox$, workspace special:browser"
+        "match:class ^(floating|xdg-desktop-portal-gtk|waypaper)$, float on, dim_around on, size 960 540"
+        "match:class ^(surviving mars|Minecraft|ksp\\.x86_64|X-Plane|steam_app).*, workspace special:games, tile on, fullscreen on"
       ];
 
       workspace = [
@@ -130,8 +123,8 @@
       ];
 
       layerrule = [
-        "noanim, ^(hyprpicker|notification_popup)$"
-        "animation slide, ^notifications$"
+        "match:namespace ^(hyprpicker|notification_popup)$, no_anim on"
+        "match:namespace ^notifications$, animation slide"
       ];
 
       bind = [

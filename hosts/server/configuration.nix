@@ -42,7 +42,7 @@ in {
   };
 
   # HACK: temporary
-  boot.loader.raspberryPi.bootloader = "kernel";
+  boot.loader.raspberry-pi.bootloader = "kernel";
 
   hardware.raspberry-pi.config = {
     all.base-dt-params = {
