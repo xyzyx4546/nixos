@@ -25,7 +25,6 @@
 
     packages = with pkgs; [
       onlyoffice-desktopeditors
-      piper
     ];
 
     stateVersion = "24.05";
