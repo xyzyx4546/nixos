@@ -120,6 +120,9 @@
       enable = true;
 
       shellAliases = {
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        "...." = "cd ../../..";
         c = "clear";
         cat = "bat";
         ls = "eza";
