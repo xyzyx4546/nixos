@@ -77,6 +77,11 @@
       icons = "always";
     };
 
+    zoxide = {
+      enable = true;
+      options = ["--cmd=j"];
+    };
+
     starship = {
       enable = true;
       settings = {
