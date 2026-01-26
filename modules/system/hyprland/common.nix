@@ -180,9 +180,9 @@
       ];
       bindl = [
         ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+        ", XF86AudioPlay, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl pp"
+        ", XF86AudioNext, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl next"
+        ", XF86AudioPrev, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl prev"
       ];
       bindel = [
         ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
