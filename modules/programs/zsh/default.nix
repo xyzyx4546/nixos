@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   inputs,
   ...
 }: {
@@ -26,6 +27,13 @@
 
   programs = {
     nix-index-database.comma.enable = true;
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
+      config.whitelist.prefix = ["${config.home.homeDirectory}/Projects"];
+    };
 
     fzf = {
       enable = true;
