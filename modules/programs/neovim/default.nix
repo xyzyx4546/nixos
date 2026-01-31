@@ -14,7 +14,6 @@
     enable = true;
     defaultEditor = true;
     settings.vim = {
-      # Theme and appearance settings
       theme = {
         enable = true;
         name = "dracula";
@@ -22,11 +21,7 @@
       };
 
       highlight = {
-        TelescopeNormal = {bg = null;};
-        NormalFloat = {bg = null;};
-        FloatBorder = {bg = null;};
         Pmenu = {bg = null;};
-        TabLineFill = {bg = null;};
         StatusLine = {bg = null;};
         StatusLineTerm = {bg = null;};
         LspReferenceText = {bg = "#44475a";};
@@ -34,7 +29,6 @@
         LspReferenceWrite = {bg = "#44475a";};
       };
 
-      # General editor settings
       clipboard = {
         enable = true;
         providers.wl-copy.enable = true;
@@ -45,8 +39,6 @@
       globals = {
         mapleader = " ";
         maplocalleader = " ";
-        loaded_netrw = 1;
-        loaded_netrwPlugin = 1;
       };
 
       options = {
@@ -58,7 +50,6 @@
         showmode = false;
       };
 
-      # Dashboard configuration
       dashboard.dashboard-nvim = {
         enable = true;
         setupOpts = {
@@ -116,7 +107,6 @@
         };
       };
 
-      # UI and visual plugins
       notify.nvim-notify = {
         enable = true;
         setupOpts = {
@@ -152,7 +142,6 @@
         };
       };
 
-      # ToggleTerm
       terminal.toggleterm = {
         enable = true;
         lazygit = {
@@ -169,16 +158,11 @@
         };
       };
 
-      # Git
-      git = {
-        gitsigns = {
-          enable = true;
-          mappings.toggleDeleted = null;
-        };
-        vim-fugitive.enable = true;
+      git.gitsigns = {
+        enable = true;
+        mappings.toggleDeleted = null;
       };
 
-      # Autocompletion
       autocomplete.blink-cmp = {
         enable = true;
         friendly-snippets.enable = true;
@@ -203,7 +187,6 @@
         };
       };
 
-      # Utility plugins
       binds.whichKey.enable = true;
 
       notes.todo-comments = {
@@ -216,11 +199,8 @@
         };
       };
 
-      autopairs.nvim-autopairs.enable = true;
-
-      comments.comment-nvim.enable = true;
-
       utility = {
+        ccc.enable = true;
         snacks-nvim = {
           enable = true;
           setupOpts = {
@@ -230,34 +210,27 @@
             words.enabled = true;
           };
         };
-        surround.enable = true;
-        ccc.enable = true;
-        oil-nvim = {
-          enable = true;
-          setupOpts = {
-            delete_to_trash = true;
-            skip_confirm_for_simple_edits = true;
-            keymaps = {
-              "<C-c>" = false;
-              "<C-t>" = false;
-              "<C-q>" = "actions.close";
-              "<C-o>" = "actions.close";
-              "?" = "actions.show_help";
-            };
-            float = {
-              max_width = 0.8;
-              max_height = 0.8;
-            };
-          };
-        };
         yazi-nvim = {
           enable = true;
           mappings = {
-            openYazi = "<C-y>";
-            openYaziDir = null;
+            openYazi = "<leader>e";
+            openYaziDir = "<leader>E";
           };
-          setupOpts.keymaps.change_working_directory = "<C-c>";
+          setupOpts = {
+            open_for_directories = true;
+            keymaps.change_working_directory = "<C-c>";
+          };
         };
+      };
+
+      mini = {
+        ai.enable = true;
+        comment.enable = true;
+        move.enable = true;
+        pairs.enable = true;
+        surround.enable = true;
+
+        git.enable = true;
       };
 
       extraPlugins = with pkgs.vimPlugins; {

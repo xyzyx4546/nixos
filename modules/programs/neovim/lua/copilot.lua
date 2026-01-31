@@ -21,3 +21,5 @@ require("CopilotChat").setup({
     show_help = "?",
   },
 })
+
+vim.keymap.set("", "<C-c>", "<CMD>CopilotChatToggle<CR>", { silent = true })

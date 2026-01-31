@@ -282,6 +282,10 @@ local StatusLine = {
 }
 
 local BufferLine = utils.make_buflist({
+  condition = function(self)
+    local name = vim.api.nvim_buf_get_name(self.bufnr)
+    return name ~= "" and name ~= nil
+  end,
   init = function(self)
     self.is_active = vim.fn.bufwinnr(self.bufnr) > 0
   end,
@@ -313,10 +317,6 @@ local BufferLine = utils.make_buflist({
     provider = function(self)
       local full_path = vim.api.nvim_buf_get_name(self.bufnr)
       local filename = vim.fn.fnamemodify(full_path, ":t")
-
-      if filename == "" then
-        return "[No Name]"
-      end
 
       local has_duplicate = vim.iter(vim.api.nvim_list_bufs())
           :filter(function(buf)
