@@ -4,19 +4,12 @@
   domain,
   ...
 }: {
-  fileSystems."/mnt/nextcloud" = {
-    device = "/dev/disk/by-label/NEXTCLOUD";
-    fsType = "ext4";
-    options = ["defaults" "noatime" "nofail"];
-  };
-
   services = {
     nextcloud = {
       enable = true;
       package = pkgs.nextcloud32;
       https = true;
       hostName = domain;
-      datadir = "/mnt/nextcloud";
       configureRedis = true;
       database.createLocally = true;
       maxUploadSize = "16G";
@@ -40,34 +33,11 @@
         inherit impersonate groupfolders notes calendar contacts news;
       };
     };
-
-    mysql.dataDir = "/mnt/nextcloud/mysql";
   };
 
   environment.systemPackages = [
-    (pkgs.writeScriptBin
-      "nextcloud-logs"
-      #bash
-      ''
-        journalctl -t Nextcloud -n "''${1:-100}" -o json | jq -C -r '.MESSAGE | fromjson' | less +G
-      '')
+    (pkgs.writeScriptBin "nextcloud-logs" ''journalctl -t Nextcloud -n "''${1:-100}" -o json | jq -C -r '.MESSAGE | fromjson' | less +G'')
   ];
-
-  systemd = {
-    tmpfiles.rules = ["d /mnt/nextcloud/mysql 0750 ${config.services.mysql.user} ${config.services.mysql.group}"];
-
-    services = {
-      # HACK: Ensure tmpfiles are created after the nextcloud mount is available
-      "systemd-tmpfiles-resetup" = {
-        after = ["mnt-nextcloud.mount"];
-        wants = ["mnt-nextcloud.mount"];
-      };
-      "systemd-tmpfiles-setup" = {
-        after = ["mnt-nextcloud.mount"];
-        wants = ["mnt-nextcloud.mount"];
-      };
-    };
-  };
 
   backup = {
     localOnlyPaths = [

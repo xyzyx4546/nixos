@@ -36,7 +36,7 @@ in {
       fsType = "vfat";
     };
     "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
+      device = "/dev/disk/by-label/ROOT";
       fsType = "ext4";
     };
   };
@@ -202,8 +202,6 @@ in {
           if status != 0 then alert
 
         check filesystem root with path /
-          if space usage > 80% then alert
-        check filesystem nextcloud with path /mnt/nextcloud
           if space usage > 80% then alert
         check filesystem backup with path /mnt/backup
           if space usage > 80% then alert
