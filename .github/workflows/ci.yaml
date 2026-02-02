@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   flake-check:
@@ -12,5 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: DeterminateSystems/nix-installer-action@v21
-      - name: Nix Flake Check
-        run: nix flake check --keep-going
+      - run: nix flake check --keep-going
