@@ -5,16 +5,16 @@
 }:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "lazytimer";
-  version = "0.1.0";
+  version = "0.2.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "xyzyx4546";
     repo = "lazytimer";
     rev = "v${version}";
-    sha256 = "sha256-rjgCvOzeENRA0HSVg1sbMuFTUn0ANot0VJCoCqCbvi8=";
+    sha256 = "sha256-+WVUCS6mtS7yWE/Ii/bULVry6NIaYfrmSYlA9zmDfl8=";
   };
 
-  cargoHash = "sha256-McknMjHr99dgBhmWoLTQUSu6houbi+UXnfe19TBuVVA=";
+  cargoHash = "sha256-mPwBO+I1NDUkdgUbw3FoKY1QBplIGTTEIUJVXoN+nXA=";
 
   meta = {
     description = "A terminal-based speedcubing timer";
