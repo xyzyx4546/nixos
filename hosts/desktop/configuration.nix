@@ -28,7 +28,7 @@
     ratbagd.enable = true;
     hardware.openrgb.enable = true;
     greetd.settings.initial_session = {
-      command = "Hyprland &> /dev/null";
+      command = "start-hyprland &> /dev/null";
       user = "xyzyx";
     };
   };
