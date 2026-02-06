@@ -11,7 +11,6 @@
     ncdu
     wev
     nix-prefetch-git
-    nix-output-monitor
     tokei
     tldr
     speedtest-go

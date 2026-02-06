@@ -56,6 +56,17 @@
     zsh.enable = true;
     nh = {
       enable = true;
+      # HACK:
+      package = pkgs.nh.override {
+        nix-output-monitor = pkgs.nix-output-monitor.overrideAttrs (_: {
+          src = pkgs.fetchFromGitHub {
+            owner = "maralorn";
+            repo = "nix-output-monitor";
+            rev = "fa520d4f05d0e48d5d4675415dd0eeee72ce9a0a";
+            sha256 = "sha256-+MnTTUVBJ1Sas2cz2FkHmdtzedc1YFntfM69rNQFz6k=";
+          };
+        });
+      };
       flake = "/home/xyzyx/Projects/nixos";
       clean = {
         enable = true;
