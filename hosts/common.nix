@@ -46,7 +46,7 @@
 
   users.users.xyzyx = {
     isNormalUser = true;
-    extraGroups = ["wheel" "input"];
+    extraGroups = ["wheel" "input" "networkmanager"];
     hashedPasswordFile = config.sops.secrets."xyzyx/password".path;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq2xd3Eri9HfFP49Gl4snnrxMY6zXyNpWQIs9dd2L4Q"];
