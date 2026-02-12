@@ -100,6 +100,11 @@
       wireplumber.enable = true;
     };
 
+    interception-tools = {
+      enable = true;
+      plugins = [pkgs.interception-tools-plugins.caps2esc];
+    };
+
     upower.enable = true;
   };
 }
