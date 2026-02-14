@@ -1,10 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    (pkgs.steam.override {
+      extraEnv."MANGOHUD" = true;
+    })
     prismlauncher
     protontricks
     lsfg-vk
-    (pkgs.callPackage ../../packages/melonloader-installer {inherit pkgs;})
-    (pkgs.callPackage ../../packages/littlenavmap {inherit pkgs;})
+    (pkgs.callPackage ../../packages/melonloader-installer {})
+    (pkgs.callPackage ../../packages/littlenavmap {})
     (pkgs.writeShellScriptBin "nms-editor" ''
       set -euo pipefail
       trap 'rm -f "$DIR"/*.tmp' EXIT

@@ -63,17 +63,7 @@
     };
   };
 
-  programs = {
-    hyprland.enable = true;
-    steam = {
-      enable = true;
-      package = pkgs.steam.override {
-        extraEnv = {
-          "MANGOHUD" = true;
-        };
-      };
-    };
-  };
+  programs.hyprland.enable = true;
 
   services = {
     greetd = {
