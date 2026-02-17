@@ -5,7 +5,6 @@
     enable = true;
     themeFile = "Dracula";
     font = {
-      package = pkgs.nerd-fonts.jetbrains-mono;
       name = "family='JetBrainsMono Nerd Font' style=SemiBold";
       size = 12;
     };

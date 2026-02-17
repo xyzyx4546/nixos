@@ -14,7 +14,7 @@
     ../../modules/programs/zsh
 
     ../../modules/system/clipse
-    ../../modules/system/fonts
+    ../../modules/system/dms
     ../../modules/system/gtk
     ../../modules/system/hyprland/desktop.nix
     ../../modules/system/xdg

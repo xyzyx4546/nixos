@@ -27,10 +27,6 @@
   services = {
     ratbagd.enable = true;
     hardware.openrgb.enable = true;
-    greetd.settings.initial_session = {
-      command = "start-hyprland &> /dev/null";
-      user = "xyzyx";
-    };
   };
 
   # HACK: Set LAN speed

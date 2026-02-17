@@ -7,7 +7,7 @@
   imports = [inputs.nix-index-database.homeModules.default];
 
   home.packages = with pkgs; [
-    (pkgs.callPackage ../../packages/lazytimer {inherit pkgs;})
+    (pkgs.callPackage ../../packages/lazytimer {})
     ncdu
     wev
     nix-prefetch-git
@@ -64,17 +64,6 @@
       ];
       config = {
         theme = "Dracula";
-      };
-    };
-
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "dracula";
-        theme_background = false;
-        vim_keys = true;
-        update_ms = 1000;
-        disk_free_priv = true;
       };
     };
 

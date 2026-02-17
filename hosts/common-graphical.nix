@@ -30,7 +30,7 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
-        theme = pkgs.callPackage ../modules/packages/grub-theme {inherit pkgs;};
+        theme = pkgs.callPackage ../modules/packages/grub-theme {};
         splashImage = null;
         useOSProber = true;
       };
@@ -58,19 +58,25 @@
       enable = true;
       theme = "alterra";
       themePackages = [
-        (pkgs.callPackage ../modules/packages/plymouth-theme {inherit pkgs;})
+        (pkgs.callPackage ../modules/packages/plymouth-theme {})
       ];
     };
   };
 
   programs.hyprland.enable = true;
 
+  environment.systemPackages = [pkgs.bibata-cursors];
   services = {
-    greetd = {
+    displayManager.dms-greeter = {
       enable = true;
-      settings.default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --remember --asterisks --time";
-        user = "greeter";
+      configHome = "/home/xyzyx";
+      configFiles = ["/home/xyzyx/.config/hypr/hyprland.conf"];
+      compositor = {
+        name = "hyprland";
+        customConfig = ''
+          source=/var/lib/dms-greeter/hyprland.conf
+          debug:suppress_errors=true
+        '';
       };
     };
 
@@ -88,6 +94,8 @@
       plugins = [pkgs.interception-tools-plugins.caps2esc];
     };
 
+    accounts-daemon.enable = true;
+    power-profiles-daemon.enable = true;
     upower.enable = true;
   };
 }

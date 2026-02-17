@@ -1,27 +1,8 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    ./hyprlock.nix
-    ./hypridle.nix
-  ];
-
+{pkgs, ...}: {
   home.packages = with pkgs; [
     hyprland-qtutils
     xdg-desktop-portal-hyprland
-    swww
-    wl-clipboard
-    inputs.ags-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-
-  services.polkit-gnome.enable = true;
-
-  xdg.configFile."wallpapers" = {
-    recursive = true;
-    source = ./wallpapers;
-  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -46,12 +27,9 @@
 
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
-        "swww-daemon"
-        "ags-shell"
 
         "sleep 1 && vesktop --start-minimized"
         "kdeconnectd"
-        "spotify_player -d"
         "steam -silent"
       ];
 
@@ -121,10 +99,7 @@
         "4, persistent:true"
       ];
 
-      layerrule = [
-        "match:namespace ^(hyprpicker|notification_popup)$, no_anim on"
-        "match:namespace ^notifications$, animation slide"
-      ];
+      layerrule = ["match:namespace ^(hyprpicker|dms:.*)$, no_anim on"];
 
       bind = [
         # Window management
@@ -144,21 +119,18 @@
 
         # Programs
         "SUPER, C, exec, kitty"
-        "SUPER, V, exec, kitty --class=floating clipse"
         "SUPER, Y, exec, kitty yazi"
         "SUPER, S, exec, kitty --class=left spotify_player"
         "SUPER, N, exec, kitty nvim"
         "SUPER, D, exec, vesktop"
-        "SUPER, SPACE, exec, ags-shell toggle Launcher"
+        "SUPER, V, exec, dms ipc clipboard toggle"
+        "SUPER, SPACE, exec, dms ipc spotlight toggle"
 
-        "SUPER, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers --random"
-        "SUPER SHIFT, W, exec, ${pkgs.waypaper}/bin/waypaper --folder ~/.config/wallpapers"
+        "SUPER, W, exec, dms ipc dankdash wallpaper"
         ", PRINT, exec, ${pkgs.grimblast}/bin/grimblast --notify --freeze copysave area"
 
-        "SUPER, X, exec, hyprlock"
+        "SUPER, X, exec, dms ipc powermenu toggle"
         "SUPER SHIFT, R, exec, hyprctl reload"
-        "SUPER SHIFT, escape, exit,"
-        "SUPER SHIFT, Q, exec, systemctl poweroff"
 
         # Workspaces
         "SUPER, G, exec, hyprctl dispatch focusmonitor 0 && hyprctl dispatch togglespecialworkspace games"
@@ -178,21 +150,20 @@
         "SUPER SHIFT, Tab, focusmonitor, -1"
       ];
       bindl = [
-        ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioPlay, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl pp"
-        ", XF86AudioNext, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl next"
-        ", XF86AudioPrev, exec, ${pkgs.pkgs.callPackage ../../packages/mpris-ctl {inherit pkgs;}}/bin/mpris-ctl prev"
+        ", XF86AudioMute, exec, dms ipc audio mute"
+        ", XF86AudioPlay, exec, dms ipc mpris playPause"
+        ", XF86AudioNext, exec, dms ipc mpris next"
+        ", XF86AudioPrev, exec, dms ipc mpris previous"
       ];
       bindel = [
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- -l 0.0"
-        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +10%"
-        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 10%-"
+        ", XF86AudioRaiseVolume, exec, dms ipc audio increment 5"
+        ", XF86AudioLowerVolume, exec, dms ipc audio decrement 5"
+        ", XF86MonBrightnessUp, exec, dms ipc brightness increment 10 ''"
+        ", XF86MonBrightnessDown, exec, dms ipc brightness decrement 10 ''"
       ];
 
       misc = {
         disable_hyprland_logo = true;
-        force_default_wallpaper = 0;
         focus_on_activate = true;
       };
 
