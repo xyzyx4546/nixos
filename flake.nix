@@ -12,6 +12,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +43,7 @@
     nixos-hardware,
     nixos-raspberrypi,
     sops-nix,
+    lanzaboote,
     home-manager,
     ...
   } @ inputs: {
@@ -51,6 +56,7 @@
           nixos-hardware.nixosModules.common-pc-ssd
           ./hosts/desktop/configuration.nix
           sops-nix.nixosModules.sops
+          lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -69,6 +75,7 @@
           nixos-hardware.nixosModules.dell-latitude-3480
           ./hosts/laptop/configuration.nix
           sops-nix.nixosModules.sops
+          lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
           {
             home-manager = {

@@ -26,15 +26,14 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        theme = pkgs.callPackage ../modules/packages/grub-theme {};
-        splashImage = null;
-        useOSProber = true;
-      };
-      timeout = 3;
+      timeout = 0;
+    };
+
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+      autoGenerateKeys.enable = true;
+      autoEnrollKeys.enable = true;
     };
 
     # Enable cross-compilation
