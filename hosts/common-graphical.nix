@@ -22,10 +22,7 @@
   # Boot Configuration
   boot = {
     loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
+      efi.canTouchEfiVariables = true;
       timeout = 0;
     };
 

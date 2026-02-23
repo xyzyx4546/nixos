@@ -9,8 +9,8 @@
       device = "/dev/disk/by-label/ROOT";
       fsType = "ext4";
     };
-    "/boot/efi" = {
-      device = "/dev/disk/by-label/EFI";
+    "/boot" = {
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
       options = ["fmask=0022" "dmask=0022"];
     };
