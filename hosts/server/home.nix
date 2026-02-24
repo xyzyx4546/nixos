@@ -12,9 +12,6 @@
     username = "xyzyx";
     homeDirectory = "/home/xyzyx";
 
-    # HACK: suppress warning until i can use unpatched nixpkgs
-    enableNixpkgsReleaseCheck = false;
-
     stateVersion = "24.05";
   };
   programs.home-manager.enable = true;
