@@ -35,11 +35,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "de-latin1";
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    (pkgs.callPackage ../modules/packages/nunito {})
-  ];
-
   hardware.bluetooth.enable = true;
 
   networking.firewall = {

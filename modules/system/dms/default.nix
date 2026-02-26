@@ -46,6 +46,14 @@
       showWorkspaceApps = true;
       reverseScrolling = true;
 
+      powerMenuActions = [
+        "poweroff"
+        "reboot"
+        "suspend"
+        "lock"
+        "restart"
+      ];
+
       barConfigs = [
         {
           id = "default";

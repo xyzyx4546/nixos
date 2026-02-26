@@ -49,30 +49,20 @@
       "udev.log_priority=3"
     ];
 
-    # Plymouth (Boot Splash) Configuration
-    plymouth = {
-      enable = true;
-      theme = "alterra";
-      themePackages = [
-        (pkgs.callPackage ../modules/packages/plymouth-theme {})
-      ];
-    };
+    plymouth.enable = true;
   };
 
   programs.hyprland.enable = true;
 
-  environment.systemPackages = [pkgs.bibata-cursors];
   services = {
-    displayManager.dms-greeter = {
+    greetd = {
       enable = true;
-      configHome = "/home/xyzyx";
-      configFiles = ["/home/xyzyx/.config/hypr/hyprland.conf"];
-      compositor = {
-        name = "hyprland";
-        customConfig = ''
-          source=/var/lib/dms-greeter/hyprland.conf
-          debug:suppress_errors=true
-        '';
+      settings = rec {
+        initial_session = {
+          command = "start-hyprland";
+          user = "xyzyx";
+        };
+        default_session = initial_session;
       };
     };
 

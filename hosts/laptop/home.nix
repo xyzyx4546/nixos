@@ -16,6 +16,7 @@
 
     ../../modules/system/clipse
     ../../modules/system/dms
+    ../../modules/system/fonts
     ../../modules/system/gtk
     ../../modules/system/hyprland/laptop.nix
     ../../modules/system/xdg
