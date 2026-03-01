@@ -14,7 +14,6 @@
     ../../modules/programs/zathura
     ../../modules/programs/zsh
 
-    ../../modules/system/clipse
     ../../modules/system/dms
     ../../modules/system/fonts
     ../../modules/system/gtk
