@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ../../modules/programs/fastfetch
     ../../modules/programs/firefox
     ../../modules/programs/games
     ../../modules/programs/git

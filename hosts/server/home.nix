@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../modules/programs/fastfetch
     ../../modules/programs/git
     ../../modules/programs/kitty
     ../../modules/programs/neovim

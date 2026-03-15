@@ -15,6 +15,10 @@
     systemd.enable = true;
 
     plugins = {
+      dankKDEConnect = {
+        enable = true;
+        settings.enable = true;
+      };
       dankBatteryAlerts = {
         enable = true;
         settings.enable = true;
@@ -73,6 +77,7 @@
             "memUsage"
             "diskUsage"
             "spacer"
+            "dankKDEConnect"
             "clipboard"
             "notificationButton"
             "battery"

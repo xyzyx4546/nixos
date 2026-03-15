@@ -95,10 +95,6 @@
         command = "FocusPreviousWindow";
         key_sequence = "H";
       }
-      {
-        command = "ToggleFakeTrackRepeatMode";
-        key_sequence = "r";
-      }
     ];
   };
 }

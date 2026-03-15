@@ -15,14 +15,11 @@
     tldr
     speedtest-go
     asciiquarium-transparent
-    neofetch
     duf
     libqalculate
     jq
     dnsutils
   ];
-
-  xdg.configFile."neofetch/config.conf".source = ./neofetch.conf;
 
   programs = {
     nix-index-database.comma.enable = true;

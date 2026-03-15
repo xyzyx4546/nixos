@@ -7,9 +7,7 @@
       documents = "${config.home.homeDirectory}/Documents";
       download = "${config.home.homeDirectory}/Downloads";
       pictures = "${config.home.homeDirectory}/Pictures";
-      extraConfig = {
-        XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
-      };
+      extraConfig.PROJECTS = "${config.home.homeDirectory}/Projects";
 
       desktop = null;
       music = null;

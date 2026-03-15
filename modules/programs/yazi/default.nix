@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   programs.yazi = {
     enable = true;
+    shellWrapperName = "y";
 
     flavors.dracula = "${builtins.fetchGit {
       url = "https://github.com/yazi-rs/flavors.git";
