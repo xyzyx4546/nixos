@@ -81,4 +81,12 @@
     power-profiles-daemon.enable = true;
     upower.enable = true;
   };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 }
