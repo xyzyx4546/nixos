@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   imports = [
     ../common.nix
     ../common-graphical.nix
@@ -27,17 +27,6 @@
   services = {
     ratbagd.enable = true;
     hardware.openrgb.enable = true;
-  };
-
-  # HACK: Set LAN speed
-  systemd.services.set-lan-speed = {
-    after = ["network-pre.target" "network.target"];
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.ethtool}/bin/ethtool -s enp14s0 speed 10 duplex full autoneg off";
-      RemainAfterExit = true;
-    };
   };
 
   networking.hostName = "desktop";
