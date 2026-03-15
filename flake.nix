@@ -1,4 +1,3 @@
-# TODO: disko/nixos-anywhere
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -13,6 +12,10 @@
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
@@ -46,6 +49,7 @@
     nixos-hardware,
     nixos-raspberrypi,
     sops-nix,
+    disko,
     lanzaboote,
     home-manager,
     ...
@@ -78,6 +82,7 @@
           nixos-hardware.nixosModules.dell-latitude-3480
           ./hosts/laptop/configuration.nix
           sops-nix.nixosModules.sops
+          disko.nixosModules.disko
           lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
           {

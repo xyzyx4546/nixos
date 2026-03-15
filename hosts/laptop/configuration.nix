@@ -4,15 +4,41 @@
     ../common-graphical.nix
   ];
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/ROOT";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-      options = ["fmask=0022" "dmask=0022"];
+  disko.devices.disk."primary" = {
+    type = "disk";
+    device = "/dev/nvme0n1";
+    content = {
+      type = "gpt";
+      partitions = {
+        "BOOT" = {
+          type = "EF00";
+          size = "1G";
+          content = {
+            type = "filesystem";
+            format = "vfat";
+            extraArgs = ["-n" "BOOT"];
+            mountpoint = "/boot";
+            mountOptions = ["umask=0077"];
+          };
+        };
+        "ROOT" = {
+          size = "100%";
+          content = {
+            type = "luks";
+            name = "cryptroot";
+            settings.allowDiscards = true;
+            # settings = {
+            #   keyFile = "/tmp/secret.key";
+            # };
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              extraArgs = ["-L" "ROOT"];
+              mountpoint = "/";
+            };
+          };
+        };
+      };
     };
   };
 

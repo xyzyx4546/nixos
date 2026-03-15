@@ -41,14 +41,11 @@
     initrd.verbose = false;
     kernelParams = [
       "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
     ];
 
+    initrd.systemd.enable = true;
     plymouth.enable = true;
   };
 
@@ -59,7 +56,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "start-hyprland";
+          command = "start-hyprland &> /dev/null";
           user = "xyzyx";
         };
         default_session = initial_session;
