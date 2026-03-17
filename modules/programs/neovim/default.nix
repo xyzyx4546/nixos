@@ -7,7 +7,7 @@
   imports = [
     inputs.nvf.homeManagerModules.default
     ./keymaps.nix
-    ./languages.nix
+    ./languages
   ];
 
   programs.nvf = {
@@ -260,6 +260,7 @@
 
       extraPackages = with pkgs; [
         sops
+        nodejs-slim # required for copilot
       ];
 
       extraLuaFiles = [

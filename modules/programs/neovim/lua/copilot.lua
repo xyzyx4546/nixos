@@ -1,8 +1,5 @@
 -- TODO: Configure Copilot Chat
 
----@diagnostic disable: undefined-global
--- luacheck: globals vim
-
 require("copilot").setup()
 
 require("CopilotChat").setup({

@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  imports = [
+    ./lua.nix
+    ./nix.nix
+    ./rust.nix
+    ./tex.nix
+  ];
+
   programs.nvf.settings.vim = {
     lsp = {
       enable = true;
@@ -20,47 +27,23 @@
             virtual_text = not vim.diagnostic.config().virtual_text,
           })
         end, { desc = 'Toggle diagnostic virtual lines and virtual text' })
-        -- HACK: lsp.mappings.format currently doesnt always use conform
-        vim.keymap.set('n', '<leader><leader>', require('conform').format, { desc = 'Format' })
       '';
 
-    # Languages
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader><leader>";
+        action = "<CMD>lua require('conform').format()<CR>";
+        silent = true;
+        desc = "Format";
+      }
+    ];
+
     languages = {
       enableExtraDiagnostics = true;
       enableFormat = true;
       enableTreesitter = true;
       enableDAP = true;
-
-      bash.enable = true;
-      css.enable = true;
-      html.enable = true;
-      lua.enable = true;
-      nix.enable = true;
-      rust = {
-        enable = true;
-        extensions.crates-nvim.enable = true;
-      };
-      ts.enable = true;
     };
-
-    # LaTeX support
-    extraPlugins."vimtex".package = pkgs.vimPlugins.vimtex;
-    formatter.conform-nvim.setupOpts.formatters_by_ft.tex = ["latexindent"];
-    globals.vimtex_quickfix_mode = 0;
-
-    extraPackages = with pkgs; [
-      rustfmt
-      rustc
-      texlab
-    ];
   };
-
-  home.packages = with pkgs; [
-    cargo
-    gcc
-    gnumake
-    nodejs
-    bun
-    texliveFull
-  ];
 }

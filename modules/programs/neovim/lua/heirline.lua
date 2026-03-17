@@ -1,6 +1,3 @@
----@diagnostic disable: undefined-global
--- luacheck: globals vim
-
 local heirline = require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
