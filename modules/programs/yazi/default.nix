@@ -7,7 +7,7 @@
     enable = true;
     shellWrapperName = "y";
 
-    flavors.dracula = "${builtins.fetchGit {
+    flavors.dracula = "${fetchGit {
       url = "https://github.com/yazi-rs/flavors.git";
       rev = "ca6165818bb84d46af5fd8f95bedd2b1c395890a";
     }}/dracula.yazi";
@@ -15,8 +15,8 @@
     theme.flavor.dark = "dracula";
 
     plugins = with pkgs.yaziPlugins; {
-      inherit ouch chmod full-border git mime-ext;
-      kdeconnect-send = builtins.fetchGit {
+      inherit ouch chmod full-border git mime-ext mount;
+      kdeconnect-send = fetchGit {
         url = "https://github.com/Deepak22903/kdeconnect-send.yazi.git";
         rev = "7d9098d25c2bcfa46611a593fb6cef3f431fdfdc";
       };
@@ -153,6 +153,11 @@
           on = ["c" "m"];
           run = "plugin chmod";
           desc = "Chmod on selected files";
+        }
+        {
+          on = ["M"];
+          run = "plugin mount";
+          desc = "Mount/unmount disk";
         }
         {
           on = ["K"];
