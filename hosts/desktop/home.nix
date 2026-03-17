@@ -18,6 +18,7 @@
     ../../modules/system/fonts
     ../../modules/system/gtk
     ../../modules/system/hyprland/desktop.nix
+    ../../modules/system/nextcloud
     ../../modules/system/xdg
   ];
 

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
@@ -11,7 +15,7 @@
     theme.flavor.dark = "dracula";
 
     plugins = with pkgs.yaziPlugins; {
-      inherit ouch chmod full-border git;
+      inherit ouch chmod full-border git mime-ext;
       kdeconnect-send = builtins.fetchGit {
         url = "https://github.com/Deepak22903/kdeconnect-send.yazi.git";
         rev = "7d9098d25c2bcfa46611a593fb6cef3f431fdfdc";
@@ -27,15 +31,9 @@
 
     settings = {
       plugin = {
-        prepend_preloaders = [
-          {
-            name = "/mnt/nextcloud/**";
-            run = "noop";
-          }
-        ];
         prepend_previewers = [
           {
-            name = "/mnt/nextcloud/**";
+            url = "${config.xdg.userDirs.extraConfig.NEXTCLOUD}/**";
             run = "noop";
           }
           {
@@ -93,6 +91,18 @@
             id = "git";
             name = "*/";
             run = "git";
+          }
+          {
+            id = "mime";
+            url = "local://*";
+            run = "mime-ext.local";
+            prio = "high";
+          }
+          {
+            id = "mime";
+            url = "remote://*";
+            run = "mime-ext.remote";
+            prio = "high";
           }
         ];
       };
@@ -153,6 +163,11 @@
           on = ["g" "s"];
           run = "cd ~/.local/share/Steam/steamapps/common";
           desc = "Go to Steam apps";
+        }
+        {
+          on = ["g" "n"];
+          run = "cd ~/Nextcloud";
+          desc = "Go to Nextcloud";
         }
       ];
     };

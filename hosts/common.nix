@@ -27,6 +27,7 @@
       "restic/password" = {};
       "restic/b2" = {};
       "nextcloud/password" = {};
+      "nextcloud/webdav".owner = "xyzyx";
       "vaultwarden/password" = {};
     };
   };
