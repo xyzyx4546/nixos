@@ -15,6 +15,10 @@
     systemd.enable = true;
 
     plugins = {
+      calculator = {
+        enable = true;
+        settings.enable = true;
+      };
       dankKDEConnect = {
         enable = true;
         settings.enable = true;
