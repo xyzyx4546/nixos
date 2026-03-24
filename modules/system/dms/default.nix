@@ -42,6 +42,7 @@
       launcherLogoMode = "os";
       acLockTimeout = 5400;
       powerActionHoldDuration = 0.25;
+      notificationHistoryEnabled = false;
 
       screenPreferences = let
         screens = ["eDP-1" "DP-3"];
