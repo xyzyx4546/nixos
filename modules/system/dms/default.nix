@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms-plugin-registry.modules.default
@@ -9,6 +13,10 @@
     recursive = true;
     source = ./wallpapers;
   };
+
+  home.packages = with pkgs; [
+    libnotify
+  ];
 
   programs.dank-material-shell = {
     enable = true;
