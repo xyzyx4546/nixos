@@ -7,6 +7,8 @@
     ../../modules/programs/tmux
     ../../modules/programs/yazi
     ../../modules/programs/zsh
+
+    ../../modules/system/xdg
   ];
 
   home = {
