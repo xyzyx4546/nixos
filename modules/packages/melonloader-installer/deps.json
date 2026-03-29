@@ -1,8 +1,8 @@
 [
   {
     "pname": "Avalonia",
-    "version": "11.3.3",
-    "hash": "sha256-UvENUQgoTUikjIMTL+oI93FNwr1gZfoGVtZdYzBzdts="
+    "version": "11.3.8",
+    "hash": "sha256-0cM3VVudDUELNE/fWehuCplPKLITjw1hbg9IGtIm20g="
   },
   {
     "pname": "Avalonia.Angle.Windows.Natives",
@@ -11,68 +11,68 @@
   },
   {
     "pname": "Avalonia.BuildServices",
-    "version": "0.0.31",
-    "hash": "sha256-wgtodGf644CsUZEBIpFKcUjYHTbnu7mZmlr8uHIxeKA="
+    "version": "11.3.1",
+    "hash": "sha256-JYcA/DgTHRJ02/FcURqtJnXYhhdzki8DGECLkZ4zONg="
   },
   {
     "pname": "Avalonia.Controls.ColorPicker",
-    "version": "11.3.3",
-    "hash": "sha256-zg35D8NygrU8mCAsLLoPmrzXZcV31NuHNtTaiZZhOxc="
+    "version": "11.3.8",
+    "hash": "sha256-cB3mYR1X8Gzu1FQfWCJpfWosnpojIQhRSxrjYz4zD6g="
   },
   {
     "pname": "Avalonia.Desktop",
-    "version": "11.3.3",
-    "hash": "sha256-/jYjxA5vJqU5IpJkgnlathprzdHB/ihdL35ZZBRESeU="
+    "version": "11.3.8",
+    "hash": "sha256-X/ggsRzsN7o3O4Iw4uvjgOdlW58Xbe8Jpv4llRuFcoA="
   },
   {
     "pname": "Avalonia.Diagnostics",
-    "version": "11.3.3",
-    "hash": "sha256-rHBFnhZ+gAqPqqDfZxBxUr3wXIpgOc9hInwzDOgdk5E="
+    "version": "11.3.8",
+    "hash": "sha256-eOLf2Id4Olbq/nMWERarked+vg5ZnVMCxMKOXBfqAqM="
   },
   {
     "pname": "Avalonia.Fonts.Inter",
-    "version": "11.3.3",
-    "hash": "sha256-OjFm/uEyLOAY2gwRY2jhqVUzxHHG8wfljoo8gFqF1iw="
+    "version": "11.3.8",
+    "hash": "sha256-EaUjJZ+K+5HaSJ1hmLgwuH4HGp1N2s1TNJogZulpVT8="
   },
   {
     "pname": "Avalonia.FreeDesktop",
-    "version": "11.3.3",
-    "hash": "sha256-kUSE90HoJz9NsYCphLUQgNkxb3xHhFIlqXa6lzuGi4c="
+    "version": "11.3.8",
+    "hash": "sha256-XJogaWo4ZNg/PvckA6D5EEuyQneYUKDePnT9snNwaHs="
   },
   {
     "pname": "Avalonia.Native",
-    "version": "11.3.3",
-    "hash": "sha256-QmvN5gUsgjk7ViacdXOwHULHid0TfAKJGW3cf9A8bwQ="
+    "version": "11.3.8",
+    "hash": "sha256-Hm4uneEN3rQVmSp1Ai4cDSTJpixYDzYJzEkAesvwxPw="
   },
   {
     "pname": "Avalonia.Remote.Protocol",
-    "version": "11.3.3",
-    "hash": "sha256-gHZA53IyRAdeIg7yRIN6Pzh0AbOGd5B9mckEWsPuK7A="
+    "version": "11.3.8",
+    "hash": "sha256-pCIcQuTTcpik4xg5x8Y/QuXaW/GmNny/5ZBVr0bhmNU="
   },
   {
     "pname": "Avalonia.Skia",
-    "version": "11.3.3",
-    "hash": "sha256-pUMqXnupxztsAP/n4U2pSgTga89gy7CBLg39y2j0EjA="
+    "version": "11.3.8",
+    "hash": "sha256-FeJ6tdgeGKHkv0JKPOq2eHTxaDTT0t2yJ7wavBKnr68="
   },
   {
     "pname": "Avalonia.Themes.Fluent",
-    "version": "11.3.3",
-    "hash": "sha256-tWNl3jvESx96lTd6i0lxo6Y8/Y6cS5ZQrPovIolNfAE="
+    "version": "11.3.8",
+    "hash": "sha256-fVXc8+WPRa3YkX4EIt/Wjz9hnI7y6pv3P1cCBhEPgOg="
   },
   {
     "pname": "Avalonia.Themes.Simple",
-    "version": "11.3.3",
-    "hash": "sha256-nUfIEeJZgiLuy681S16Qncri6fvCGF7tYk4dSf3JY4s="
+    "version": "11.3.8",
+    "hash": "sha256-GSD4yvyDKqBSGV/rwE/EO3CTp9dG4eR4B5H0Y/u9+hE="
   },
   {
     "pname": "Avalonia.Win32",
-    "version": "11.3.3",
-    "hash": "sha256-jlQXEdbZjfRsu2MjYzHGUAyn+uvdACXCvm63HjUKqfQ="
+    "version": "11.3.8",
+    "hash": "sha256-YwzyF4YJtCzcLpGxDe6U3Tpxjcqft8mcYjUNnL2Ockg="
   },
   {
     "pname": "Avalonia.X11",
-    "version": "11.3.3",
-    "hash": "sha256-7A+uzB7g21P+RnKO4bKOJVY35qPz5Xna8n8VGG7RoMw="
+    "version": "11.3.8",
+    "hash": "sha256-SlAWkiaGYc+Ynq4QcO3/xorz2EIWWyrZcHXIk7F68i0="
   },
   {
     "pname": "CommunityToolkit.Mvvm",
@@ -125,6 +125,11 @@
     "hash": "sha256-e4uoLnUSmON4If9qJh78+4z14IzW9qCu5YkqLdQqWQU="
   },
   {
+    "pname": "Microsoft.NET.ILLink.Tasks",
+    "version": "9.0.10",
+    "hash": "sha256-0fL4pa/a3aLZMqA7B5zNxrb1bHCu14v4HLBfcziUtiE="
+  },
+  {
     "pname": "Microsoft.NETCore.Platforms",
     "version": "1.1.0",
     "hash": "sha256-FeM40ktcObQJk4nMYShB61H/E8B7tIKfl9ObJ0IOcCM="
@@ -151,8 +156,8 @@
   },
   {
     "pname": "Microsoft.Win32.SystemEvents",
-    "version": "9.0.7",
-    "hash": "sha256-7o59Y4Wy9EsTlcNVCNuweR/7Y7QlbB6MwK/aHGax3F4="
+    "version": "9.0.10",
+    "hash": "sha256-hqtadbUx58gBwBFfVk2vyRmgWgdRpbmT84pcuhKTXl0="
   },
   {
     "pname": "NETStandard.Library",
@@ -471,8 +476,8 @@
   },
   {
     "pname": "System.Drawing.Common",
-    "version": "9.0.7",
-    "hash": "sha256-GRiTUzguCr8o3V9whhoKvW16NCA08mdYO1rViJiDvvo="
+    "version": "9.0.10",
+    "hash": "sha256-D4E99H3HVNatH+MDKuCGxaJOP7pXTxibBLThNZBXwLc="
   },
   {
     "pname": "System.Globalization",
