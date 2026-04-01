@@ -45,6 +45,7 @@
       monoFontFamily = "JetBrainsMono Nerd Font";
       fontWeight = 500;
 
+      soundsEnabled = false;
       useAutoLocation = true;
       osdAlwaysShowValue = true;
       launcherLogoMode = "os";
