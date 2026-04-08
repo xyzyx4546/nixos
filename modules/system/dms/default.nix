@@ -18,6 +18,9 @@
     libnotify
   ];
 
+  # HACK: open terminal apps in kitty
+  home.file.".config/environment.d/90-dms.conf".text = "TERMINAL=kitty";
+
   programs.dank-material-shell = {
     enable = true;
     systemd.enable = true;
