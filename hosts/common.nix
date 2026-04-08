@@ -11,6 +11,8 @@
       "steam-unwrapped"
     ];
 
+  documentation.nixos.enable = false;
+
   sops = {
     defaultSopsFile = ../secrets.yaml;
     defaultSopsFormat = "yaml";
