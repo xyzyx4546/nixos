@@ -1,29 +1,34 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    hyprland-qtutils
-    xdg-desktop-portal-hyprland
-  ];
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  home = {
+    packages = with pkgs; [
+      hyprland-qtutils
+      xdg-desktop-portal-hyprland
+    ];
+    # Force wayland
+    sessionVariables = {
+      GDK_BACKEND = "wayland";
+      QT_QPA_PLATFORM = "wayland";
+      SDL_VIDEODRIVER = "wayland";
+      CLUTTER_BACKEND = "wayland";
+      ELECTRON_OZONE_PLATFORM = "wayland";
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      EGL_PLATFORM = "wayland";
+      NIXOS_OZONE_WL = "1";
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
 
     settings = {
-      env = [
-        "EDITOR,nvim"
-        # Force wayland
-        "GDK_BACKEND,wayland"
-        "QT_QPA_PLATFORM,wayland"
-        "SDL_VIDEODRIVER,wayland"
-        "CLUTTER_BACKEND,wayland"
-        "ELECTRON_OZONE_PLATFORM,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "MOZ_DISABLE_RDD_SANDBOX,1"
-        "EGL_PLATFORM,wayland"
-        "NIXOS_OZONE_WL,1"
-        # gtk darkmode is not working otherwise
-        "ADW_DISABLE_PORTAL,1"
-      ];
+      env = lib.mapAttrsToList (k: v: "${k},${toString v}") config.home.sessionVariables;
 
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 20"
