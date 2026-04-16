@@ -6,11 +6,14 @@
     };
   };
 
-  home.packages = with pkgs; [
-    gcc
-    rustc
-    cargo
-    rustfmt
-    cargo-release
-  ];
+  home = {
+    packages = with pkgs; [
+      gcc
+      rustc
+      cargo
+      rustfmt
+      cargo-release
+    ];
+    sessionVariables.LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+  };
 }
