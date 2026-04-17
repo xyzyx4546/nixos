@@ -1,6 +1,10 @@
 -- TODO: Configure Copilot Chat
 
-require("copilot").setup()
+require("copilot").setup({
+  filetypes = {
+    ["*"] = false,
+  },
+})
 
 require("CopilotChat").setup({
   show_help = false,
