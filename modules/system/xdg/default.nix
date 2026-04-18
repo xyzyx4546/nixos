@@ -3,6 +3,7 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = true;
 
       documents = "${config.home.homeDirectory}/Documents";
       download = "${config.home.homeDirectory}/Downloads";
