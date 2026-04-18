@@ -7,7 +7,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud32;
+      package = pkgs.nextcloud33;
       https = true;
       hostName = domain;
       configureRedis = true;
@@ -24,6 +24,7 @@
         "opcache.max_accelerated_files" = "20000";
       };
       settings = {
+        serverid = 0;
         default_phone_region = "DE";
         maintenance_window_start = 23;
         trashbin_retention_obligation = "auto, 30";
