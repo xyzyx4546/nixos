@@ -249,6 +249,26 @@
         "type": "github"
       }
     },
+    "lazytimer": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777455237,
+        "narHash": "sha256-0gcUVBNlEtXFMFtEbZwxkfXkYd/IpQ5MQVE0TFX2DSU=",
+        "owner": "xyzyx4546",
+        "repo": "lazytimer",
+        "rev": "79558afcb8fa163583244306325a5885b1e71985",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xyzyx4546",
+        "repo": "lazytimer",
+        "type": "github"
+      }
+    },
     "mnw": {
       "locked": {
         "lastModified": 1770419553,
@@ -465,6 +485,7 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
+        "lazytimer": "lazytimer",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixos-raspberrypi": "nixos-raspberrypi",

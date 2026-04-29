@@ -42,6 +42,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lazytimer = {
+      url = "github:xyzyx4546/lazytimer";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

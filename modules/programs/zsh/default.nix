@@ -7,7 +7,6 @@
   imports = [inputs.nix-index-database.homeModules.default];
 
   home.packages = with pkgs; [
-    (pkgs.callPackage ../../packages/lazytimer {})
     ncdu
     wev
     nix-prefetch-git

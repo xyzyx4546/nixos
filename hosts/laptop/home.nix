@@ -7,6 +7,7 @@
     ../../modules/programs/git
     ../../modules/programs/kdeconnect
     ../../modules/programs/kitty
+    ../../modules/programs/lazytimer
     ../../modules/programs/neovim
     ../../modules/programs/tmux
     ../../modules/programs/spotify
