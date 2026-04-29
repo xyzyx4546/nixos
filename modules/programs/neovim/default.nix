@@ -174,16 +174,11 @@
           scrollDocsDown = "<M-j>";
           scrollDocsUp = "<M-k>";
         };
-        setupOpts = {
-          # HACK: Disables conflicting autocompletion for Copilot Chat
-          enabled =
-            lib.mkLuaInline "function() return vim.bo.filetype ~= 'copilot-chat' end";
-          completion = {
-            # HACK: shouldn't be needed due to `ui.borders.globalStyle = "rounded"`
-            menu.border = "rounded";
-            documentation.window.border = "rounded";
-            ghost_text.enabled = true;
-          };
+        setupOpts.completion = {
+          # HACK: shouldn't be needed due to `ui.borders.globalStyle = "rounded"`
+          menu.border = "rounded";
+          documentation.window.border = "rounded";
+          ghost_text.enabled = true;
         };
       };
 
@@ -247,11 +242,6 @@
           };
         };
 
-        "CopilotChat" = {
-          package = CopilotChat-nvim;
-          setup = builtins.readFile ./lua/copilot.lua;
-        };
-
         "heirline" = {
           package = heirline-nvim;
           setup = builtins.readFile ./lua/heirline.lua;
@@ -260,7 +250,6 @@
 
       extraPackages = with pkgs; [
         sops
-        nodejs-slim # required for copilot
       ];
 
       extraLuaFiles = [
