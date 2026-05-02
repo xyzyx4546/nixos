@@ -7,7 +7,7 @@
     ../../home/games
     ../../home/git
     ../../home/gtk
-    ../../home/hyprland/laptop.nix
+    ../../home/hyprland/desktop.nix
     ../../home/kitty
     ../../home/lazytimer
     ../../home/neovim
