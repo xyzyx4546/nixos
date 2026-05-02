@@ -1,14 +1,13 @@
 {
   imports = [
-    ../../modules/programs/fastfetch
-    ../../modules/programs/git
-    ../../modules/programs/kitty
-    ../../modules/programs/neovim
-    ../../modules/programs/tmux
-    ../../modules/programs/yazi
-    ../../modules/programs/zsh
-
-    ../../modules/system/xdg
+    ../../home/fastfetch
+    ../../home/git
+    ../../home/kitty
+    ../../home/neovim
+    ../../home/tmux
+    ../../home/xdg
+    ../../home/yazi
+    ../../home/zsh
   ];
 
   home = {
