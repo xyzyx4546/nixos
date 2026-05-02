@@ -13,7 +13,7 @@ pkgs.buildDotnetModule rec {
   projectFile = "MelonLoader.Installer/MelonLoader.Installer.csproj";
   dotnet-sdk = pkgs.dotnetCorePackages.sdk_9_0;
   dotnet-runtime = pkgs.dotnetCorePackages.runtime_9_0;
-  # nix-build -E 'with import <nixpkgs> {}; (callPackage ./modules/packages/melonloader-installer/default.nix {}).fetch-deps' && ./result && rm result
+  # nix-build -A fetch-deps overlays/melonloader-installer && ./result && rm result
   nugetDeps = ./deps.json;
 
   # Disable auto update
