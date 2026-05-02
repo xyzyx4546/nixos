@@ -1,5 +1,4 @@
 final: prev: {
-  xfastmanager = final.callPackage ./xfastmanager {};
   melonloader-installer = final.callPackage ./melonloader-installer {};
   nms-editor = final.writeShellScriptBin "nms-editor" ''
     set -euo pipefail
