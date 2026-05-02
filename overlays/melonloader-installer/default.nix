@@ -1,13 +1,13 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.buildDotnetModule rec {
   pname = "melonloader-installer";
-  version = "4.2.1";
+  version = "4.2.3";
 
   src = pkgs.fetchFromGitHub {
     owner = "LavaGang";
     repo = "MelonLoader.Installer";
     rev = version;
-    sha256 = "sha256-0hUc4f1avPfNDGAQDokLpRLK4sSrUFD5GkJZeP/Gu34=";
+    sha256 = "sha256-Ldp3/DY2MWUGWSylAifSDyInFc6wC/9hv11i2t6IA8s=";
   };
 
   projectFile = "MelonLoader.Installer/MelonLoader.Installer.csproj";
