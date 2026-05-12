@@ -51,11 +51,11 @@
     lazygit = {
       enable = true;
       settings.keybinding.universal = {
-          nextBlock-alt2 = "]";
-          prevBlock-alt2 = "[";
-          nextTab = "<tab>";
-          prevTab = "<backtab>";
-        };
+        nextBlock-alt2 = "]";
+        prevBlock-alt2 = "[";
+        nextTab = "<tab>";
+        prevTab = "<backtab>";
+      };
     };
   };
 }
