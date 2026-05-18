@@ -228,9 +228,12 @@
         git.enable = true;
       };
 
-      extraPlugins = with pkgs.vimPlugins; {
-        presence-nvim.package = presence-nvim;
+      presence.neocord = {
+        enable = true;
+        setupOpts.logo = "https://raw.githubusercontent.com/IogaMaster/neocord/cb9f5234941bf4a53cd69d2f321734a650e7d442/assets/logos/Neovim.png";
+      };
 
+      extraPlugins = with pkgs.vimPlugins; {
         "sops.nvim".package = pkgs.vimUtils.buildVimPlugin {
           pname = "sops.nvim";
           version = "latest";

@@ -1,19 +1,17 @@
-let
-  profile = "xyzyx";
-
-  item = name: url: {
-    inherit name;
-    inherit url;
-  };
-
-  folder = name: bookmarks: {
-    inherit name;
-    inherit bookmarks;
-  };
-in {
-  programs.firefox.profiles.${profile}.bookmarks = {
+{
+  programs.firefox.profiles."xyzyx".bookmarks = {
     force = true;
-    settings = [
+    settings = let
+      item = name: url: {
+        inherit name;
+        inherit url;
+      };
+
+      folder = name: bookmarks: {
+        inherit name;
+        inherit bookmarks;
+      };
+    in [
       {
         toolbar = true;
         bookmarks = [

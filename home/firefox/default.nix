@@ -8,6 +8,7 @@
 
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
 
     profiles."xyzyx" = {
       isDefault = true;
