@@ -12,6 +12,7 @@
       rustc
       cargo
       rustfmt
+      clippy
       cargo-release
     ];
     sessionVariables.LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
