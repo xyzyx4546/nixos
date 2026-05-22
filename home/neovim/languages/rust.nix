@@ -14,6 +14,7 @@
       rustfmt
       clippy
       cargo-release
+      cargo-flamegraph
     ];
     sessionVariables.LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
   };
