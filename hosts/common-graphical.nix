@@ -83,11 +83,9 @@
     upower.enable = true;
   };
 
-  virtualisation.docker = {
+  virtualisation.podman = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    dockerCompat = true;
+    dockerSocket.enable = true;
   };
 }

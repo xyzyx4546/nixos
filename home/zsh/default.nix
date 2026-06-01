@@ -18,7 +18,6 @@
     libqalculate
     jq
     dnsutils
-    lazydocker
   ];
 
   programs = {
