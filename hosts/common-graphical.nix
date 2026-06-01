@@ -33,9 +33,6 @@
       autoEnrollKeys.enable = true;
     };
 
-    # Enable cross-compilation
-    binfmt.emulatedSystems = ["aarch64-linux"];
-
     # Silent Boot Configuration
     consoleLogLevel = 0;
     initrd.verbose = false;
