@@ -80,4 +80,12 @@
       KbdInteractiveAuthentication = false;
     };
   };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 }

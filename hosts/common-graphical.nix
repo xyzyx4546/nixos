@@ -79,9 +79,4 @@
     udisks2.enable = true;
     upower.enable = true;
   };
-
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
 }
