@@ -38,6 +38,8 @@
         desc = "Format";
       }
     ];
+    
+    debugger.nvim-dap.ui.enable = true;
 
     languages = {
       enableExtraDiagnostics = true;
