@@ -255,9 +255,7 @@
         sops
       ];
 
-      extraLuaFiles = [
-        ./lua/projects.lua
-      ];
+      luaConfigRC.projects = builtins.readFile ./lua/projects.lua;
     };
   };
 }

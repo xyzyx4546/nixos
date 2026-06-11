@@ -18,7 +18,7 @@
       };
     };
 
-    luaConfigPost =
+    luaConfigRC.virtual_diagnostic =
       # lua
       ''
         vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
