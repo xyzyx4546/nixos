@@ -17,6 +17,7 @@
   services.kdeconnect.enable = true;
   home.packages = with pkgs; [
     libnotify
+    libqalculate
   ];
 
   # HACK: open terminal apps in kitty
@@ -26,18 +27,26 @@
     enable = true;
     systemd.enable = true;
 
-    plugins = {
-      calculator = {
+    plugins = let
+      mkPlugin = extraSettings: {
         enable = true;
-        settings.enable = true;
+        settings = {enabled = true;} // extraSettings;
       };
-      dankKDEConnect = {
-        enable = true;
-        settings.enable = true;
+    in {
+      dankBatteryAlerts = mkPlugin {};
+      dankKDEConnect = mkPlugin {};
+      calculator = mkPlugin {
+        calcEngine = "qalc";
+        alwaysActive = true;
+        noTrigger = true;
       };
-      dankBatteryAlerts = {
-        enable = true;
-        settings.enable = true;
+      systemMonitorPlus = mkPlugin {
+        cpuUsageEnabled = true;
+        ramUsageEnabled = true;
+        cpuTempEnabled = false;
+        gpuTempEnabled = false;
+        cpuUsageVisualStyle = "gauge";
+        ramUsageVisualStyle = "gauge";
       };
     };
 
@@ -91,9 +100,7 @@
             "weather"
           ];
           rightWidgets = [
-            "cpuUsage"
-            "memUsage"
-            "diskUsage"
+            "systemMonitorPlus"
             "spacer"
             "dankKDEConnect"
             "clipboard"

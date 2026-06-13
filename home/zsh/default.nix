@@ -15,7 +15,6 @@
     speedtest-go
     asciiquarium-transparent
     duf
-    libqalculate
     jq
     dnsutils
   ];

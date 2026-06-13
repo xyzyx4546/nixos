@@ -8,7 +8,7 @@
     ];
 
     workspace = [
-      "99, monitor:HDMI-A-1, default:true, persistent:true"
+      "10, monitor:HDMI-A-1, default:true, persistent:true"
       "1, monitor:DP-3"
       "2, monitor:DP-3"
       "3, monitor:DP-3"
@@ -16,8 +16,8 @@
     ];
 
     windowrule = [
-      "match:class negative:(^(firefox|Little Navmap|left|vesktop|steam|org.prismlauncher.PrismLauncher)$), monitor 0"
-      "match:class ^(Little Navmap|left|vesktop|steam|org.prismlauncher.PrismLauncher)$, workspace 99"
+      "match:class negative:(^(firefox|left|vesktop|steam|org.prismlauncher.PrismLauncher)$), monitor 0"
+      "match:class ^(left|vesktop|steam|org.prismlauncher.PrismLauncher)$, workspace 10"
     ];
 
     bindm = [
