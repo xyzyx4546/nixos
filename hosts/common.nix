@@ -81,11 +81,8 @@
     };
   };
 
-  virtualisation.docker = {
+  virtualisation.docker.rootless = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    setSocketVariable = true;
   };
 }
