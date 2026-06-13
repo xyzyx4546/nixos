@@ -5,7 +5,7 @@
 }: {
   imports = [
     inputs.dms.homeModules.dank-material-shell
-    inputs.dms-plugin-registry.modules.default
+    inputs.dms-plugin-registry.nixosModules.default
   ];
 
   # HACK: wallpaper config cant be set in settings.json

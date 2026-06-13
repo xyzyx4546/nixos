@@ -1,5 +1,4 @@
 final: prev: {
-  melonloader-installer = final.callPackage ./melonloader-installer {};
   nms-editor = final.writeShellScriptBin "nms-editor" ''
     set -euo pipefail
     trap 'rm -f "$DIR"/*.tmp' EXIT
