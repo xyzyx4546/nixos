@@ -4,23 +4,16 @@
   config,
   ...
 }: {
-  home = {
-    packages = with pkgs; [
-      hyprland-qtutils
-      xdg-desktop-portal-hyprland
-    ];
-    # Force wayland
-    sessionVariables = {
-      GDK_BACKEND = "wayland";
-      QT_QPA_PLATFORM = "wayland";
-      SDL_VIDEODRIVER = "wayland";
-      CLUTTER_BACKEND = "wayland";
-      ELECTRON_OZONE_PLATFORM = "wayland";
-      MOZ_ENABLE_WAYLAND = "1";
-      MOZ_DISABLE_RDD_SANDBOX = "1";
-      EGL_PLATFORM = "wayland";
-      NIXOS_OZONE_WL = "1";
-    };
+  home.sessionVariables = {
+    GDK_BACKEND = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    ELECTRON_OZONE_PLATFORM = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    EGL_PLATFORM = "wayland";
+    NIXOS_OZONE_WL = "1";
   };
 
   wayland.windowManager.hyprland = {
