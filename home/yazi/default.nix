@@ -93,14 +93,8 @@
             group = "git";
           }
           {
-            url = "local://*";
+            url = "${config.xdg.userDirs.extraConfig.NEXTCLOUD}/**";
             run = "mime-ext.local";
-            prio = "high";
-            group = "mime";
-          }
-          {
-            url = "remote://*";
-            run = "mime-ext.remote";
             prio = "high";
             group = "mime";
           }
