@@ -1,5 +1,8 @@
-{
-  imports = [
+{inputs, ...}: {
+  imports = with inputs; [
+    nixos-hardware.nixosModules.dell-latitude-3480
+    disko.nixosModules.disko
+    lanzaboote.nixosModules.lanzaboote
     ../common.nix
     ../common-graphical.nix
   ];
@@ -49,7 +52,4 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
-
-  networking.hostName = "laptop";
-  system.stateVersion = "24.05";
 }

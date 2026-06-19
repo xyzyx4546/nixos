@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   domain = "fam-ehrhardt.de";
@@ -22,7 +23,9 @@
 in {
   _module.args = {inherit domain;};
 
-  imports = [
+  imports = with inputs; [
+    nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+    nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
     ../common.nix
     ./backup.nix
     ./home-assistant.nix
@@ -216,7 +219,4 @@ in {
       extraDomainNames = map (s: "${s.name}.${domain}") subdomains;
     };
   };
-
-  networking.hostName = "server";
-  system.stateVersion = "24.05";
 }

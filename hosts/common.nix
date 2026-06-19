@@ -2,8 +2,15 @@
   pkgs,
   lib,
   config,
+  inputs,
+  name,
   ...
 }: {
+  imports = with inputs; [
+    sops-nix.nixosModules.sops
+    home-manager.nixosModules.home-manager
+  ];
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs = {
     overlays = [(import ../overlays)];
@@ -43,9 +50,12 @@
 
   hardware.bluetooth.enable = true;
 
-  networking.firewall = {
-    enable = true;
-    allowedUDPPorts = [5353]; # mDNS
+  networking = {
+    hostName = name;
+    firewall = {
+      enable = true;
+      allowedUDPPorts = [5353]; # mDNS
+    };
   };
 
   boot.tmp.cleanOnBoot = true;
@@ -61,6 +71,13 @@
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq2xd3Eri9HfFP49Gl4snnrxMY6zXyNpWQIs9dd2L4Q"];
     };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users."xyzyx".imports = [./${config.networking.hostName}/home.nix];
+    extraSpecialArgs = {inherit inputs;};
   };
 
   programs = {
@@ -92,4 +109,6 @@
     enable = true;
     setSocketVariable = true;
   };
+
+  system.stateVersion = "24.05";
 }

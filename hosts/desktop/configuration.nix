@@ -1,5 +1,9 @@
-{
-  imports = [
+{inputs, ...}: {
+  imports = with inputs; [
+    nixos-hardware.nixosModules.common-cpu-amd
+    nixos-hardware.nixosModules.common-gpu-amd
+    nixos-hardware.nixosModules.common-pc-ssd
+    lanzaboote.nixosModules.lanzaboote
     ../common.nix
     ../common-graphical.nix
   ];
@@ -57,7 +61,4 @@
       KERNEL=="hidraw*", ATTRS{idProduct}=="bb52", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-3m-pdc-r"
     '';
   };
-
-  networking.hostName = "desktop";
-  system.stateVersion = "24.05";
 }

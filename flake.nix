@@ -50,87 +50,39 @@
 
   outputs = {
     nixpkgs,
-    nixos-hardware,
     nixos-raspberrypi,
-    sops-nix,
-    disko,
-    lanzaboote,
-    home-manager,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
+    mkSystem = name:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs name;};
+        modules = [./hosts/${name}/configuration.nix];
+      };
+    mkCheck = name: cmd:
+      pkgs.stdenv.mkDerivation {
+        name = "${name}-check";
+        buildCommand = ''
+          ${cmd}
+          touch $out
+        '';
+      };
+  in {
     nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
-          ./hosts/desktop/configuration.nix
-          sops-nix.nixosModules.sops
-          lanzaboote.nixosModules.lanzaboote
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."xyzyx".imports = [./hosts/desktop/home.nix];
-              extraSpecialArgs = {inherit inputs;};
-            };
-          }
-        ];
-      };
-
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          nixos-hardware.nixosModules.dell-latitude-3480
-          ./hosts/laptop/configuration.nix
-          sops-nix.nixosModules.sops
-          disko.nixosModules.disko
-          lanzaboote.nixosModules.lanzaboote
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."xyzyx".imports = [./hosts/laptop/home.nix];
-              extraSpecialArgs = {inherit inputs;};
-            };
-          }
-        ];
-      };
-
+      laptop = mkSystem "laptop";
+      desktop = mkSystem "desktop";
       server = nixos-raspberrypi.lib.nixosSystem {
-        specialArgs = {inherit nixos-raspberrypi;};
-        modules = [
-          nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-          nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
-          ./hosts/server/configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."xyzyx".imports = [./hosts/server/home.nix];
-              extraSpecialArgs = {inherit inputs;};
-            };
-          }
-        ];
+        specialArgs = {
+          inherit inputs;
+          name = "server";
+        };
+        modules = [./hosts/server/configuration.nix];
       };
     };
 
-    checks.x86_64-linux = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      mkCheck = name: cmd:
-        pkgs.stdenv.mkDerivation {
-          name = "${name}-check";
-          buildCommand = ''
-            ${cmd}
-            touch $out
-          '';
-        };
-    in {
+    checks.${system} = {
       alejandra = mkCheck "alejandra" "${pkgs.alejandra}/bin/alejandra --check ${./.}";
       statix = mkCheck "statix" "${pkgs.statix}/bin/statix check ${./.}";
       deadnix = mkCheck "deadnix" "${pkgs.deadnix}/bin/deadnix --fail ${./.}";
