@@ -1,4 +1,8 @@
-{osConfig, ...}: {
+{
+  osConfig,
+  hostName,
+  ...
+}: {
   programs.nvf.settings.vim = {
     lsp.servers.nixd.settings.nixd = let
       flake = "(builtins.getFlake \"${osConfig.programs.nh.flake}\")";
@@ -6,8 +10,8 @@
       nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
 
       options = {
-        nixos.expr = "${flake}.nixosConfigurations.${osConfig.networking.hostName}.options";
-        home_manager.expr = "${flake}.nixosConfigurations.${osConfig.networking.hostName}.options.home-manager.users.type.getSubOptions []";
+        nixos.expr = "${flake}.nixosConfigurations.${hostName}.options";
+        home_manager.expr = "${flake}.nixosConfigurations.${hostName}.options.home-manager.users.type.getSubOptions []";
       };
     };
 

@@ -1,4 +1,4 @@
-{osConfig, ...}: {
+{hostName, ...}: {
   programs.spotify-player = {
     enable = true;
 
@@ -9,7 +9,7 @@
       enable_media_control = true;
       enable_streaming = "Always";
       enable_notify = false;
-      default_device = osConfig.networking.hostName;
+      default_device = hostName;
       play_icon = "";
       pause_icon = "";
       liked_icon = " ";
@@ -17,7 +17,7 @@
       cover_img_length = 8;
       cover_img_width = 4;
       device = {
-        name = osConfig.networking.hostName;
+        name = hostName;
         volume = 90;
       };
     };

@@ -55,11 +55,11 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
-    mkSystem = name:
+    mkSystem = hostName:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs name;};
-        modules = [./hosts/${name}/configuration.nix];
+        specialArgs = {inherit inputs hostName;};
+        modules = [./hosts/${hostName}/configuration.nix];
       };
     mkCheck = name: cmd:
       pkgs.stdenv.mkDerivation {
@@ -76,7 +76,7 @@
       server = nixos-raspberrypi.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          name = "server";
+          hostName = "server";
         };
         modules = [./hosts/server/configuration.nix];
       };

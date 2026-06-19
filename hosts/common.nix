@@ -3,7 +3,7 @@
   lib,
   config,
   inputs,
-  name,
+  hostName,
   ...
 }: {
   imports = with inputs; [
@@ -51,7 +51,7 @@
   hardware.bluetooth.enable = true;
 
   networking = {
-    hostName = name;
+    inherit hostName;
     firewall = {
       enable = true;
       allowedUDPPorts = [5353]; # mDNS
@@ -76,8 +76,8 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."xyzyx".imports = [./${config.networking.hostName}/home.nix];
-    extraSpecialArgs = {inherit inputs;};
+    users."xyzyx".imports = [./${hostName}/home.nix];
+    extraSpecialArgs = {inherit inputs hostName;};
   };
 
   programs = {
