@@ -52,11 +52,13 @@
 
   networking = {
     inherit hostName;
+    networkmanager.enable = true;
     firewall = {
       enable = true;
       allowedUDPPorts = [5353]; # mDNS
     };
   };
+  systemd.services."NetworkManager-wait-online".enable = false;
 
   boot.tmp.cleanOnBoot = true;
 
@@ -97,11 +99,17 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
+  services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
+    interception-tools = {
+      enable = true;
+      plugins = [pkgs.interception-tools-plugins.caps2esc];
     };
   };
 

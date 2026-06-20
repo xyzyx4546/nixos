@@ -1,7 +1,4 @@
-{pkgs, ...}: {
-  networking.networkmanager.enable = true;
-  systemd.services."NetworkManager-wait-online".enable = false;
-
+{
   # Graphics Configuration
   hardware.graphics = {
     enable = true;
@@ -67,11 +64,6 @@
       pulse.enable = true;
       jack.enable = true;
       wireplumber.enable = true;
-    };
-
-    interception-tools = {
-      enable = true;
-      plugins = [pkgs.interception-tools-plugins.caps2esc];
     };
 
     accounts-daemon.enable = true;

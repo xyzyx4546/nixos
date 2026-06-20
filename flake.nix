@@ -82,6 +82,8 @@
       };
     };
 
+    packages.${system}.default = (mkSystem "iso").config.system.build.images.iso-installer;
+
     checks.${system} = {
       alejandra = mkCheck "alejandra" "${pkgs.alejandra}/bin/alejandra --check ${./.}";
       statix = mkCheck "statix" "${pkgs.statix}/bin/statix check ${./.}";

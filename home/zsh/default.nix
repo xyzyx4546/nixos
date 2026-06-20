@@ -8,12 +8,10 @@
 
   home.packages = with pkgs; [
     ncdu
-    wev
     nix-prefetch-git
     tokei
     tldr
     speedtest-go
-    asciiquarium-transparent
     duf
     jq
     dnsutils
