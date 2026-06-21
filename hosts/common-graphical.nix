@@ -30,17 +30,9 @@
       autoEnrollKeys.enable = true;
     };
 
-    # Silent Boot Configuration
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=3"
-      "systemd.show_status=auto"
-    ];
-
-    initrd.systemd.enable = true;
     plymouth.enable = true;
+    initrd.systemd.enable = true;
+    kernelParams = ["quiet"];
   };
 
   programs.hyprland.enable = true;
