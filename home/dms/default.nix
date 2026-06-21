@@ -33,12 +33,14 @@
         settings = {enabled = true;} // extraSettings;
       };
     in {
-      dankBatteryAlerts = mkPlugin {};
-      dankKDEConnect = mkPlugin {};
       calculator = mkPlugin {
         calcEngine = "qalc";
         alwaysActive = true;
         noTrigger = true;
+      };
+      dankBatteryAlerts = mkPlugin {};
+      dankKDEConnect = mkPlugin {
+        selectedDeviceId = "c7bc322559214d9885b2509e457eb5c6";
       };
       systemMonitorPlus = mkPlugin {
         cpuUsageEnabled = true;
