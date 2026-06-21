@@ -26,8 +26,8 @@
         updateInterval = 24 * 60 * 60 * 1000;
         definedAliases = ["@nixos"];
       };
-      "Homemanager" = {
-        urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";}];
+      "Homemanager Options" = {
+        urls = [{template = "https://search.nixos.org/options?channel=unstable&source=home_manager&query={searchTerms}";}];
         icon = "https://raw.githubusercontent.com/NixOS/nixos-artwork/refs/heads/master/logo/nix-snowflake-colours.svg";
         updateInterval = 24 * 60 * 60 * 1000;
         definedAliases = ["@homemanager"];
