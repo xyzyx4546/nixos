@@ -1,28 +1,46 @@
 {
-  imports = [./common.nix];
-
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "DP-3, 2560x1440@144, 1920x-200, 1"
-      "HDMI-A-1, 1920x1080@60, 0x0, 1"
+      {
+        output = "DP-3";
+        mode = "2560x1440@144";
+        position = "1920x-200";
+        scale = 1;
+      }
+      {
+        output = "HDMI-A-1";
+        mode = "1920x1080@60";
+        position = "0x0";
+        scale = 1;
+      }
     ];
 
-    workspace = [
-      "10, monitor:HDMI-A-1, default:true, persistent:true"
-      "1, monitor:DP-3"
-      "2, monitor:DP-3"
-      "3, monitor:DP-3"
-      "4, monitor:DP-3"
-    ];
+    workspace_rule = let
+      mkWorkspace = ws: {
+        workspace = ws;
+        persistent = true;
+        monitor = "DP-3";
+      };
+    in
+      map mkWorkspace [1 2 3 4]
+      ++ [
+        {
+          workspace = 5;
+          monitor = "HDMI-A-1";
+          default = true;
+          persistent = true;
+        }
+      ];
 
-    windowrule = [
-      "match:class negative:(^(firefox|left|vesktop|steam|org.prismlauncher.PrismLauncher)$), monitor 0"
-      "match:class ^(left|vesktop|steam|org.prismlauncher.PrismLauncher)$, workspace 10"
-    ];
-
-    bindm = [
-      ", mouse:277, movewindow"
-      "ALT, mouse:272, resizewindow"
+    window_rule = [
+      {
+        match.class = "^(left|vesktop|steam|org.prismlauncher.PrismLauncher)$";
+        workspace = 5;
+      }
+      {
+        match.class = "negative:(^(firefox|left|vesktop|steam|org.prismlauncher.PrismLauncher)$)";
+        monitor = 0;
+      }
     ];
   };
 }
