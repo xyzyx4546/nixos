@@ -2,6 +2,7 @@
   imports = [
     ./c.nix
     ./lua.nix
+    ./markdown.nix
     ./nix.nix
     ./rust.nix
     ./tex.nix
