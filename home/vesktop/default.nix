@@ -1,4 +1,9 @@
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.vesktop = {
     enable = true;
     settings = {
@@ -25,5 +30,19 @@
         YoutubeAdblock.enabled = true;
       };
     };
+  };
+
+  systemd.user.services."vesktop" = {
+    Unit = {
+      Description = "Vesktop";
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 5"; # HACK: ensure tray icon shows up in dms
+      ExecStart = "${lib.getExe config.programs.vesktop.package} --start-minimized";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

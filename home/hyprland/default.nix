@@ -29,18 +29,6 @@
     settings = {
       env = lib.mapAttrsToList (k: v: {_args = [k (toString v)];}) config.home.sessionVariables;
 
-      # TODO: fix autostart to early
-      on._args = [
-        "hyprland.start"
-        (lib.generators.mkLuaInline ''
-          function()
-            hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 20")
-            hl.exec_cmd("vesktop --start-minimized")
-            hl.exec_cmd("kdeconnectd")
-            hl.exec_cmd("steam -silent")
-          end'')
-      ];
-
       config = {
         input = {
           kb_layout = "de";

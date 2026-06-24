@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     steam
     prismlauncher
@@ -6,6 +10,19 @@
     melonloader-installer
     nms-editor
   ];
+
+  systemd.user.services."steam" = {
+    Unit = {
+      Description = "Steam";
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${lib.getExe pkgs.steam} -silent";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
 
   xdg.configFile."lsfg-vk/conf.toml".source = (pkgs.formats.toml {}).generate "conf.toml" {
     version = 1;
