@@ -5,7 +5,6 @@
     ../../home/fastfetch
     ../../home/firefox
     ../../home/fonts
-    ../../home/games
     ../../home/git
     ../../home/gtk
     ../../home/hyprland
