@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = with inputs; [
-    nixos-hardware.nixosModules.dell-latitude-3480
+    nixos-hardware.nixosModules.dell-latitude-5520
     disko.nixosModules.disko
     lanzaboote.nixosModules.lanzaboote
     ../common.nix
