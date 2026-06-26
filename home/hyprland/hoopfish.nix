@@ -1,5 +1,4 @@
 {
-  # TODO: include dms monitor config
   wayland.windowManager.hyprland.settings = {
     config = {
       input = {
@@ -40,16 +39,6 @@
         scale = 0.5;
         action = "special";
         workspace_name = "browser";
-      }
-      {
-        fingers = 3;
-        direction = "pinchin";
-        action = "close";
-      }
-      {
-        fingers = 3;
-        direction = "pinchout";
-        action = "close";
       }
     ];
 

@@ -71,18 +71,18 @@
       };
   in {
     nixosConfigurations = {
-      laptop = mkSystem "laptop";
-      desktop = mkSystem "desktop";
-      server = nixos-raspberrypi.lib.nixosSystem {
+      eyeye = mkSystem "eyeye";
+      hoopfish = mkSystem "hoopfish";
+      oculus = nixos-raspberrypi.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          hostName = "server";
+          hostName = "oculus";
         };
-        modules = [./hosts/server/configuration.nix];
+        modules = [./hosts/oculus/configuration.nix];
       };
     };
 
-    packages.${system}.default = (mkSystem "iso").config.system.build.images.iso-installer;
+    packages.${system}.default = (mkSystem "holefish").config.system.build.images.iso-installer;
 
     checks.${system} = {
       alejandra = mkCheck "alejandra" "${pkgs.alejandra}/bin/alejandra --check ${./.}";
