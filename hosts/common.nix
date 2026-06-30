@@ -78,7 +78,14 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."xyzyx".imports = [./${hostName}/home.nix];
+    users.xyzyx = {
+      imports = [./${hostName}/home.nix];
+      home = rec {
+        username = "xyzyx";
+        homeDirectory = "/home/${username}";
+        stateVersion = config.system.stateVersion;
+      };
+    };
     extraSpecialArgs = {inherit inputs hostName;};
   };
 

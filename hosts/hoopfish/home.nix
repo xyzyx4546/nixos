@@ -21,14 +21,8 @@
     ../../home/zsh
   ];
 
-  home = {
-    username = "xyzyx";
-    homeDirectory = "/home/xyzyx";
-
-    packages = with pkgs; [
-      onlyoffice-desktopeditors
-    ];
-
-    stateVersion = "24.05";
-  };
+  home.packages = with pkgs; [
+    onlyoffice-desktopeditors
+    steam
+  ];
 }
