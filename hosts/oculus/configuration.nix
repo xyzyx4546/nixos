@@ -81,6 +81,7 @@ in {
         address = ["/${domain}/192.168.2.10"];
         server = ["192.168.2.1"];
         no-resolv = true;
+        no-hosts = true;
         cache-size = 1000;
       };
     };
