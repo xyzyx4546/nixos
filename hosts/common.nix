@@ -92,6 +92,10 @@
 
   programs = {
     zsh.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = pkgs.appimageTools.defaultFhsEnvArgs.targetPkgs pkgs;
+    };
     nh = {
       enable = true;
       flake = "/home/xyzyx/Projects/nixos";
