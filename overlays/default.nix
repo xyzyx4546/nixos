@@ -28,16 +28,6 @@ final: prev: {
     (cd "$DIR" && ${final.openjdk}/bin/java -jar "$JAR" > /dev/null)
   '';
 
-  # HACK:
-  nix-output-monitor = prev.nix-output-monitor.overrideAttrs (_: {
-    src = final.fetchFromGitHub {
-      owner = "maralorn";
-      repo = "nix-output-monitor";
-      rev = "fa520d4f05d0e48d5d4675415dd0eeee72ce9a0a";
-      sha256 = "sha256-+MnTTUVBJ1Sas2cz2FkHmdtzedc1YFntfM69rNQFz6k=";
-    };
-  });
-
   spotify-player = prev.spotify-player.override {
     withAudioBackend = "pulseaudio";
   };

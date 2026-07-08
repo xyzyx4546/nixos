@@ -46,6 +46,10 @@
       url = "github:xyzyx4546/lazytimer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nom = {
+      url = "github:maralorn/nix-output-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
