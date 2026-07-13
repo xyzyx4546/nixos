@@ -3,12 +3,6 @@
   osConfig,
   ...
 }: {
-  systemd.user.services."rclone-mount:.@nextcloud".Unit = rec {
-    After = ["rclone-config.service"];
-    Wants = After;
-  };
-
-  # TODO: replace with yazi vfs
   programs.rclone = {
     enable = true;
     requiresUnit = "run-secrets.d.mount";

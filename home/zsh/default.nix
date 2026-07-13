@@ -29,7 +29,7 @@
 
     fzf = {
       enable = true;
-      changeDirWidgetOptions = ["--preview 'eza --tree --color=always --icons=always --level=5 {} | head -200'"];
+      changeDirWidget.options = ["--preview 'eza --tree --color=always --icons=always --level=5 {} | head -200'"];
       defaultOptions = [
         "--min-height 500"
         "--border"

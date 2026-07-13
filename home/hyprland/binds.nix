@@ -50,7 +50,7 @@
     (bind "SUPER + Y" (dsp.exec "kitty yazi"))
 
     (bind "PRINT" (dsp.exec "${pkgs.grimblast}/bin/grimblast --notify --freeze copysave area"))
-    (bind "SUPER + SPACE" (dsp.exec "dms ipc spotlight toggle"))
+    (bind "SUPER + SPACE" (dsp.exec "dms ipc spotlight-bar toggle"))
     (bind "SUPER + V" (dsp.exec "dms ipc clipboard toggle"))
     (bind "SUPER + W" (dsp.exec "dms ipc dankdash wallpaper"))
     (bind "SUPER + X" (dsp.exec "dms ipc powermenu toggle"))

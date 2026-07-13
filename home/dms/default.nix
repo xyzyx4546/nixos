@@ -38,7 +38,6 @@
         alwaysActive = true;
         noTrigger = true;
       };
-      dankBatteryAlerts = mkPlugin {};
       dankKDEConnect = mkPlugin {
         selectedDeviceId = "c7bc322559214d9885b2509e457eb5c6";
       };
@@ -64,6 +63,7 @@
       useAutoLocation = true;
       osdAlwaysShowValue = true;
       launcherLogoMode = "os";
+      showWeekNumber = true;
       acLockTimeout = 5400;
       powerActionHoldDuration = 0.25;
       notificationHistoryEnabled = false;

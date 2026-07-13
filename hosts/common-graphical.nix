@@ -35,7 +35,10 @@
     kernelParams = ["quiet"];
   };
 
-  programs.hyprland.enable = true;
+  programs = {
+    hyprland.enable = true;
+    fuse.enable = true;
+  };
 
   services = {
     greetd = {
