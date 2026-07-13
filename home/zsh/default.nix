@@ -18,6 +18,8 @@
     zmx
   ];
 
+  services.ssh-agent.enable = true;
+
   programs = {
     nix-index-database.comma.enable = true;
 
