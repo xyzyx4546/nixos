@@ -15,6 +15,7 @@
     duf
     jq
     dnsutils
+    zmx
   ];
 
   programs = {
@@ -25,6 +26,18 @@
       nix-direnv.enable = true;
       enableZshIntegration = true;
       config.whitelist.prefix = ["${config.home.homeDirectory}/Projects"];
+    };
+
+    ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      includes = ["./custom"];
+      settings."Host s" = {
+        HostName = "192.168.2.10";
+        User = "xyzyx";
+        RequestTTY = "yes";
+        RemoteCommand = "zmx a main";
+      };
     };
 
     fzf = {
@@ -112,7 +125,6 @@
         du = "ncdu";
         df = "duf --only local,network --hide-mp /nix/store --theme ansi";
         y = "yazi";
-        t = "tmux new-session -A -s main";
       };
 
       autosuggestion.enable = true;

@@ -12,7 +12,6 @@
     ../../home/lazytimer
     ../../home/neovim
     ../../home/nextcloud
-    ../../home/tmux
     ../../home/spotify
     ../../home/vesktop
     ../../home/xdg
