@@ -16,8 +16,7 @@
 
   services.kdeconnect = {
     enable = true;
-    package = pkgs.kdeconnect-kde.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [./kdeconnect.patch];
+    package = pkgs.kdePackages.kdeconnect-kde.overrideAttrs (old: {
       preConfigure =
         (old.preConfigure or "")
         + ''
