@@ -31,10 +31,10 @@
       fi
 
       [ -f "$CONF" ] || echo "{}" > "$CONF"
-      ${final.jq}/bin/jq '.GameSaveDir = "'$GAME_PATH'"' "$CONF" > "$CONF.tmp"
+      ${pkgs.jq}/bin/jq '.GameSaveDir = "'$GAME_PATH'"' "$CONF" > "$CONF.tmp"
       mv "$CONF.tmp" "$CONF"
 
-      (cd "$DIR" && ${final.openjdk}/bin/java -jar "$JAR" > /dev/null)
+      (cd "$DIR" && ${pkgs.openjdk}/bin/java -jar "$JAR" > /dev/null)
     '')
   ];
 
