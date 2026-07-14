@@ -1,0 +1,63 @@
+diff --git a/core/internal/accounts/add.go b/core/internal/accounts/add.go
+index 3050852..1927373 100644
+--- a/core/internal/accounts/add.go
++++ b/core/internal/accounts/add.go
+@@ -73,17 +73,17 @@ func AddCalDAV(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore,
+ 		settings[caldavprovider.SettingInsecureSkipVerify] = true
+ 	}
+ 
+-	domainAcc := calendar.Account{ID: accountID, Kind: calendar.AccountCalDAV, Settings: settings}
+-	probe := memSecrets{caldavprovider.SecretKeyPassword: []byte(in.Password)}
+-
+-	provider, err := caldavprovider.Factory{}.Build(ctx, domainAcc, probe)
+-	if err != nil {
+-		return Result{}, fmt.Errorf("caldav connection failed: %w", err)
+-	}
+-	defer provider.Close()
+-	if _, err := provider.ListCalendars(ctx); err != nil {
+-		return Result{}, fmt.Errorf("caldav connection failed: %w", err)
+-	}
++	// domainAcc := calendar.Account{ID: accountID, Kind: calendar.AccountCalDAV, Settings: settings}
++	// probe := memSecrets{caldavprovider.SecretKeyPassword: []byte(in.Password)}
++	//
++	// provider, err := caldavprovider.Factory{}.Build(ctx, domainAcc, probe)
++	// if err != nil {
++	// 	return Result{}, fmt.Errorf("caldav connection failed: %w", err)
++	// }
++	// defer provider.Close()
++	// if _, err := provider.ListCalendars(ctx); err != nil {
++	// 	return Result{}, fmt.Errorf("caldav connection failed: %w", err)
++	// }
+ 
+ 	if err := Ensure(ctx, r, accountID, account.KindCaldav, displayName, settings); err != nil {
+ 		return Result{}, err
+@@ -107,10 +107,12 @@ func AddICal(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore, in
+ 	username := strings.TrimSpace(in.Username)
+ 	displayName := strings.TrimSpace(in.DisplayName)
+ 
+-	feedURL, feedName, err := icalprovider.Probe(ctx, in.URL, username, in.Password)
+-	if err != nil {
+-		return Result{}, fmt.Errorf("ical subscription failed: %w", err)
+-	}
++	// feedURL, feedName, err := icalprovider.Probe(ctx, in.URL, username, in.Password)
++	// if err != nil {
++	// 	return Result{}, fmt.Errorf("ical subscription failed: %w", err)
++	// }
++	feedURL := in.URL
++	feedName := in.DisplayName
+ 
+ 	parsed, err := url.Parse(feedURL)
+ 	if err != nil {
+diff --git a/quickshell/Services/DankCalService.qml b/quickshell/Services/DankCalService.qml
+index a526c58..e186e32 100644
+--- a/quickshell/Services/DankCalService.qml
++++ b/quickshell/Services/DankCalService.qml
+@@ -356,7 +356,7 @@ Singleton {
+             const list = response.result || [];
+             for (let i = 0; i < list.length; i++) {
+                 if (!list[i].color)
+-                    list[i].color = fallbackPalette[i % fallbackPalette.length];
++                    list[i].color = "#930010";
+             }
+             if (_stableStringify(list) === _stableStringify(calendars))
+                 return;

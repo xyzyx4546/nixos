@@ -26,6 +26,7 @@
   programs.dank-material-shell = {
     enable = true;
     systemd.enable = true;
+    enableCalendarEvents = false;
 
     plugins = let
       mkPlugin = extraSettings: {
