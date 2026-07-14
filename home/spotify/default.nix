@@ -1,6 +1,13 @@
-{hostName, ...}: {
+{
+  pkgs,
+  hostName,
+  ...
+}: {
   programs.spotify-player = {
     enable = true;
+    package = pkgs.spotify-player.override {
+      withAudioBackend = "pulseaudio";
+    };
 
     settings = {
       theme = "dracula";

@@ -14,7 +14,7 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs = {
     # HACK: use latest nom verion
-    overlays = [(import ../overlays) inputs.nom.overlays.default];
+    overlays = [inputs.nom.overlays.default];
     config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "steam"
