@@ -62,10 +62,12 @@
       systemMonitorPlus = mkPlugin {
         cpuUsageEnabled = true;
         ramUsageEnabled = true;
+        diskPartitionUsageEnabled = true;
         cpuTempEnabled = false;
         gpuTempEnabled = false;
         cpuUsageVisualStyle = "gauge";
         ramUsageVisualStyle = "gauge";
+        diskPartitionUsageVisualStyle = "gauge";
       };
     };
 
