@@ -343,11 +343,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781533643,
-        "narHash": "sha256-l/LPdAGKNj5ZYS+XPsET0nThWFfeNv9Nja50Ne5oaOw=",
+        "lastModified": 1785001693,
+        "narHash": "sha256-i4G3A/qtts4IVi+4lG4FH0teT4UMWHYfHQvY77z1tSY=",
         "owner": "xyzyx4546",
         "repo": "lazytimer",
-        "rev": "fc9d991ebf6dcd174552bbafd9ab4e3633c6f752",
+        "rev": "7844b9e02c14523177c02dd099f774e5ba9fda58",
         "type": "github"
       },
       "original": {
