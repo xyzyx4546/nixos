@@ -27,7 +27,7 @@
   sops = {
     defaultSopsFile = ../secrets.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/xyzyx/.config/sops/age/keys.txt";
+    age.keyFile = "/etc/sops-key";
 
     secrets = {
       "xyzyx/password".neededForUsers = true;
@@ -44,6 +44,8 @@
       "vaultwarden/password" = {};
     };
   };
+  environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+  systemd.tmpfiles.rules = ["z ${config.sops.age.keyFile} 0400 xyzyx users - -"];
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_GB.UTF-8";
