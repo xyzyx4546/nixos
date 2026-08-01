@@ -38,7 +38,7 @@
         workspace = 5;
       }
       {
-        match.class = "negative:(^(firefox|left|vesktop|steam|org.prismlauncher.PrismLauncher)$)";
+        match.class = "negative:(^(brave-origin|left|vesktop|steam|org.prismlauncher.PrismLauncher)$)";
         monitor = 0;
       }
     ];

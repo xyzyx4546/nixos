@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   imports = [
+    ../../home/brave
     ../../home/dms
     ../../home/fastfetch
-    ../../home/firefox
     ../../home/fonts
     ../../home/games
     ../../home/git

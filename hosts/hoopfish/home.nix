@@ -1,9 +1,9 @@
 # TODO: improve scroll behaviour
 {pkgs, ...}: {
   imports = [
+    ../../home/brave
     ../../home/dms
     ../../home/fastfetch
-    ../../home/firefox
     ../../home/fonts
     ../../home/git
     ../../home/gtk

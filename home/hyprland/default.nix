@@ -134,7 +134,7 @@
       workspace_rule = [
         {
           workspace = "special:browser";
-          on_created_empty = "firefox";
+          on_created_empty = "brave-origin";
         }
       ];
 
@@ -144,6 +144,17 @@
           workspace = "special:games";
           tile = true;
           fullscreen = true;
+        }
+        {
+          match.class = "^brave-nngceckbapebfimnlniiiahkandclblb-Default$";
+          float = true;
+          move = ["monitor_w - window_w - 100" "(monitor_h / 2) - (window_h / 2)"];
+        }
+        {
+          match.class = "^xdg-desktop-portal.*";
+          float = true;
+          center = true;
+          size = [960 540];
         }
       ];
 
