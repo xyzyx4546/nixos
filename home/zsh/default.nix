@@ -8,7 +8,8 @@
 
   home.packages = with pkgs; [
     ncdu
-    nix-prefetch-git
+    nurl
+    nix-output-monitor
     tokei
     tldr
     speedtest-go

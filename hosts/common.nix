@@ -12,15 +12,12 @@
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nixpkgs = {
-    # HACK: use latest nom verion
-    overlays = [inputs.nom.overlays.default];
-    config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "steam"
-        "steam-unwrapped"
-      ];
-  };
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-unwrapped"
+      "vscode-extension-ms-vscode-cpptools"
+    ];
 
   documentation.nixos.enable = false;
 
