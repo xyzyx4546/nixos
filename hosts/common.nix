@@ -62,6 +62,12 @@
 
   boot.tmp.cleanOnBoot = true;
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 32 * 1024;
+    }
+  ];
   zramSwap.enable = true;
 
   users.users = {
