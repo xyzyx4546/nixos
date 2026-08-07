@@ -85,6 +85,7 @@
       launcherLogoMode = "os";
       showWeekNumber = true;
       acLockTimeout = 5400;
+      batteryLockTimeout = 5400;
       powerActionHoldDuration = 0.25;
       notificationHistoryEnabled = false;
 
