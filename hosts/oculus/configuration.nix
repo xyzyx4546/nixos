@@ -17,7 +17,7 @@
     }
     {
       name = "home";
-      port = config.services.home-assistant.config.http.server_port;
+      port = 8123;
     }
   ];
 in {
