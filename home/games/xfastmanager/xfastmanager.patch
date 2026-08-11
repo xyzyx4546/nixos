@@ -1,0 +1,69 @@
+diff --git a/src-tauri/src/lib.rs b/src-tauri/src/lib.rs
+index 089c6ee..978939d 100644
+--- a/src-tauri/src/lib.rs
++++ b/src-tauri/src/lib.rs
+@@ -1822,9 +1822,8 @@ fn launch_xplane(xplane_path: String, args: Option<Vec<String>>) -> Result<(), S
+ 
+     #[cfg(target_os = "linux")]
+     {
+-        let exe_path = find_xplane_executable_in_root(path)
+-            .ok_or_else(|| "X-Plane executable not found (expected X-Plane*)".to_string())?;
+-        std::process::Command::new(exe_path)
++        std::process::Command::new("steam")
++            .arg("steam://rungameid/2014780")
+             .args(&extra_args)
+             .spawn()
+             .map_err(|e| {
+diff --git a/src-tauri/src/main.rs b/src-tauri/src/main.rs
+index 7fa9f81..129f8d3 100644
+--- a/src-tauri/src/main.rs
++++ b/src-tauri/src/main.rs
+@@ -59,12 +59,12 @@ fn main() {
+             }
+         };
+ 
+-        set_default_env("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
++        // set_default_env("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+         // Workaround for "Could not create default EGL display: EGL_BAD_PARAMETER" on
+         // certain Wayland systems (e.g. EndeavourOS, Arch Linux). WebKit still tries to
+         // initialise an EGL display for compositing even when DMA-BUF is disabled; setting
+         // this variable prevents that code path from running.
+-        set_default_env("WEBKIT_DISABLE_COMPOSITING_MODE", "1");
++        // set_default_env("WEBKIT_DISABLE_COMPOSITING_MODE", "1");
+ 
+         // Default is native backend (Wayland/X11 decided by GTK).
+         // For problematic Linux environments, allow explicit X11 fallback:
+diff --git a/src-tauri/tauri.conf.json b/src-tauri/tauri.conf.json
+index ce18de7..e855c1e 100644
+--- a/src-tauri/tauri.conf.json
++++ b/src-tauri/tauri.conf.json
+@@ -12,6 +12,7 @@
+     "windows": [
+       {
+         "title": "XFast Manager - X-Plane Addon Auto Manager",
++        "decorations": false,
+         "width": 700,
+         "height": 600,
+         "minWidth": 650,
+@@ -33,7 +34,7 @@
+   },
+   "bundle": {
+     "active": true,
+-    "createUpdaterArtifacts": true,
++    "createUpdaterArtifacts": false,
+     "targets": ["app", "dmg", "deb", "rpm", "appimage", "msi"],
+     "icon": [
+       "icons/32x32.png",
+diff --git a/src/stores/management.ts b/src/stores/management.ts
+index 368703c..0d60487 100644
+--- a/src/stores/management.ts
++++ b/src/stores/management.ts
+@@ -1096,7 +1096,7 @@ export const useManagementStore = defineStore('management', () => {
+   ) {
+     const key = `${type}:${folderName.toLowerCase()}`
+ 
+-    if (!newEnabled) {
++    if (false) {
+       // Disabling → auto-lock, but only track if not already manually locked
+       if (!lockStore.isLocked(type, folderName)) {
+         autoLockedByDisable.add(key)

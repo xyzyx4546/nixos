@@ -34,11 +34,12 @@
 
     window_rule = [
       {
-        match.class = "^(left|vesktop|steam|org.prismlauncher.PrismLauncher)$";
+        match.class = "^(left|vesktop|xfastmanager|steam|org.prismlauncher.PrismLauncher)$";
         workspace = 5;
+        fullscreen_state = 0;
       }
       {
-        match.class = "negative:(^(brave-.*|left|vesktop|steam|org.prismlauncher.PrismLauncher)$)";
+        match.class = "negative:(^(brave-.*|xdg-desktop-portal.*|left|vesktop|xfastmanager|steam|org.prismlauncher.PrismLauncher)$)";
         monitor = 0;
       }
     ];

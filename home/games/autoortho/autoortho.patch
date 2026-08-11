@@ -1,0 +1,57 @@
+diff --git a/autoortho/aoconfig.py b/autoortho/aoconfig.py
+index 0cb7b92..f0498d7 100644
+--- a/autoortho/aoconfig.py
++++ b/autoortho/aoconfig.py
+@@ -612,11 +612,10 @@ route_prefetch_radius_nm = 40
+ 
+     def save(self):
+         log.info("Saving config ... ")
+-        self.set_config()
+-
+-        with open(self.conf_file, 'w') as h:
+-            self.config.write(h)
+-        log.info(f"Wrote config file: {self.conf_file}")
++        import io, PySide6.QtGui as gui
++        if app := gui.QGuiApplication.instance():
++            self.config.write(buf := io.StringIO())
++            app.clipboard().setText(buf.getvalue())
+ 
+ 
+     def set_config(self):
+diff --git a/autoortho/utils/mount_utils.py b/autoortho/utils/mount_utils.py
+index 0c93db6..20b4784 100644
+--- a/autoortho/utils/mount_utils.py
++++ b/autoortho/utils/mount_utils.py
+@@ -42,6 +42,8 @@ _AO_PLACEHOLDER_ITEMS = {"Earth nav data", "terrain", "textures", ".AO_PLACEHOLD
+ 
+ def cleanup_mountpoint(mountpoint):
+     placeholder_path = os.path.join(mountpoint, ".AO_PLACEHOLDER")
++    import subprocess
++    subprocess.run(["fusermount", "-uz", mountpoint], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+     if os.path.lexists(mountpoint):
+         log.info(f"Cleaning up mountpoint: {mountpoint}")
+         os.rmdir(mountpoint)
+diff --git a/autoortho/winsetup.py b/autoortho/winsetup.py
+index 0efbaaf..1fd719f 100644
+--- a/autoortho/winsetup.py
++++ b/autoortho/winsetup.py
+@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
+ try:
+     import winreg as reg
+ except ImportError:
+-    log.error("Failed to import winreg")
++    pass
+ 
+ _PLACEHOLDER = ".AO_PLACEHOLDER"
+ _ALLOWED_PLACEHOLDER = {"Earth nav data", "terrain", "textures", _PLACEHOLDER, "desktop.ini"}
+diff --git a/pyproject.toml b/pyproject.toml
+index 139023e..270effb 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [tool.poetry]
+-name = "autoortho4xplane"
++name = "autoortho"
+ version = "2.0.3"
+ description = "AutoOrtho project for X-plane, the project is a fork ."
+ authors = []

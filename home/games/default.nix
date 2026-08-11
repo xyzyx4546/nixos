@@ -3,6 +3,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ./x-plane.nix
+  ];
+
   home.packages = with pkgs; [
     (steam.override {extraEnv."MANGOHUD" = true;})
     prismlauncher
@@ -47,6 +51,7 @@
     Service = {
       ExecStart = "${lib.getExe pkgs.steam} -silent";
       Restart = "on-failure";
+      Environment = "MANGOHUD=1";
     };
     Install.WantedBy = ["graphical-session.target"];
   };
