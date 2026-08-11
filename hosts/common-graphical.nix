@@ -1,10 +1,4 @@
 {
-  # Graphics Configuration
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   # KDE Connect
   networking.firewall = rec {
     allowedTCPPortRanges = [
@@ -35,10 +29,7 @@
     kernelParams = ["quiet"];
   };
 
-  programs = {
-    hyprland.enable = true;
-    fuse.enable = true;
-  };
+  programs.hyprland.enable = true;
 
   services = {
     greetd = {

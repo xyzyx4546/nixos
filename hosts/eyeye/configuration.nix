@@ -20,14 +20,6 @@
     };
   };
 
-  boot = {
-    initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
-    kernelModules = ["kvm-amd"];
-  };
-
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableRedistributableFirmware = true;
-
   services = {
     ratbagd.enable = true;
     hardware.openrgb.enable = true;

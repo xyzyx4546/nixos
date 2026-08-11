@@ -44,12 +44,4 @@
       };
     };
   };
-
-  boot = {
-    initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme"];
-    kernelModules = ["kvm-intel"];
-  };
-
-  hardware.cpu.intel.updateMicrocode = true;
-  hardware.enableRedistributableFirmware = true;
 }

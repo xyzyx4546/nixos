@@ -48,7 +48,10 @@
   i18n.defaultLocale = "en_GB.UTF-8";
   console.keyMap = "de-latin1";
 
-  hardware.bluetooth.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    enableRedistributableFirmware = true;
+  };
 
   networking = {
     inherit hostName;
@@ -96,10 +99,9 @@
   };
 
   programs = {
-    zsh.enable = true;
-    nix-ld = {
+    fuse = {
       enable = true;
-      libraries = pkgs.appimageTools.defaultFhsEnvArgs.targetPkgs pkgs;
+      userAllowOther = true;
     };
     nh = {
       enable = true;
@@ -110,6 +112,11 @@
         extraArgs = "--keep=5 --keep-since=3d";
       };
     };
+    nix-ld = {
+      enable = true;
+      libraries = pkgs.appimageTools.defaultFhsEnvArgs.targetPkgs pkgs;
+    };
+    zsh.enable = true;
   };
 
   services = {
