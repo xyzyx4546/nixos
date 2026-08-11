@@ -17,5 +17,6 @@
       confirm_os_window_close = 0;
       enable_audio_bell = "no";
     };
+    keybindings."ctrl+ö" = "send_text all \\x1c";
   };
 }
