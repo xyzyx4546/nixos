@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -65,5 +66,29 @@
         };
       };
     };
+
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "restore-db" ''
+        files=("$@")
+        [ ''${#files[@]} -eq 0 ] && files=("${config.services.mysqlBackup.location}"/*.zst)
+
+        for file in "''${files[@]}"; do
+          [[ "$file" != *.zst ]] && file="${config.services.mysqlBackup.location}/$file.zst"
+          db=$(basename "$file" .zst)
+
+          if [ ! -f "$file" ]; then
+            echo "Error: Backup '$file' not found" >&2
+            continue
+          fi
+
+          printf "Restoring '%s'..." "$db"
+          if zstd -dc "$file" | mariadb "$db"; then
+            printf "\r\033[K✓ Restored '%s'\n" "$db"
+          else
+            printf "\r\033[K✗ Failed to restore '%s'\n" "$db" >&2
+          fi
+        done
+      '')
+    ];
   };
 }

@@ -5,10 +5,6 @@
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-raspberrypi = {
-      url = "github:nvmd/nixos-raspberrypi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,11 +47,7 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    nixos-raspberrypi,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
     mkSystem = hostName:
@@ -76,13 +68,7 @@
     nixosConfigurations = {
       eyeye = mkSystem "eyeye";
       hoopfish = mkSystem "hoopfish";
-      oculus = nixos-raspberrypi.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          hostName = "oculus";
-        };
-        modules = [./hosts/oculus/configuration.nix];
-      };
+      oculus = mkSystem "oculus";
     };
 
     packages.${system}.default = (mkSystem "holefish").config.system.build.images.iso-installer;

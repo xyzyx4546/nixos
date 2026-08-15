@@ -24,8 +24,9 @@ in {
   _module.args = {inherit domain;};
 
   imports = with inputs; [
-    nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-    nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
+    nixos-hardware.nixosModules.common-cpu-amd
+    nixos-hardware.nixosModules.common-pc-ssd
+    disko.nixosModules.disko
     ../common.nix
     ./backup.nix
     ./home-assistant.nix
@@ -33,45 +34,57 @@ in {
     ./vaultwarden.nix
   ];
 
-  fileSystems = {
-    "/boot/firmware" = {
-      device = "/dev/disk/by-label/FIRMWARE";
-      fsType = "vfat";
-    };
-    "/" = {
-      device = "/dev/disk/by-label/ROOT";
-      fsType = "ext4";
-    };
-  };
+  boot.loader.systemd-boot.enable = true;
 
-  # HACK: temporary
-  boot.loader.raspberry-pi.bootloader = "kernel";
-
-  hardware.raspberry-pi.config = {
-    all.base-dt-params = {
-      pciex1 = {
-        enable = true;
-        value = "on";
-      };
-      pciex1_gen = {
-        enable = true;
-        value = "3";
+  disko.devices.disk."primary" = {
+    type = "disk";
+    device = "/dev/disk/by-id/ata-EDILOCA_ES106_4TB_AA000010667";
+    content = {
+      type = "gpt";
+      partitions = {
+        "BOOT" = {
+          type = "EF00";
+          size = "1G";
+          content = {
+            type = "filesystem";
+            format = "vfat";
+            extraArgs = ["-n" "BOOT"];
+            mountpoint = "/boot";
+            mountOptions = ["umask=0077"];
+          };
+        };
+        "ROOT" = {
+          size = "100%";
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            extraArgs = ["-L" "ROOT"];
+            mountpoint = "/";
+          };
+        };
       };
     };
   };
 
   networking = {
+    networkmanager.ensureProfiles.profiles."eth" = {
+      connection = {
+        id = "eth";
+        type = "ethernet";
+        autoconnect = true;
+      };
+      ipv4 = {
+        method = "manual";
+        address1 = "192.168.2.10/24";
+        gateway = "192.168.2.1";
+        dns = "127.0.0.1;";
+      };
+      ipv6.method = "auto";
+    };
     firewall = {
       allowedUDPPorts = [53];
       allowedTCPPorts = [53 80 443];
     };
-    interfaces."end0".ipv4.addresses = [
-      {
-        address = "192.168.2.10";
-        prefixLength = 24;
-      }
-    ];
-    defaultGateway = "192.168.2.1";
   };
 
   services = {
