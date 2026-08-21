@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  domain,
+  ...
+}: {
   services = {
     home-assistant = {
       enable = true;
@@ -17,6 +21,15 @@
     };
 
     matter-server.enable = true;
+
+    nginx.virtualHosts."home.${domain}" = {
+      forceSSL = true;
+      useACMEHost = domain;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8123";
+        proxyWebsockets = true;
+      };
+    };
   };
 
   systemd.tmpfiles.rules = [

@@ -38,6 +38,15 @@ in {
         }
       ];
     };
+
+    nginx.virtualHosts."vault.${domain}" = {
+      forceSSL = true;
+      useACMEHost = domain;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+        proxyWebsockets = true;
+      };
+    };
   };
 
   backup.databases = [dbName];

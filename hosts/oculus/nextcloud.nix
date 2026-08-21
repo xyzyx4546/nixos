@@ -34,6 +34,13 @@
         inherit impersonate groupfolders notes calendar contacts news;
       };
     };
+
+    nginx.virtualHosts = {
+      "${domain}" = {
+        forceSSL = true;
+        enableACME = true;
+      };
+    };
   };
 
   environment.systemPackages = [

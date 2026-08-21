@@ -6,20 +6,7 @@
   ...
 }: let
   domain = "fam-ehrhardt.de";
-  subdomains = [
-    {
-      name = "status";
-      port = 2812;
-    }
-    {
-      name = "vault";
-      port = config.services.vaultwarden.config.ROCKET_PORT;
-    }
-    {
-      name = "home";
-      port = 8123;
-    }
-  ];
+  subdomains = builtins.filter (lib.hasSuffix ".${domain}") (builtins.attrNames config.services.nginx.virtualHosts);
 in {
   _module.args = {inherit domain;};
 
@@ -113,7 +100,7 @@ in {
         ]
         ++ (map (s: {
             inherit domain;
-            subdomain = s.name;
+            subdomain = lib.removeSuffix ".${domain}" s;
           })
           subdomains);
     };
@@ -122,25 +109,15 @@ in {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts =
-        (lib.listToAttrs (map (s: {
-            name = "${s.name}.${domain}";
-            value = {
-              forceSSL = true;
-              useACMEHost = domain;
-              locations."/" = {
-                proxyPass = "http://127.0.0.1:${toString s.port}/";
-                proxyWebsockets = true;
-              };
-            };
-          })
-          subdomains))
-        // {
-          "${domain}" = {
-            forceSSL = true;
-            enableACME = true;
-          };
+
+      virtualHosts."status.${domain}" = {
+        forceSSL = true;
+        useACMEHost = domain;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2812";
+          proxyWebsockets = true;
         };
+      };
     };
 
     monit = let
@@ -230,7 +207,7 @@ in {
     acceptTerms = true;
     certs."${domain}" = {
       email = "nobody@${domain}";
-      extraDomainNames = map (s: "${s.name}.${domain}") subdomains;
+      extraDomainNames = subdomains;
     };
   };
 }
