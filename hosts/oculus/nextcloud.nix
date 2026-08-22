@@ -31,14 +31,25 @@
       };
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit impersonate groupfolders notes calendar contacts news;
+        inherit onlyoffice impersonate groupfolders notes calendar contacts news;
       };
+    };
+
+    onlyoffice = {
+      enable = true;
+      hostname = "office.${domain}";
+      jwtSecretFile = config.sops.secrets."nextcloud/onlyoffice".path;
+      securityNonceFile = "${pkgs.writeText "onlyoffice-nonce" ''set $secure_link_secret "alterra";''}";
     };
 
     nginx.virtualHosts = {
       "${domain}" = {
         forceSSL = true;
         enableACME = true;
+      };
+      "office.${domain}" = {
+        forceSSL = true;
+        useACMEHost = domain;
       };
     };
   };
