@@ -21,8 +21,6 @@ in {
     ./vaultwarden.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-
   disko.devices.disk."primary" = {
     type = "disk";
     device = "/dev/disk/by-id/ata-EDILOCA_ES106_4TB_AA000010667";

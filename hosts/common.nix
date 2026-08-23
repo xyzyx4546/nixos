@@ -8,6 +8,7 @@
 }: {
   imports = with inputs; [
     sops-nix.nixosModules.sops
+    lanzaboote.nixosModules.lanzaboote
     home-manager.nixosModules.home-manager
   ];
 
@@ -45,6 +46,20 @@
   environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
   systemd.tmpfiles.rules = ["z ${config.sops.age.keyFile} 0400 xyzyx users - -"];
 
+  boot = {
+    loader = {
+      efi.canTouchEfiVariables = true;
+      timeout = lib.mkForce 0;
+    };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+      autoGenerateKeys.enable = true;
+      autoEnrollKeys.enable = true;
+    };
+    tmp.cleanOnBoot = true;
+  };
+
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_GB.UTF-8";
   console.keyMap = "de-latin1";
@@ -63,8 +78,6 @@
     };
   };
   systemd.services."NetworkManager-wait-online".enable = false;
-
-  boot.tmp.cleanOnBoot = true;
 
   swapDevices = [
     {

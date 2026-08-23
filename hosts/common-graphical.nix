@@ -10,20 +10,7 @@
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
-  # Boot Configuration
   boot = {
-    loader = {
-      efi.canTouchEfiVariables = true;
-      timeout = 0;
-    };
-
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
-      autoGenerateKeys.enable = true;
-      autoEnrollKeys.enable = true;
-    };
-
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
