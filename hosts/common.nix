@@ -17,7 +17,7 @@
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-unwrapped"
-      "vscode-extension-ms-vscode-cpptools"
+      "lsfg-vk"
     ];
 
   documentation.nixos.enable = false;
