@@ -83,6 +83,7 @@
       useAutoLocation = true;
       osdAlwaysShowValue = true;
       launcherLogoMode = "os";
+      launcherStyle = "island";
       showWeekNumber = true;
       acLockTimeout = 5400;
       batteryLockTimeout = 5400;
@@ -112,28 +113,53 @@
         {
           id = "default";
           enabled = true;
+          island = true;
+          islandNotificationExpand = true;
+          islandSatelliteBackground = true;
+          islandSatellitePosition = "island";
+          islandInteractionMode = "click";
+          islandNotificationBadgeClearOnOpen = false;
           leftWidgets = [
-            "launcherButton"
             "workspaceSwitcher"
-            "systemTray"
+            "systemMonitorPlus"
           ];
-          centerWidgets = [
-            "music"
-            "clock"
-            "weather"
+          islandHomeLayout = [
+            {
+              id = "media";
+              enabled = true;
+            }
+            {
+              id = "clock";
+              enabled = true;
+            }
+            {
+              id = "notifications";
+              enabled = true;
+            }
+            {
+              id = "weather";
+              enabled = true;
+            }
+            {
+              id = "status";
+              enabled = true;
+            }
+            {
+              id = "volume";
+              enabled = false;
+            }
+            {
+              id = "brightness";
+              enabled = false;
+            }
           ];
           rightWidgets = [
-            "systemMonitorPlus"
-            "spacer"
             "dankKDEConnect"
             "clipboard"
-            "notificationButton"
-            "battery"
+            "systemTray"
             "controlCenterButton"
             "powerMenuButton"
           ];
-          transparency = 0;
-          fontScale = 1.25;
         }
       ];
 
