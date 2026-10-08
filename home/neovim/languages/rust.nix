@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   programs.nvf.settings.vim = {
+    lsp.servers.rust-analyzer.settings."rust-analyzer".check.command = "clippy";
+
     languages.rust = {
       enable = true;
       extensions.crates-nvim.enable = true;
