@@ -145,6 +145,7 @@
       enable = true;
       plugins = [pkgs.interception-tools-plugins.caps2esc];
     };
+    udev.packages = [pkgs.headsetcontrol];
   };
 
   virtualisation.docker.rootless = {
