@@ -81,9 +81,10 @@
     enableCalendarEvents = false;
 
     plugins = let
-      mkPlugin = extraSettings: {
+      mkPlugin = args: {
         enable = true;
-        settings = {enabled = true;} // extraSettings;
+        settings = {enabled = true;} // removeAttrs args ["src"];
+        src = lib.mkIf (args ? src) (lib.mkForce args.src);
       };
     in {
       calculator = mkPlugin {
@@ -92,7 +93,14 @@
         noTrigger = true;
       };
       dankKDEConnect = mkPlugin {
-        selectedDeviceId = "c7bc322559214d9885b2509e457eb5c6";
+        src = inputs.dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.dankKDEConnect.overrideAttrs (_: {
+          postPatch = ''
+            substituteInPlace DankKDEConnect/DankKDEConnect.qml \
+              --replace-fail \
+              'function autoSelectBestDevice() {' \
+              'function autoSelectBestDevice() { selectedDeviceId = "c7bc322559214d9885b2509e457eb5c6"; return;'
+          '';
+        });
       };
       systemMonitorPlus = mkPlugin {
         cpuUsageEnabled = true;
