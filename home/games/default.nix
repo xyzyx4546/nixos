@@ -57,15 +57,16 @@
   };
 
   xdg.configFile."lsfg-vk/conf.toml".source = (pkgs.formats.toml {}).generate "conf.toml" {
-    version = 1;
-    game = [
+    version = 2;
+    global = {};
+    profile = [
       {
-        exe = "2";
+        name = "2x";
         multiplier = 2;
         performance_mode = true;
       }
       {
-        exe = "3";
+        name = "3x";
         multiplier = 3;
         performance_mode = true;
       }
