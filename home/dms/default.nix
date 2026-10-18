@@ -107,7 +107,7 @@
     };
 
     settings = {
-      currentThemeName = "purple";
+      currentThemeName = "dynamic";
       widgetBackgroundColor = "sc";
 
       fontFamily = "Nunito";

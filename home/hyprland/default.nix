@@ -25,6 +25,7 @@
     enable = true;
     configType = "lua";
     xwayland.enable = true;
+    extraConfig = "require('dms.colors')";
 
     settings = {
       env = lib.mapAttrsToList (k: v: {_args = [k (toString v)];}) config.home.sessionVariables;
@@ -44,8 +45,6 @@
           border_size = 2;
           gaps_in = 5;
           gaps_out = 10;
-          "col.active_border" = "rgb(bd93f9)";
-          "col.inactive_border" = "rgba(282a36aa)";
           layout = "dwindle";
           resize_on_border = true;
         };

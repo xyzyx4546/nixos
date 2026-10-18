@@ -21,12 +21,12 @@
       };
 
       highlight = {
-        Pmenu = {bg = null;};
-        StatusLine = {bg = null;};
-        StatusLineTerm = {bg = null;};
-        LspReferenceText = {bg = "#44475a";};
-        LspReferenceRead = {bg = "#44475a";};
-        LspReferenceWrite = {bg = "#44475a";};
+        Pmenu.bg = null;
+        StatusLine.bg = null;
+        StatusLineTerm.bg = null;
+        LspReferenceText.bg = "#44475a";
+        LspReferenceRead.bg = "#44475a";
+        LspReferenceWrite.bg = "#44475a";
       };
 
       clipboard = {
@@ -94,7 +94,7 @@
                 icon = "  ";
                 desc = "Find file";
                 key = "f";
-                action = "cd $HOME | Telescope find_files";
+                action = "Telescope find_files";
               }
               {
                 icon = "  ";
