@@ -30,6 +30,11 @@
       };
     };
 
+    mullvad-vpn = {
+      enable = true;
+      enableEarlyBootBlocking = true;
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;

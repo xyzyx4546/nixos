@@ -14,6 +14,7 @@
     ../../home/nextcloud
     ../../home/spotify
     ../../home/vesktop
+    ../../home/vpn
     ../../home/xdg
     ../../home/yazi
     ../../home/zathura

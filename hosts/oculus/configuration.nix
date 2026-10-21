@@ -62,28 +62,14 @@ in {
         method = "manual";
         address1 = "192.168.2.10/24";
         gateway = "192.168.2.1";
-        dns = "127.0.0.1;";
+        dns = "192.168.2.1;";
       };
       ipv6.method = "auto";
     };
-    firewall = {
-      allowedUDPPorts = [53];
-      allowedTCPPorts = [53 80 443];
-    };
+    firewall.allowedTCPPorts = [80 443];
   };
 
   services = {
-    dnsmasq = {
-      enable = true;
-      settings = {
-        address = ["/${domain}/192.168.2.10"];
-        server = ["192.168.2.1"];
-        no-resolv = true;
-        no-hosts = true;
-        cache-size = 1000;
-      };
-    };
-
     oink = {
       enable = true;
       apiKeyFile = config.sops.secrets."oink/api-key".path;
