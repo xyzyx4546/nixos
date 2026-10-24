@@ -13,11 +13,7 @@
       configureRedis = true;
       database.createLocally = true;
       maxUploadSize = "16G";
-      config = {
-        adminpassFile = config.sops.secrets."nextcloud/password".path;
-        adminuser = "david";
-        dbtype = "mysql";
-      };
+      config.dbtype = "mysql";
       phpOptions = {
         "opcache.memory_consumption" = "512";
         "opcache.interned_strings_buffer" = "32";

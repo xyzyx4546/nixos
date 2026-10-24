@@ -37,7 +37,6 @@
       "oink/secret-api-key" = {};
       "restic/password" = {};
       "restic/b2" = {};
-      "nextcloud/password" = {};
       "nextcloud/webdav".owner = "xyzyx";
       "nextcloud/onlyoffice".owner = lib.mkIf config.services.onlyoffice.enable "onlyoffice";
       "vaultwarden/password" = {};
