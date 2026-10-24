@@ -7,7 +7,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud34;
+      package = pkgs.nextcloud35;
       https = true;
       hostName = domain;
       configureRedis = true;
