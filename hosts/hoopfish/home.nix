@@ -8,6 +8,7 @@
     ../../home/git
     ../../home/gtk
     ../../home/hyprland
+    ../../home/kdeconnect
     ../../home/kitty
     ../../home/lazytimer
     ../../home/neovim
