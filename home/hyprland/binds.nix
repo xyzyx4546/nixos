@@ -52,7 +52,7 @@
     (bind "PRINT" (dsp.exec "${pkgs.grimblast}/bin/grimblast --notify --freeze copysave area"))
     (bind "SUPER + SPACE" (dsp.exec "dms ipc launcher toggle"))
     (bind "SUPER + V" (dsp.exec "dms ipc clipboard toggle"))
-    (bind "SUPER + W" (dsp.exec "dms ipc dankdash wallpaper"))
+    (bind "SUPER + W" (dsp.exec "dms ipc dash toggle wallpaper"))
     (bind "SUPER + X" (dsp.exec "dms ipc powermenu toggle"))
     (bind "SUPER + SHIFT + R" (dsp.exec "hyprctl reload"))
 

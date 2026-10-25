@@ -57,14 +57,14 @@
       "locked": {
         "lastModified": 1792831832,
         "narHash": "sha256-obzSUNSrxmvtI6JnjuW7a1OUTiJZ730DMSwvs3mBNKA=",
-        "owner": "AvengeMedia",
-        "repo": "dankcalendar",
+        "owner": "duxlabs-dev",
+        "repo": "dux-calendar",
         "rev": "050dbb3c85b59a8adf10bb4bd9bc6c4de58a9957",
         "type": "github"
       },
       "original": {
-        "owner": "AvengeMedia",
-        "repo": "dankcalendar",
+        "owner": "duxlabs-dev",
+        "repo": "dux-calendar",
         "type": "github"
       }
     },
@@ -99,35 +99,35 @@
       "locked": {
         "lastModified": 1792523829,
         "narHash": "sha256-hyWdbsyOGXsJxvXG4Tqg0uRI1s3JwPi8DKyWips3Ta8=",
-        "owner": "AvengeMedia",
-        "repo": "DankMaterialShell",
+        "owner": "duxlabs-dev",
+        "repo": "dux-shell",
         "rev": "9b413296b16721f7679fb62e624cb1ed2433fa58",
         "type": "github"
       },
       "original": {
-        "owner": "AvengeMedia",
+        "owner": "duxlabs-dev",
         "ref": "stable",
-        "repo": "DankMaterialShell",
+        "repo": "dux-shell",
         "type": "github"
       }
     },
-    "dms-plugin-registry": {
+    "dux-plugin-registry": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1792847535,
-        "narHash": "sha256-XXzhm2nFKB9VhVPoL1pLwWZ/41gdm6f558krvCsHDeY=",
-        "owner": "AvengeMedia",
-        "repo": "dms-plugin-registry",
-        "rev": "7cc53b0fa6bfc05d9bdf6f9fccf9f6314818357e",
+        "lastModified": 1792895078,
+        "narHash": "sha256-GInOfCKf01qodyr5Ea4/T/UN40qwRzQuDdAGpDsvJKo=",
+        "owner": "duxlabs-dev",
+        "repo": "dux-plugin-registry",
+        "rev": "51669fbf1b1dd6f623ba226df69984fe53037d22",
         "type": "github"
       },
       "original": {
-        "owner": "AvengeMedia",
-        "repo": "dms-plugin-registry",
+        "owner": "duxlabs-dev",
+        "repo": "dux-plugin-registry",
         "type": "github"
       }
     },
@@ -363,7 +363,7 @@
         "dcal": "dcal",
         "disko": "disko",
         "dms": "dms",
-        "dms-plugin-registry": "dms-plugin-registry",
+        "dux-plugin-registry": "dux-plugin-registry",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "lazytimer": "lazytimer",

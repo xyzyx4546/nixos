@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    inputs.dms.homeModules.dank-material-shell
-    inputs.dms-plugin-registry.nixosModules.default
+    inputs.dms.homeModules.default
+    inputs.dux-plugin-registry.homeModules.default
   ];
 
   # HACK: wallpaper config cant be set in settings.json
@@ -75,25 +75,35 @@
     };
   };
 
-  programs.dank-material-shell = {
+  programs.dank-material-shell = let
+    mainScreen = ["eDP-1" "DP-3"];
+    mkPlugin = args: {
+      enable = true;
+      settings = {enabled = true;} // removeAttrs args ["src"];
+      src = lib.mkIf (args ? src) (lib.mkForce args.src);
+    };
+    mkIslandWidget = name: {
+      id = name;
+      enabled = true;
+    };
+    mkLockScreenWidget = name: config: {
+      id = name;
+      widgetType = name;
+      config = {displayPreferences = mainScreen;} // config;
+    };
+  in {
     enable = true;
     systemd.enable = true;
     enableCalendarEvents = false;
 
-    plugins = let
-      mkPlugin = args: {
-        enable = true;
-        settings = {enabled = true;} // removeAttrs args ["src"];
-        src = lib.mkIf (args ? src) (lib.mkForce args.src);
-      };
-    in {
+    plugins = {
       calculator = mkPlugin {
         calcEngine = "qalc";
         alwaysActive = true;
         noTrigger = true;
       };
       dankKDEConnect = mkPlugin {
-        src = inputs.dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.dankKDEConnect.overrideAttrs (_: {
+        src = inputs.dux-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.dankKDEConnect.overrideAttrs (_: {
           postPatch = ''
             substituteInPlace DankKDEConnect/DankKDEConnect.qml \
               --replace-fail \
@@ -115,6 +125,7 @@
     };
 
     settings = {
+      configVersion = 42;
       currentThemeName = "dynamic";
       widgetBackgroundColor = "sc";
 
@@ -127,22 +138,18 @@
       osdAlwaysShowValue = true;
       launcherLogoMode = "os";
       launcherStyle = "island";
+      dankLauncherV2ShowSourceBadges = false;
       showWeekNumber = true;
       acLockTimeout = 5400;
       batteryLockTimeout = 5400;
       powerActionHoldDuration = 0.25;
       notificationHistoryEnabled = false;
 
-      screenPreferences = let
-        screens = ["eDP-1" "DP-3"];
-      in {
-        osd = screens;
-        toast = screens;
-        notifications = screens;
+      screenPreferences =  {
+        osd = mainScreen;
+        toast = mainScreen;
+        notifications = mainScreen;
       };
-
-      showWorkspaceApps = true;
-      reverseScrolling = true;
 
       powerMenuActions = [
         "poweroff"
@@ -156,49 +163,29 @@
         {
           id = "default";
           enabled = true;
+          screenPreferences = mainScreen;
           island = true;
           islandNotificationExpand = true;
           islandSatelliteBackground = true;
-          islandSatellitePosition = "island";
           islandInteractionMode = "click";
-          islandNotificationBadgeClearOnOpen = false;
+          islandNotch = true;
           leftWidgets = [
-            "workspaceSwitcher"
+            {
+              id = "workspaceSwitcher";
+              showWorkspaceApps = true;
+            }
             "systemMonitorPlus"
           ];
           islandHomeLayout = [
-            {
-              id = "media";
-              enabled = true;
-            }
-            {
-              id = "clock";
-              enabled = true;
-            }
-            {
-              id = "notifications";
-              enabled = true;
-            }
-            {
-              id = "weather";
-              enabled = true;
-            }
-            {
-              id = "status";
-              enabled = true;
-            }
-            {
-              id = "volume";
-              enabled = false;
-            }
-            {
-              id = "brightness";
-              enabled = false;
-            }
+            (mkIslandWidget "media")
+            (mkIslandWidget "clock")
+            (mkIslandWidget "notifications")
+            (mkIslandWidget "weather")
+            (mkIslandWidget "status")
+            (mkIslandWidget "privacy")
           ];
           rightWidgets = [
             "dankKDEConnect"
-            "clipboard"
             "systemTray"
             "controlCenterButton"
             "powerMenuButton"
@@ -206,37 +193,119 @@
         }
       ];
 
+      dashOptions.overview.panelRows = 4;
+      dashCards = [
+        {
+          id = "clock";
+          w = 3;
+          h = 1;
+          col = 0;
+          row = 0;
+        }
+        {
+          id = "notifications";
+          w = 3;
+          h = 4;
+          col = 3;
+          row = 0;
+        }
+        {
+          id = "calendar";
+          w = 3;
+          h = 3;
+          col = 0;
+          row = 1;
+        }
+      ];
+
       controlCenterWidgets = [
         {
-          id = "volumeSlider";
-          enabled = true;
-          width = 50;
+          id = "user";
+          w = 5;
+          h = 1;
+          col = 0;
+          row = 0;
+        }
+        {
+          id = "edit";
+          w = 1;
+          h = 1;
+          small = true;
+          col = 5;
+          row = 0;
+        }
+        {
+          id = "settings";
+          w = 1;
+          h = 1;
+          small = true;
+          col = 6;
+          row = 0;
+        }
+        {
+          id = "power";
+          w = 1;
+          h = 1;
+          small = true;
+          col = 7;
+          row = 0;
         }
         {
           id = "brightnessSlider";
-          enabled = true;
-          width = 50;
+          w = 4;
+          h = 1;
+          col = 4;
+          row = 1;
+        }
+        {
+          id = "volumeSlider";
+          w = 4;
+          h = 1;
+          col = 0;
+          row = 1;
         }
         {
           id = "wifi";
-          enabled = true;
-          width = 50;
+          w = 4;
+          h = 1;
+          col = 0;
+          row = 2;
         }
         {
           id = "bluetooth";
-          enabled = true;
-          width = 50;
+          w = 4;
+          h = 1;
+          col = 4;
+          row = 2;
         }
         {
           id = "audioOutput";
-          enabled = true;
-          width = 50;
+          w = 4;
+          h = 1;
+          col = 0;
+          row = 3;
         }
         {
           id = "audioInput";
-          enabled = true;
-          width = 50;
+          w = 4;
+          h = 1;
+          col = 4;
+          row = 3;
         }
+      ];
+
+      lockScreenWidgetInstances = [
+        (mkLockScreenWidget "desktopClock" {
+          style = "expressive";
+          showDate = true;
+        })
+        (mkLockScreenWidget "lockAuth" {
+          style = "ring";
+          profileVisibility = "typing";
+          passwordVisibility = "typing";
+        })
+        (mkLockScreenWidget "lockStatus" {})
+        (mkLockScreenWidget "lockPower" {})
       ];
     };
   };
