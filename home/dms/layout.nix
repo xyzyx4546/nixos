@@ -20,6 +20,7 @@ in {
         islandSatelliteBackground = true;
         islandInteractionMode = "click";
         islandNotch = true;
+        islandBatteryStyle = "solid";
         leftWidgets = [
           {
             id = "workspaceSwitcher";
