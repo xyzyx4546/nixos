@@ -9,6 +9,7 @@
     settings = {
       enableSystemNotifications = false;
       startMinimized = true;
+      changelogDisplayedForVersion = config.programs.mullvad-vpn.package.version;
     };
   };
 
