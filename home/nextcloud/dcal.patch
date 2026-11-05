@@ -1,8 +1,21 @@
+diff --git a/core/cmd/dcal/account_add.go b/core/cmd/dcal/account_add.go
+index 3b844e4..f3654ff 100644
+--- a/core/cmd/dcal/account_add.go
++++ b/core/cmd/dcal/account_add.go
+@@ -404,7 +404,7 @@ func finishAdd(ctx context.Context, st *cliStores, res accounts.Result) error {
+ 	}
+ 
+ 	if syncErr != nil {
+-		return fmt.Errorf("initial sync failed (run `dcal sync %s` to retry): %w", res.AccountID, syncErr)
++		infof("initial sync failed (run `dcal sync %s` to retry): %v", res.AccountID, syncErr)
+ 	}
+ 	return nil
+ }
 diff --git a/core/internal/accounts/add.go b/core/internal/accounts/add.go
-index 3050852..1927373 100644
+index d987a5b..c48cdb2 100644
 --- a/core/internal/accounts/add.go
 +++ b/core/internal/accounts/add.go
-@@ -73,17 +73,17 @@ func AddCalDAV(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore,
+@@ -74,17 +74,17 @@ func AddCalDAV(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore,
  		settings[caldavprovider.SettingInsecureSkipVerify] = true
  	}
  
@@ -31,7 +44,7 @@ index 3050852..1927373 100644
  
  	if err := Ensure(ctx, r, accountID, account.KindCaldav, displayName, settings); err != nil {
  		return Result{}, err
-@@ -107,10 +107,12 @@ func AddICal(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore, in
+@@ -108,10 +108,12 @@ func AddICal(ctx context.Context, r *repo.Repo, secrets calendar.SecretStore, in
  	username := strings.TrimSpace(in.Username)
  	displayName := strings.TrimSpace(in.DisplayName)
  
@@ -49,10 +62,10 @@ index 3050852..1927373 100644
  	parsed, err := url.Parse(feedURL)
  	if err != nil {
 diff --git a/quickshell/Services/DankCalService.qml b/quickshell/Services/DankCalService.qml
-index a526c58..e186e32 100644
+index a2d720e..4ddc0e4 100644
 --- a/quickshell/Services/DankCalService.qml
 +++ b/quickshell/Services/DankCalService.qml
-@@ -356,7 +356,7 @@ Singleton {
+@@ -410,7 +410,7 @@ Singleton {
              const list = response.result || [];
              for (let i = 0; i < list.length; i++) {
                  if (!list[i].color)
