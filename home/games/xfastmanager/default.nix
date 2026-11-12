@@ -27,6 +27,8 @@ pkgs.rustPlatform.buildRustPackage rec {
   ];
 
   buildInputs = with pkgs; [
+    sqlite
+    openssl
     webkitgtk_4_1
   ];
 

@@ -73,8 +73,8 @@
     (bind "SUPER + B" (dsp.toggleSpecial "browser"))
     (bind "SUPER + G" (dsp.focusMonitor 0))
     (bind "SUPER + G" (dsp.toggleSpecial "games"))
-    (bind "SUPER + SUPER_L" (dsp.focusMonitor 1))
-    (bind "SUPER + SUPER_L" (dsp.toggleSpecial "browser"))
+    (bindOpts "SUPER + SUPER_L" (dsp.focusMonitor 1) {release = true;})
+    (bindOpts "SUPER + SUPER_L" (dsp.toggleSpecial "browser") {release = true;})
 
     # Media & Hardware Controls
     (bindOpts "XF86AudioMute" (dsp.exec "dms ipc audio mute") {locked = true;})
@@ -100,13 +100,7 @@
     })
 
     # Mouse Bindings
-    (bindOpts "mouse:277" dsp.drag {
-      mouse = true;
-      drag = true;
-    })
-    (bindOpts "ALT + mouse:272" dsp.resize {
-      mouse = true;
-      drag = true;
-    })
+    (bindOpts "mouse:277" dsp.drag {mouse = true;})
+    (bindOpts "ALT + mouse:272" dsp.resize {mouse = true;})
   ];
 }

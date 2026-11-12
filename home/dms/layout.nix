@@ -46,6 +46,7 @@ in {
     ];
 
     dashOptions.overview.panelRows = 4;
+    notificationTrailingShortcut = "settings";
     dashCards = [
       {
         id = "clock";
