@@ -18,7 +18,7 @@
     databases = lib.mkOption {
       type = with lib.types; listOf str;
       default = [];
-      description = "List of MySQL database names to include in backups.";
+      description = "List of PostgreSQL database names to include in backups.";
     };
   };
 
@@ -30,11 +30,10 @@
     };
 
     services = {
-      mysqlBackup = {
+      postgresqlBackup = {
         enable = true;
-        compressionAlg = "zstd";
-        singleTransaction = true;
-        calendar = "01:00:00";
+        compression = "zstd";
+        startAt = "01:00:00";
         inherit (config.backup) databases;
       };
 
@@ -53,12 +52,12 @@
       in {
         "local" = {
           inherit passwordFile timerConfig pruneOpts;
-          paths = [config.services.mysqlBackup.location] ++ config.backup.paths ++ config.backup.localOnlyPaths;
+          paths = [config.services.postgresqlBackup.location] ++ config.backup.paths ++ config.backup.localOnlyPaths;
           repository = "/mnt/backup";
         };
         "b2" = {
           inherit passwordFile timerConfig pruneOpts;
-          paths = [config.services.mysqlBackup.location] ++ config.backup.paths;
+          paths = [config.services.postgresqlBackup.location] ++ config.backup.paths;
           # using s3 due to issues with the current restic b2 library
           # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html#backblaze-b2
           repository = "s3:s3.eu-central-003.backblazeb2.com/sanctuary-zero/server";
@@ -70,11 +69,11 @@
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "restore-db" ''
         files=("$@")
-        [ ''${#files[@]} -eq 0 ] && files=("${config.services.mysqlBackup.location}"/*.zst)
+        [ ''${#files[@]} -eq 0 ] && files=("${config.services.postgresqlBackup.location}"/*.sql.zstd)
 
         for file in "''${files[@]}"; do
-          [[ "$file" != *.zst ]] && file="${config.services.mysqlBackup.location}/$file.zst"
-          db=$(basename "$file" .zst)
+          [[ "$file" != *.sql.zstd ]] && file="${config.services.postgresqlBackup.location}/$file.sql.zstd"
+          db=$(basename "$file" .sql.zstd)
 
           if [ ! -f "$file" ]; then
             echo "Error: Backup '$file' not found" >&2
@@ -82,7 +81,8 @@
           fi
 
           printf "Restoring '%s'..." "$db"
-          if zstd -dc "$file" | mariadb "$db"; then
+          if sudo -u postgres psql -v ON_ERROR_STOP=1 -d postgres -c "DROP DATABASE IF EXISTS \"$db\" WITH (FORCE);" > /dev/null \
+            && zstd -dc "$file" | sudo -u postgres psql -v ON_ERROR_STOP=1 -d postgres > /dev/null; then
             printf "\r\033[K✓ Restored '%s'\n" "$db"
           else
             printf "\r\033[K✗ Failed to restore '%s'\n" "$db" >&2

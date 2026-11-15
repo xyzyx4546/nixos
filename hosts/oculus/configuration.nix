@@ -164,9 +164,8 @@ in {
 
         check process sshd matching "sshd"
         check process nginx matching "nginx"
-        check process dnsmasq matching "dnsmasq"
         check process oink matching "oink"
-        check process mysql matching "mysqld"
+        check process postgresql matching "postgresql"
         check process onlyoffice matching "onlyoffice"
         check process nextcloud matching "phpfpm-nextcloud"
         check process matter matching "matter-server"
@@ -177,8 +176,11 @@ in {
           if status != 0 then alert
         check program restic-b2 with path "${checkOneshotService} restic-backups-b2"
           if status != 0 then alert
-        check program mysql-backup with path "${checkOneshotService} mysql-backup"
-          if status != 0 then alert
+        ${lib.concatMapStringsSep "\n" (db: ''
+            check program pg-backup-${db} with path "${checkOneshotService} postgresqlBackup-${db}"
+              if status != 0 then alert
+          '')
+          config.services.postgresqlBackup.databases}
 
         check filesystem root with path /
           if space usage > 80% then alert

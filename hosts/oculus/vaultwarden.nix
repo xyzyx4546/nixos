@@ -9,7 +9,7 @@ in {
   services = {
     vaultwarden = {
       enable = true;
-      dbBackend = "mysql";
+      dbBackend = "postgresql";
       environmentFile = config.sops.secrets."vaultwarden/password".path;
       config = {
         # https://github.com/dani-garcia/vaultwarden/blob/main/.env.template
@@ -17,7 +17,7 @@ in {
         SIGNUPS_ALLOWED = false;
         INVITATIONS_ALLOWED = true;
 
-        DATABASE_URL = "mysql://${dbUser}@localhost/${dbName}";
+        DATABASE_URL = "postgresql://${dbUser}@/${dbName}?host=/run/postgresql";
 
         USER_ATTACHMENT_LIMIT = 0;
 
@@ -27,14 +27,12 @@ in {
       };
     };
 
-    mysql = {
+    postgresql = {
       ensureDatabases = [dbName];
       ensureUsers = [
         {
           name = dbUser;
-          ensurePermissions = {
-            "${dbName}.*" = "ALL PRIVILEGES";
-          };
+          ensureDBOwnership = true;
         }
       ];
     };

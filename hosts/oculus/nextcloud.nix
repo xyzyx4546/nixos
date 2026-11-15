@@ -13,7 +13,7 @@
       configureRedis = true;
       database.createLocally = true;
       maxUploadSize = "16G";
-      config.dbtype = "mysql";
+      config.dbtype = "pgsql";
       phpOptions = {
         "opcache.memory_consumption" = "512";
         "opcache.interned_strings_buffer" = "32";
