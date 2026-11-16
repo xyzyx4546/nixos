@@ -45,7 +45,6 @@
     # Programs
     (bind "SUPER + C" (dsp.exec "kitty"))
     (bind "SUPER + D" (dsp.exec "vesktop"))
-    (bind "SUPER + N" (dsp.exec "kitty nvim"))
     (bind "SUPER + S" (dsp.exec "kitty --class=left spotify_player"))
     (bind "SUPER + Y" (dsp.exec "kitty yazi"))
 

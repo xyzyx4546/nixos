@@ -5,9 +5,9 @@
   ...
 }: {
   imports = [
-    inputs.nvf.homeManagerModules.default
+    inputs.nvf.homeModules.default
     ./keymaps.nix
-    ./languages
+    ./languages.nix
   ];
 
   programs.nvf = {
@@ -97,16 +97,22 @@
                 action = "Telescope find_files";
               }
               {
-                icon = "  ";
-                desc = "Find project";
-                key = "p";
-                action = "lua PROJECTS()";
+                icon = "  ";
+                desc = "Find text";
+                key = "g";
+                action = "Telescope live_grep";
               }
               {
-                icon = "  ";
-                desc = "Configuration";
-                key = "x";
-                action = "lua PROJECTS('nixos')";
+                icon = "󰇥  ";
+                desc = "File explorer";
+                key = "y";
+                action = "Yazi cwd";
+              }
+              {
+                icon = "  ";
+                desc = "Project TODOs";
+                key = "t";
+                action = "TodoTelescope";
               }
               {
                 icon = "  ";
@@ -261,15 +267,13 @@
 
         "heirline" = {
           package = heirline-nvim;
-          setup = builtins.readFile ./lua/heirline.lua;
+          setup = builtins.readFile ./heirline.lua;
         };
       };
 
       extraPackages = with pkgs; [
         sops
       ];
-
-      luaConfigRC.projects = builtins.readFile ./lua/projects.lua;
     };
   };
 }

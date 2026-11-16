@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../home/devenv
     ../../home/fastfetch
     ../../home/git
     ../../home/kitty

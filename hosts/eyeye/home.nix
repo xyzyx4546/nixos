@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../../home/brave
+    ../../home/devenv
     ../../home/dms
     ../../home/fastfetch
     ../../home/fonts
