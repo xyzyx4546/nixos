@@ -1,5 +1,8 @@
 {
   pkgs,
+  lib,
+  config,
+  osConfig,
   hostName,
   ...
 }: {
@@ -11,10 +14,15 @@
 
     settings = {
       theme = "dracula";
-      client_id = "d83c868d85a54fe28d93ec17446cfe3c";
+      client_id_command = {
+        command = "cat";
+        args = [osConfig.sops.secrets."xyzyx/spotify".path];
+      };
+      ncspot_only_get_endpoints = [];
       playback_format = "{status} {track}\n{artists}\n{metadata}";
+      pause_on_startup = true;
       enable_media_control = true;
-      enable_streaming = "Always";
+      enable_streaming = "DaemonOnly";
       enable_notify = false;
       default_device = hostName;
       play_icon = "";
@@ -96,5 +104,23 @@
         key_sequence = "H";
       }
     ];
+  };
+
+  systemd.user.services."spotify" = {
+    Unit = {
+      Description = "Spotify";
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "forking";
+      TimeoutStartSec = "infinity";
+      ExecStartPre = pkgs.writeShellScript "wait-for-mullvad" ''
+        until ${lib.getExe pkgs.mullvad} status -j | ${lib.getExe pkgs.jq} -e ".state==\"connected\""; do sleep 2; done
+      '';
+      ExecStart = "/run/wrappers/bin/mullvad-exclude ${lib.getExe config.programs.spotify-player.package} -d";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

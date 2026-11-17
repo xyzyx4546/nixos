@@ -29,6 +29,7 @@
 
     secrets = {
       "xyzyx/password".neededForUsers = true;
+      "xyzyx/spotify".owner = "xyzyx";
       "xyzyx/ssh-key" = {
         path = "/home/xyzyx/.ssh/id_ed25519";
         owner = "xyzyx";
