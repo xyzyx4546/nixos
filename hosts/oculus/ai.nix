@@ -46,7 +46,7 @@ in {
     };
 
     postgresql = {
-      extensions = ps: with ps; [ pgvector ];
+      extensions = ps: with ps; [pgvector];
       ensureDatabases = [dbName];
       ensureUsers = [
         {
