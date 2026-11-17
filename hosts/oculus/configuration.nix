@@ -17,6 +17,7 @@ in {
     ../common.nix
     ./backup.nix
     ./home-assistant.nix
+    ./ai.nix
     ./nextcloud.nix
     ./vaultwarden.nix
   ];
@@ -176,7 +177,7 @@ in {
           if status != 0 then alert
         check program restic-b2 with path "${checkOneshotService} restic-backups-b2"
           if status != 0 then alert
-        ${lib.concatMapStringsSep "\n" (db: ''
+        ${lib.concatMapStrings (db: ''
             check program pg-backup-${db} with path "${checkOneshotService} postgresqlBackup-${db}"
               if status != 0 then alert
           '')

@@ -18,6 +18,7 @@
       "steam"
       "steam-unwrapped"
       "lsfg-vk"
+      "open-webui"
     ];
 
   documentation.nixos.enable = false;
